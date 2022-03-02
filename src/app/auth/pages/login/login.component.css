@@ -1,0 +1,19 @@
+.border{
+    border: solid 1px;
+    border-radius: 50x;
+    background-color: white;
+}
+
+.border2{
+    border: solid 1px;
+    background-color: blueviolet;
+}
+
+.imagenCenter{
+    text-align: center;
+    height: auto;
+}
+
+.cont-img{
+    height: 100px;
+}
