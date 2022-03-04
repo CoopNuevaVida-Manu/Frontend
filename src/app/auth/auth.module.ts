@@ -5,6 +5,7 @@ import { NewPasswordComponent } from './pages/new-password/new-password.componen
 import { AuthRoutingModule } from './auth-routing.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    PrimeNgModule
+    PrimeNgModule,
+    FormsModule
   ]
 })
 export class AuthModule { }

@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule)
   },
   {
+    path: 'caja',
+    loadChildren: () => import('./caja/caja.module').then( m => m.CajaModule)
+  },
+  {
     path: '**',
     redirectTo: 'auth'
   }

@@ -5,3 +5,9 @@ html, body{
    background-color: var(--surface-200);
    font-family: var(--font-family); 
 }
+
+.formulario{
+   border: solid 1px var(--surface-300);
+   border-radius: 10px;
+   background-color: white;
+}

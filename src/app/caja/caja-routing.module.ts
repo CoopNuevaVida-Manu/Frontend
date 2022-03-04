@@ -1,12 +1,25 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+import { NoafiliadoSincomprobantesComponent } from './pages/noafiliado-sincomprobantes/noafiliado-sincomprobantes.component';
 
+const routes: Routes = [
+  {
+    path: '',
+    children: [
+      {path: 'noafiliado-sincomprobantes', component: NoafiliadoSincomprobantesComponent},
+      {path: '**', redirectTo: 'noafiliado-sincomprobantes' }
+    ]
+  }
+]
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
   ]
 })
 export class CajaRoutingModule { }
