@@ -24,11 +24,11 @@ export class LoginComponent  {
   login(){
     this.user.usuario = this.usuario;
     this.user.password = this.password;
-
-    console.log(this.user)
-  
     
-    // this.router.navigate(['auth/New-Password'])
+    this.authService.login(this.user).subscribe(resp => {
+      console.log(resp)
+    })
+    //this.router.navigate(['auth/New-Password'])
   }
 
 }
