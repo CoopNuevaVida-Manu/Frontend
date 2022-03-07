@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChequesTercerosComponent } from './pages/cheques-terceros/cheques-terceros.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ChequesTercerosComponent
+  ],
   imports: [
     CommonModule
   ]
