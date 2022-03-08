@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirmasAutorizadasComponent } from './pages/firmas-autorizadas/firmas-autorizadas.component';
+import { AtencionRoutingModule } from './atencion-routing.module';
 
 
 
@@ -9,7 +10,8 @@ import { FirmasAutorizadasComponent } from './pages/firmas-autorizadas/firmas-au
     FirmasAutorizadasComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AtencionRoutingModule
   ]
 })
 export class AtencionModule { }

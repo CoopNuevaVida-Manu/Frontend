@@ -1,12 +1,25 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+import { FirmasAutorizadasComponent } from './pages/firmas-autorizadas/firmas-autorizadas.component';
 
+
+const routes : Routes = [
+  {
+    path: '',
+    children: [
+      {path: 'firmas-autorizadas', component: FirmasAutorizadasComponent},
+      {path: '**', redirectTo: 'firmas-autorizadas'}
+    ]
+  }
+]
 
 
 @NgModule({
-  declarations: [],
   imports: [
-    CommonModule
+    RouterModule.forChild(routes)
+  ],
+  exports:[
+    RouterModule
   ]
 })
 export class AtencionRoutingModule { }

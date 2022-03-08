@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../environments/environment';
 import { Usuario } from '../../interfaces/usuario.interface';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Login } from '../../interfaces/login.interface';
 import { Departamento } from 'src/app/interfaces/departamento.interface';
 import { UserCryp } from '../../interfaces/userCryp.interface';
@@ -24,6 +24,14 @@ export class AuthService {
   constructor(private http: HttpClient) { 
   }
 
+  verificaAutenticacion():Observable<boolean>{
+    if( !localStorage.getItem('token') ){
+      return of(false);
+    }
+
+    return of(true)
+  }
+
   login(usuario: Usuario):Observable<Login>{
     return this.http.post<Login>(`${this.urlPeticion}/login`, usuario,{
     });
@@ -40,7 +48,7 @@ export class AuthService {
     return this.http.put<CrypPass>(`${this.urlPeticion}/login`, this.userPass)
   }
   
-
+  
 
   
 }

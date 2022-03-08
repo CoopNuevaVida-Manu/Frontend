@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChequesTercerosComponent } from './pages/cheques-terceros/cheques-terceros.component';
+import { ContabilidadRoutingModule } from './contabilidad-routing.module';
 
 
 
@@ -9,7 +10,8 @@ import { ChequesTercerosComponent } from './pages/cheques-terceros/cheques-terce
     ChequesTercerosComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ContabilidadRoutingModule
   ]
 })
 export class ContabilidadModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-noafiliado-sincomprobantes',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoafiliadoSincomprobantesComponent implements OnInit {
 
-  constructor() { }
+  avatarUsuario: string = localStorage.getItem('user') || ""
+
+  constructor(private router : Router) { 
+  }
+
 
   ngOnInit(): void {
+  }
+
+  logOut(){
+    localStorage.clear();
+    this.router.navigate(['./auth'])
   }
 
 }

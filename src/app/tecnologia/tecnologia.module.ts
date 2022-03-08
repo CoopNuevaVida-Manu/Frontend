@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CambioPassComponent } from './pages/cambio-pass/cambio-pass.component';
+import { TecnologiaRoutingModule } from './tecnologia-routing.module';
 
 
 
@@ -9,7 +10,8 @@ import { CambioPassComponent } from './pages/cambio-pass/cambio-pass.component';
     CambioPassComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TecnologiaRoutingModule
   ]
 })
 export class TecnologiaModule { }
