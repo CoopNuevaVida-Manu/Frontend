@@ -13,7 +13,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   constructor(private router : Router) { 
   }
 
-
+  identidad: number = 0;
   ngOnInit(): void {
   }
 

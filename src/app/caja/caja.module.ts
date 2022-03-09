@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NoafiliadoSincomprobantesComponent } from './pages/noafiliado-sincomprobantes/noafiliado-sincomprobantes.component';
 import { CajaRoutingModule } from './caja-routing.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
   imports: [
     CommonModule,
     CajaRoutingModule,
-    PrimeNgModule
+    PrimeNgModule,
+    FormsModule
   ]
 })
 export class CajaModule { }

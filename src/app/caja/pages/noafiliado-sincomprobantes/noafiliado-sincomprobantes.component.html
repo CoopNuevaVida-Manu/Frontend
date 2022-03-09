@@ -1,22 +1,56 @@
+<div class="container">
+    <p-toolbar>
 
-<p-toolbar>
-    <div class="p-toolbar-group-left">
-        <label>Control de transacciones de no afiliados y transacciones sin comprobantes</label>
+        <div class="p-toolbar-group-left">
+            <label>Control de transacciones de no afiliados y transacciones sin comprobantes</label>
+        </div>
+        
+        <div class="p-toolbar-group-right">
+            <button icon="pi pi-user" pButton type="button" [label]="avatarUsuario" class="p-button-text" disabled='true'></button>
+            <div class="separador"></div>
+            <p-button icon="pi-sign-out" styleClass="p-button-secondary" label="Cerrar sesión" (onClick)="logOut()"></p-button>
+        </div>
+    </p-toolbar>
+    
+    <div class=" formulario">
+        <form action="" class="m-3 row">
+            <div class="col-12 text-center">
+                <h1>Control de clientes</h1>
+            </div>
+            <div class="col-6 form-group">
+                <label for="float-identidad">Identidad del cliente</label>
+                <p-inputMask class="input-group"
+                         [(ngModel)]="identidad"
+                         name="idUduario" 
+                         mask="9999-9999-99999"
+                         id="float-identidad"
+                         type="text"
+                         autocomplete="off"></p-inputMask>
+            </div>
+        </form>
     </div>
     
-    <div class="p-toolbar-group-right">
-        <button icon="pi pi-user" pButton type="button" [label]="avatarUsuario" class="p-button-text" disabled='true'></button>
-        <div class="separador"></div>
-        <p-button icon="pi-sign-out" styleClass="p-button-secondary" label="Cerrar sesión" (onClick)="logOut()"></p-button>
-    </div>
-</p-toolbar>
-
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12">
-            
-        </div>
-    </div>
+    
 </div>
 
+<!-- <div class="formulario m-0 vh-100 row justify-content-center">
+    <form class="mt-5">
+        <div class="col-4 form-group p-float-label mb-4">
+            <p-inputMask class="input-group"
+                         [(ngModel)]="identidad"
+                         name="idUduario" 
+                         mask="99-9999"
+                         id="float-identidad"
+                         type="text"
+                         autocomplete="off"></p-inputMask>
+            <input  class="input-group" 
+                    id="float-usuario" 
+                    type="text" 
+                    autocomplete="off" 
+                    [(ngModel)]="identidad"
+                    name="usuario"
+                    pInputText > 
+            <label for="float-usuario">Ingrese su usuario</label>
+        </div>
+    </form>
+</div> -->
