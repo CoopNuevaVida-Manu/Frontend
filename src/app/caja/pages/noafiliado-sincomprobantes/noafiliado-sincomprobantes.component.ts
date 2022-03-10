@@ -10,6 +10,14 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
   avatarUsuario: string = localStorage.getItem('user') || ""
 
+  nombreUser : string = '';
+  apellidoUser : string = '';
+
+  codigoAfiliado: number = 0;
+  cuentaAfectada : number = 0;
+
+  estado: boolean = false;
+
   constructor(private router : Router) { 
   }
 
