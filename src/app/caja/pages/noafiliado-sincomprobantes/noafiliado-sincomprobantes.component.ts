@@ -14,6 +14,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   apellidoUser : string = '';
 
   codigoAfiliado: number = 0;
+  cuentasAfiliado: number[] = [17044,9654]
   cuentaAfectada : number = 0;
 
   estado: boolean = false;

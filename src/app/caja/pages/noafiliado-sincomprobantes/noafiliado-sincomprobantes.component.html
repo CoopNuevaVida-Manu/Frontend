@@ -15,73 +15,63 @@
     </p-toolbar>
     
     <div class=" formulario">
-        <form action="" class="m-3 row field" 
-                        autocomplete="off" >
+        <form class="m-3 row field p-fluid" autocomplete="off">
+            <!-- Inicio de la primera fila -->
             <div class="col-12 text-center mb-3 mt-3">
                 <h3>Control de clientes</h3>
             </div>
-            <div class="col-6 form-group mb-2">
+            <div class="col-3 form-group mb-2">
                 <label for="float-identidad">Identidad del cliente</label>
-                <p-inputMask class="input-group"
-                         [(ngModel)]="identidad"
-                         name="idUduario" 
-                         mask="9999-9999-99999"
-                         id="float-identidad"
-                         type="text"
-                         autocomplete="off"></p-inputMask>
+                <div class="p-inputgroup">
+                    <p-inputMask class="input-group"
+                            [(ngModel)]="identidad"
+                            name="idUduario" 
+                            mask="9999-9999-99999"
+                            id="float-identidad"
+                            type="text"></p-inputMask>
+                    <button type="button" pButton pRipple icon="pi pi-search"></button>
+                </div>
+            </div>
+            <div class="col-3">
             </div>
             <div class="col-6 form-group mb-2">
                 <h5>El estado del cliente es: </h5>
             </div>
-            <div class="form-group p-float-label col-6 mt-3 ">
-                <span class="p-float-label mb-2">
-                    <input  class="input-group" 
-                            id="float-nameUsuario" 
-                            type="text" 
-                            [(ngModel)]="nombreUser"
-                            name="nameUsuario"
-                            [disabled]="estado"
-                            pInputText > 
-                <label for="float-nameUsuario" class="">Nombre</label>
-                </span>
+            <!-- Fin de la primera fila -->
+            <!-- Segunda fila -->
+            <div class="form-group col-6 mt-3 ">
+                <label for="nameUsuario">Nombre</label>
+                <input  class="input-group "
+                        type="text" 
+                        [(ngModel)]="nombreUser"
+                        name="nameUsuario"
+                        id="nameUsuario"
+                        autocomplete="off"
+                        pInputText />
             </div>
-            <div class="form-group p-float-label col-6 mt-3">
-                <span class="p-float-label mb-2">
-                    <input  class="input-group" 
-                            id="float-lastNameUsuario" 
-                            type="text" 
-                            autocomplete="off" 
-                            [(ngModel)]="apellidoUser"
-                            name="nameUsuario"
-                            [disabled]="estado"
-                            pInputText > 
-                <label for="float-lastNameUsuario" class="">Apellido</label>
-                </span>
+            <div class="form-group col-6 mt-3 ">
+                <label for="lastNameUsuario">Apellido</label>
+                <input  class="input-group "
+                        type="text" 
+                        [(ngModel)]="apellidoUser"
+                        name="lastNameUsuario"
+                        id="lastNameUsuario"
+                        autocomplete="off"
+                        pInputText />
             </div>
-            <div class="form-group p-float-label col-6 mt-3 ">
-                <span class="p-float-label mb-2">
-                    <input  class="input-group" 
-                            id="float-nameUsuario" 
-                            type="text" 
-                            [(ngModel)]="nombreUser"
-                            name="nameUsuario"
-                            [disabled]="estado"
-                            pInputText > 
-                <label for="float-nameUsuario" class="">Nombre</label>
-                </span>
+            <div class="form-group col-6 mt-3 ">
+                <label for="codigoafiliado">Codigo de Afiliado</label>
+                <p-inputMask class="input-group"
+                            [(ngModel)]="codigoAfiliado"
+                            name="codigoafiliado" 
+                            mask="005-009-9999999999"
+                            id="codigoafiliado"
+                            type="text"></p-inputMask>
             </div>
-            <div class="form-group p-float-label col-6 mt-3">
-                <span class="p-float-label mb-2">
-                    <input  class="input-group" 
-                            id="float-lastNameUsuario" 
-                            type="text" 
-                            autocomplete="off" 
-                            [(ngModel)]="apellidoUser"
-                            name="nameUsuario"
-                            [disabled]="estado"
-                            pInputText > 
-                <label for="float-lastNameUsuario" class="">Apellido</label>
-                </span>
+            <div class="form-group col-6 mt-3 ">
+                <label for="codigoafiliado">Codigo de Afiliado</label>
+                <p-dropdown [options]="cuentasAfiliado" [(ngModel)]="cuentaAfectada" name="cuentas" optionLabel="Cuentas"></p-dropdown>
+
             </div>
         </form>
     </div>
