@@ -70,8 +70,7 @@
             </div>
             <div class="form-group col-6 mt-3 ">
                 <label for="codigoafiliado">Codigo de Afiliado</label>
-                <p-dropdown [options]="cuentasAfiliado" [(ngModel)]="cuentaAfectada" name="cuentas" optionLabel="Cuentas"></p-dropdown>
-
+                <p-dropdown [options]="cuentasAfiliado" [(ngModel)]="cuentaAfectada" placeholder="Seleccione una cuenta" optionLabel="name" [showClear]="true"></p-dropdown>
             </div>
         </form>
     </div>
@@ -79,24 +78,4 @@
     
 </div>
 
-<!-- <div class="formulario m-0 vh-100 row justify-content-center">
-    <form class="mt-5">
-        <div class="col-4 form-group p-float-label mb-4">
-            <p-inputMask class="input-group"
-                         [(ngModel)]="identidad"
-                         name="idUduario" 
-                         mask="99-9999"
-                         id="float-identidad"
-                         type="text"
-                         autocomplete="off"></p-inputMask>
-            <input  class="input-group" 
-                    id="float-usuario" 
-                    type="text" 
-                    autocomplete="off" 
-                    [(ngModel)]="identidad"
-                    name="usuario"
-                    pInputText > 
-            <label for="float-usuario">Ingrese su usuario</label>
-        </div>
-    </form>
-</div> -->
+
