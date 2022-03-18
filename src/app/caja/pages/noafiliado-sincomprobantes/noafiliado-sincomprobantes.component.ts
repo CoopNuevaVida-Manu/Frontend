@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ceuntasAfiliado } from 'src/app/interfaces/cuentasAfiliado.interface';
+import { combobox } from 'src/app/interfaces/combobox.interface';
+
+import {SelectItem} from 'primeng/api';
+import {SelectItemGroup} from 'primeng/api';
+import { CajaService } from '../../services/caja.service';
+import { transaccion } from 'src/app/interfaces/transaccion.interface';
 
 @Component({
   selector: 'app-noafiliado-sincomprobantes',
@@ -17,31 +22,70 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   nombreUser : string = '';
   apellidoUser : string = '';
 
-  codigoAfiliado: number = 0o5;
-  cuentasAfiliado: ceuntasAfiliado[] = []
-  cuentaAfectada : number = 0;
+  cuentasAfiliado: combobox[] = []
+  cuentaAfectada !: string
 
-  estado: boolean = false;
 
   disponible: boolean = true;
 
-  caf1: string = '005';
-  caf2: string = '';
-  caf3: string = ''
+  caf1: string = '005'; //005 obligatorio
+  caf2: string = '';    //999
+  caf3: string = '';    //999999999 
+  codigoAfiliado : string = `${this.caf1}-${this.caf2}-${this.caf3}`
 
-  constructor(private router : Router) { 
+  
+  cbxTransacciones: combobox[] = [];
+  selectTransaccion !: string;
+
+  cbxorigenFondos : combobox[] = [];
+  selectOrigenFondo!: string;
+  
+  cbxRazonOperacio: combobox[] = [];
+  selectRazonFondo!: string;
+  
+
+  nombreAfiliadoC: string = '';
+  monto!: number 
+
+  
+  
+
+  constructor(private router : Router,
+              private cajaService :CajaService)  { 
+    this.cajaService.gettransacciones().subscribe(resp =>{
+      resp.forEach(element => {
+        this.cbxTransacciones.push({code: `${element.id_transaccion}` , name: `${element.transaccion}` })
+      });
+    });
+
+    this.cajaService.getOrigenFondos().subscribe( resp => {
+      resp.forEach(element => {
+        this.cbxorigenFondos.push({code: `${element.id_origen_fondos}` , name: `${element.origen_fondos}` })
+      });
+    });
+
+    this.cajaService.getRazonOperacion().subscribe( resp => {
+      resp.forEach(element => {
+        this.cbxRazonOperacio.push({code: `${element.id_razon_operacion}` , name: `${element.razon_operacion}` })
+      });
+    })
+    
     this.cuentasAfiliado= [
-      {name: 'New York', code: 'NY'},
+      {name: '1414147', code: 'NY'},
       {name: 'Rome', code: 'RM'},]
   }
 
   identidad: number = 0;
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+  
 
   logOut(){
     localStorage.clear();
     this.router.navigate(['./auth'])
+  }
+
+  prueba(){
+    console.log(this.cuentaAfectada)
   }
 
 }

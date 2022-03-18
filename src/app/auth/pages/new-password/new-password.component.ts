@@ -31,19 +31,7 @@ export class NewPasswordComponent  {
       this.authServices.actualizarPass(this.ConfPass).subscribe(resp => {
         if(resp.cryp){
           this.messageService.add({severity:'success', summary: 'Actualización Exitosa'});
-          this.listaDepartamentos.forEach(element => {
-            if(element.departamento == "Caja" && element.id_departamento == dep ){
-              this.router.navigate(['/caja/'])
-            }else if(element.departamento == "Contabilidad" && element.id_departamento == dep ){
-              this.router.navigate(['contabilidad/'])
-            }else if(element.departamento =="Atención al Afiliado" && element.id_departamento == dep ){
-              this.router.navigate(['atencion-cliente/'])
-            }else if(element.departamento == "Informática" && element.id_departamento == dep ){
-              this.router.navigate(['TI/cambio-password'])
-            }else if(element.departamento == "Informática" && element.id_departamento == dep ){
-
-            }
-          });
+          this.router.navigate(['Menu/Menu']);
         }else{
           this.messageService.add({severity:'error', summary: 'Error', detail : resp.msg});  
         }

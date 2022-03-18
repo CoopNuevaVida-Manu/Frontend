@@ -33,6 +33,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'Menu',
+    loadChildren: () => import('./menu/menu.module').then(m => m.MenuModule),
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'TI',
     loadChildren: () => import('./tecnologia/tecnologia.module').then( m => m.TecnologiaModule),
     canLoad: [AuthGuard],

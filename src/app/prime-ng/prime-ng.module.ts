@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {ButtonModule} from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputMaskModule} from 'primeng/inputmask';
+import {InputNumberModule} from 'primeng/inputnumber';
 import {InputTextModule} from 'primeng/inputtext';
 import {ToastModule} from 'primeng/toast';
 import {ToolbarModule} from 'primeng/toolbar';
@@ -14,6 +15,7 @@ import {SplitButtonModule} from 'primeng/splitbutton';
     ButtonModule,
     DropdownModule,
     InputMaskModule,
+    InputNumberModule,
     InputTextModule,
     ToastModule,
     ToolbarModule,

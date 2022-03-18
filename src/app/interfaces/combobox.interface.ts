@@ -1,4 +1,4 @@
-export interface ceuntasAfiliado {
+export interface combobox {
     name: string;
     code: string;
 }
