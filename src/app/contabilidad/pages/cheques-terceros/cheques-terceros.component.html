@@ -8,7 +8,105 @@
             <div class="col-12 text-center mb-3 mt-3">
                 <h3>Control de clientes</h3>
             </div>
-            
+            <div class="form-group col-6 mt-3">
+                <div class="col-12 row">
+                    <label for="codigoafiliado">Codigo de Afiliado</label>
+                <div class="col-3 form-group">
+                    <input  class="input-group "
+                    type="text" 
+                    [(ngModel)]="caf1"
+                    name="caf1"
+                    autocomplete="off"
+                    maxlength="3"
+                    pInputText />
+                </div>
+                <div class="col-3 form-group">
+                    <input  class="input-group "
+                    type="text" 
+                    [(ngModel)]="caf2"
+                    name="caf2"
+                    autocomplete="off"
+                    maxlength="3"
+                    pInputText />
+                </div>
+                <div class="col-6 form-group">
+                    <input  class="input-group "
+                    type="text" 
+                    [(ngModel)]="caf3"
+                    name="caf3"
+                    autocomplete="off"
+                    maxlength="9"
+                    pInputText />
+                </div>
+                
+                </div>
+            </div>
+            <div class="form-group col-6 mt-3">
+                <label for="nombreAfiliadoC">Nombre del Afiliado</label>
+                <input  class="input-group "
+                        type="text" 
+                        [(ngModel)]="nombreAfiliadoC"
+                        name="nombreAfiliadoC"
+                        id="nombreAfiliadoC"
+                        autocomplete="off"
+                        pInputText />
+            </div>
+            <div class="form-group col-6 mt-3">
+                <label for="nombreAfiliadoC">Numero de cheque</label>
+                <p-inputNumber inputId="integeronly" [(ngModel)]="numCheque" name="numerocheque">
+                </p-inputNumber>
+            </div>
+            <div class="col-6 p-fluid mt-3">
+                <div class="field ">
+                    <label for="currency-hn">Monto</label>
+                    <p-inputNumber [(ngModel)]="monto" name="montoTransaccion" inputId="currency-hn" mode="currency" currency="HNL" locale="es-HN">
+                    </p-inputNumber>
+                </div>
+            </div>
+            <div class="form-group col-6 mt-3">
+                <label for="idbeneficiario">Identidad del beneficiario</label>
+                <p-inputMask class="input-group"
+                            [(ngModel)]="idbeneficiario"
+                            name="idbeneficiario" 
+                            mask="9999-9999-99999"
+                            id="idbeneficiario"
+                            type="text"></p-inputMask>
+            </div>
+            <div class="form-group col-6 mt-3">
+                <label for="nombreBeneficiario">Nombre del beneficiario</label>
+                <input  class="input-group "
+                        type="text" 
+                        [(ngModel)]="nombreBeneficiario"
+                        name="nombreBeneficiario"
+                        id="nombreBeneficiario"
+                        autocomplete="off"
+                        pInputText />
+            </div>
+            <div class="col-6 mt-3">
+                <label for="">Parentesco con el afiliado</label>
+                <p-dropdown [options]="cbxParentesco" [(ngModel)]="selectParentesco" name="cmbParentesco" placeholder="Seleccione el parentesco" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+            </div>
+            <div class="col-6 mt-3">
+                <label for="">Origen de los fondos</label>
+                <p-dropdown [options]="cbxorigenFondos" [(ngModel)]="selectOrigenFondo" name="cmbOrigenfondos" placeholder="Seleccione el origen del fondo" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+            </div>
+            <div class="col-6 mt-3">
+                <label for="">Destino de los fondos</label>
+                <p-dropdown [options]="cbxDestino" [(ngModel)]="selectDestino" name="cmbDestino" placeholder="Seleccione el destino del fondo" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+            </div>
+            <div class="form-group col-6 mt-3">
+                <label for="observacion">Observación</label>
+                <input  class="input-group "
+                        type="text" 
+                        [(ngModel)]="observacion"
+                        name="observacion"
+                        id="observacion"
+                        autocomplete="off"
+                        pInputText />
+            </div>
+            <div class="col-12 mt-3">
+                <p-button label="Click" (onClick)="prueba()"></p-button>
+            </div>
         </form>
     </div>    
 </div>
