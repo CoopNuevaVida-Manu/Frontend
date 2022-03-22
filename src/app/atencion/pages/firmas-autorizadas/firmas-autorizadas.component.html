@@ -1,1 +1,83 @@
-<p>firmas-autorizadas works!</p>
+<div class="container">
+    <div class="formulario">
+        <form class="m-3 row field p-fluid" autocomplete="off">
+            <div class="col-12 text-center mb-3 mt-3">
+                <h3>Control de firmas autorizadas</h3>
+            </div>
+            <div class="form-group col-6 mt-3">
+                <div class="col-12 row">
+                    <label for="codigoafiliado">Codigo de Afiliado</label>
+                <div class="col-3 form-group">
+                    <input  class="input-group "
+                    type="text" 
+                    [(ngModel)]="caf1"
+                    name="caf1"
+                    autocomplete="off"
+                    maxlength="3"
+                    [disabled]="true"
+                    pInputText />
+                </div>
+                <div class="col-3 form-group">
+                    <input  class="input-group "
+                    type="text" 
+                    [(ngModel)]="caf2"
+                    name="caf2"
+                    autocomplete="off"
+                    maxlength="3"
+                    pInputText />
+                </div>
+                <div class="col-6 form-group">
+                    <input  class="input-group "
+                    type="text" 
+                    [(ngModel)]="caf3"
+                    name="caf3"
+                    autocomplete="off"
+                    maxlength="9"
+                    pInputText />
+                </div>
+                </div>
+            </div>
+            <div class="form-group col-6 mt-3">
+                <label for="nombreAfiliadoC">Nombre del Afiliado</label>
+                <input  class="input-group "
+                        type="text" 
+                        [(ngModel)]="nombreAfiliadoC"
+                        name="nombreAfiliadoC"
+                        id="nombreAfiliadoC"
+                        autocomplete="off"
+                        [disabled]="true"
+                        pInputText />
+            </div>
+            <div class="form-group col-6 mt-3">
+                <label for="idbeneficiario">Identidad del beneficiario</label>
+                <p-inputMask class="input-group"
+                            [(ngModel)]="idAutorizado"
+                            name="idbeneficiario" 
+                            mask="9999-9999-99999"
+                            id="idbeneficiario"
+                            type="text"></p-inputMask>
+            </div>
+            <div class="form-group col-6 mt-3">
+                <label for="nombreAutorizado">Nombre del beneficiario</label>
+                <input  class="input-group "
+                        type="text" 
+                        [(ngModel)]="nombreAutorizado"
+                        name="nombreAutorizado"
+                        id="nombreAutorizado"
+                        autocomplete="off"
+                        pInputText />
+            </div>
+            <div class="col-6 mt-3">
+                <label for="">Parentesco con el afiliado</label>
+                <p-dropdown [options]="cbxParentesco" [(ngModel)]="selectParentesco" name="cmbParentesco" placeholder="Seleccione el parentesco" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+            </div>
+            <div class="col-6 mt-3">
+                <label for="">Firma</label>
+                <p-dropdown [options]="cbxFirma" [(ngModel)]="selectFirma" name="cmbFirma" placeholder="Seleccione el tipo de firma" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+            </div>
+            <div class="col-12 mt-3">
+                <p-button label="Click" (onClick)="prueba()"></p-button>
+            </div>
+        </form>
+    </div>
+</div>

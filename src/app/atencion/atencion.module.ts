@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirmasAutorizadasComponent } from './pages/firmas-autorizadas/firmas-autorizadas.component';
 import { AtencionRoutingModule } from './atencion-routing.module';
+import { FormsModule } from '@angular/forms';
+import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
 
 
@@ -11,7 +13,9 @@ import { AtencionRoutingModule } from './atencion-routing.module';
   ],
   imports: [
     CommonModule,
-    AtencionRoutingModule
+    AtencionRoutingModule,
+    FormsModule,
+    PrimeNgModule
   ]
 })
 export class AtencionModule { }
