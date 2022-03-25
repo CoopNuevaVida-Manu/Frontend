@@ -5,6 +5,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {InputMaskModule} from 'primeng/inputmask';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputTextModule} from 'primeng/inputtext';
+import {TabViewModule} from 'primeng/tabview';
 import {ToastModule} from 'primeng/toast';
 import {ToolbarModule} from 'primeng/toolbar';
 import {PasswordModule} from 'primeng/password';
@@ -17,6 +18,7 @@ import {SplitButtonModule} from 'primeng/splitbutton';
     InputMaskModule,
     InputNumberModule,
     InputTextModule,
+    TabViewModule,
     ToastModule,
     ToolbarModule,
     PasswordModule,

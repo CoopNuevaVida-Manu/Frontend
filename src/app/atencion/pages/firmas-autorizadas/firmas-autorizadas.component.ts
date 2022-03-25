@@ -26,7 +26,19 @@ export class FirmasAutorizadasComponent implements OnInit {
   cbxFirma : combobox[] = [];
   selectFirma!: string;
 
-  constructor(private atencionService : AtencionService) { }
+  constructor(private atencionService : AtencionService) { 
+    this.atencionService.getParentesco().subscribe(resp => {
+      resp.forEach(element => {
+        this.cbxParentesco.push({code: `${element.id_parentesco}` , name: `${element.parentesco}`})
+      });
+    });
+
+    this.atencionService.getFirmas().subscribe( resp => {
+      resp.forEach(element => {
+        this.cbxFirma.push({code: `${element.id_firma}` , name: `${element.firma}`})
+      });
+    })
+  }
 
   ngOnInit(): void {
   }

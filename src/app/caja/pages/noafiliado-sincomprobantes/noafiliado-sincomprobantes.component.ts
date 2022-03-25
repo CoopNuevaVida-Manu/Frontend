@@ -17,8 +17,6 @@ import { transaccion } from 'src/app/interfaces/transaccion.interface';
 
 export class NoafiliadoSincomprobantesComponent implements OnInit {
 
-  avatarUsuario: string = localStorage.getItem('user') || ""
-
   nombreUser : string = '';
   apellidoUser : string = '';
 
@@ -78,11 +76,6 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   identidad: number = 0;
   ngOnInit(): void {}
   
-
-  logOut(){
-    localStorage.clear();
-    this.router.navigate(['./auth'])
-  }
 
   prueba(){
     console.log(this.cuentaAfectada)

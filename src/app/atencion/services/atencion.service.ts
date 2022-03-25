@@ -20,6 +20,6 @@ export class AtencionService {
   }
 
   getFirmas():Observable<Firma[]>{
-    return this.http.get<Firma[]>(`${this.urlPeticion}/parentesco`)
+    return this.http.get<Firma[]>(`${this.urlPeticion}/firma`)
   }
 }
