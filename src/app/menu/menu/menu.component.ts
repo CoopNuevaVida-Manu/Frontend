@@ -26,7 +26,19 @@ export class MenuComponent implements OnInit {
   constructor(private menuService: MenuService,
               private authService: AuthService,
               private router: Router) { 
-                
+                this.authService.getdepartamentos().subscribe( respdep =>{
+                  this.menuService.getColabDepID(Number(localStorage.getItem('token'))).subscribe( respcolab =>{
+                    respdep.forEach(elementdep => {
+                      respcolab.forEach(elementcolab => {
+                        if(elementcolab.id_departamento == elementdep.id_departamento){
+                          this.listdep.push({ header: elementdep.departamento , content: 'Texto de ejmplo'})
+                        }
+                      });
+                    });
+                  })
+                })
+                this.menudesable = true
+                console.log(this.listdep)
      }
 
 
@@ -37,19 +49,7 @@ export class MenuComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.authService.getdepartamentos().subscribe( respdep =>{
-      this.menuService.getColabDepID(Number(localStorage.getItem('token'))).subscribe( respcolab =>{
-        respdep.forEach(elementdep => {
-          respcolab.forEach(elementcolab => {
-            if(elementcolab.id_departamento == elementdep.id_departamento){
-              this.listdep.push({ header: elementdep.departamento , content: 'Texto de ejmplo'})
-            }
-          });
-        });
-      })
-    })
-    this.menudesable = true
-    console.log(this.listdep)
+    
   }
 
 }

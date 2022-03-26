@@ -13,10 +13,9 @@
             <p-button icon="pi-sign-out" styleClass="p-button-secondary" label="Cerrar sesión" (onClick)="logOut()"></p-button>
         </div>
     </p-toolbar>
-
-    <p-tabView *ngIf="menudesable">
-        <p-tabPanel *ngFor="let item of listdep; let i = index"  [selected]="i == 0" [header]="item.header">
-           {{item.content}}
-        </p-tabPanel>
-    </p-tabView>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline" >
+            <button pButton pRipple type="button" *ngFor="let item of listdep" label="{{item.header}}" class="p-button-outlined mr-2"></button>
+        </form>
+      </nav>
 </div>
