@@ -4,6 +4,7 @@ import { FirmasAutorizadasComponent } from './pages/firmas-autorizadas/firmas-au
 import { AtencionRoutingModule } from './atencion-routing.module';
 import { FormsModule } from '@angular/forms';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { MenuModule } from '../menu/menu.module';
 
 
 
@@ -15,7 +16,8 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
     CommonModule,
     AtencionRoutingModule,
     FormsModule,
-    PrimeNgModule
+    PrimeNgModule,
+    MenuModule
   ]
 })
 export class AtencionModule { }

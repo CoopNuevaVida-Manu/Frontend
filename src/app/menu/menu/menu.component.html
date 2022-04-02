@@ -13,9 +13,21 @@
             <p-button icon="pi-sign-out" styleClass="p-button-secondary" label="Cerrar sesión" (onClick)="logOut()"></p-button>
         </div>
     </p-toolbar>
-    <nav class="navbar navbar-light bg-light">
-        <form class="form-inline" >
-            <button pButton pRipple type="button" *ngFor="let item of listdep" label="{{item.header}}" class="p-button-outlined mr-2"></button>
-        </form>
-      </nav>
+    <!-- <div class=" col-12 formulario row" *ngFor="let item of listdep">
+        <div class="col">
+            <button pButton pRipple type="button"  label="{{item}}" class="p-button-outlined" (click)="departamentoactual(item)"></button>
+        </div>
+    </div> -->
+    
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav p-toolbar-group-left">
+            <li class="nav-item active form-inline " *ngFor="let item of listdep">
+                <button pButton pRipple type="button"  label="{{item}}" class="p-button-outlined" (click)="departamentoactual(item)"></button>
+            </li>
+            </ul>
+        </div>
+    </nav>
+    <router-outlet></router-outlet>
 </div>

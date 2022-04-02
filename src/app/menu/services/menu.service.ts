@@ -20,4 +20,8 @@ export class MenuService {
   getdep():Observable<Departamento[]>{
     return this.http.get<Departamento[]>(`${this.urlPeticion}/departamento`)
   }
+
+  getfiliales(){
+
+  }
 }

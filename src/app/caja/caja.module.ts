@@ -4,6 +4,7 @@ import { NoafiliadoSincomprobantesComponent } from './pages/noafiliado-sincompro
 import { CajaRoutingModule } from './caja-routing.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { FormsModule } from '@angular/forms';
+import { MenuModule } from '../menu/menu.module';
 
 
 
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     CajaRoutingModule,
     PrimeNgModule,
-    FormsModule
+    FormsModule,
+    MenuModule
   ]
 })
 export class CajaModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TecnologiaService } from '../../services/tecnologia.service';
 
 @Component({
   selector: 'app-cambio-pass',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CambioPassComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tecnologiaService : TecnologiaService) { }
 
   ngOnInit(): void {
   }

@@ -4,6 +4,7 @@ import { ChequesTercerosComponent } from './pages/cheques-terceros/cheques-terce
 import { ContabilidadRoutingModule } from './contabilidad-routing.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { FormsModule } from '@angular/forms';
+import { MenuModule } from '../menu/menu.module';
 
 
 
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     ContabilidadRoutingModule,
     PrimeNgModule,
-    FormsModule
+    FormsModule,
+    MenuModule
   ]
 })
 export class ContabilidadModule { }

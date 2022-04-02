@@ -19,8 +19,7 @@ export class MenuComponent implements OnInit {
 
   despartamento: string = 'Dep segun URL'
 
-  listdep: MenuTab[] = []
-  menudesable : boolean = false
+  listdep: string[] = []
   
 
   constructor(private menuService: MenuService,
@@ -31,25 +30,53 @@ export class MenuComponent implements OnInit {
                     respdep.forEach(elementdep => {
                       respcolab.forEach(elementcolab => {
                         if(elementcolab.id_departamento == elementdep.id_departamento){
-                          this.listdep.push({ header: elementdep.departamento , content: 'Texto de ejmplo'})
+                          this.listdep.push(elementdep.departamento)
                         }
                       });
                     });
                   })
                 })
-                this.menudesable = true
-                console.log(this.listdep)
+
+
+     }
+     hola(){
+       console.log('Entro freson')
      }
 
+     departamentoactual(dep : string){
+      if(dep == 'Caja'){
+        this.router.navigate(['caja/']);
+      }else if (dep == 'Contabilidad'){
+        this.router.navigate(['contabilidad/']);
+      }else if(dep == 'Atención al Afiliado'){
+        this.router.navigate(['atencion-cliente/']);
+      }else if(dep == 'Informática'){
+        this.router.navigate(['TI/']);
+      }else if(dep == 'Cumplimiento'){
+        this.router.navigate(['cumplimiento/']);
+      }
+    }
 
      logOut(){
       localStorage.clear();
       this.router.navigate(['./auth'])
     }
-  
+
 
   ngOnInit(): void {
-    
+    if (this.router.url.includes('Menu')) {
+      this.despartamento = 'Menu'
+    }else if (this.router.url.includes('caja')) {
+      this.despartamento = 'Caja'
+    }else if (this.router.url.includes('contabilidad')) {
+      this.despartamento = 'Contabilidad'
+    }else if (this.router.url.includes('atencion-cliente')) {
+      this.despartamento = 'atencion-cliente'
+    }else if (this.router.url.includes('TI')) {
+      this.despartamento = 'TI'
+    }else if (this.router.url.includes('cumplimiento')) {
+      this.despartamento = 'Cumplimiento'
+    }
   }
 
 }
