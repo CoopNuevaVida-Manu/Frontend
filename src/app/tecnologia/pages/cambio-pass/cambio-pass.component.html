@@ -1,6 +1,23 @@
 <app-menu></app-menu>
 <div class="container">
     <div class=" formulario">
-        
+        <p-table [value]="colabotabla" >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nombre Colaborador</th>
+                    <th>Usuario</th>
+                    <th>Filial</th>
+                    <th>Estado</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-colab>
+                <tr>
+                    <td>{{colab.colaborador_nombre}}</td>
+                    <td>{{colab.colaborador_usuario}}</td>
+                    <td>{{colab.oficiona}}</td>
+                    <td>{{colab.estado}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
 </div>

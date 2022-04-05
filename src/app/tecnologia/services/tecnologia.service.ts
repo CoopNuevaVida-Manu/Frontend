@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Colaborador } from '../../interfaces/colaboradores.interface';
 import { Filial } from 'src/app/interfaces/filial.interface';
+import { ColabEstado } from '../../interfaces/ColabEstado.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,12 @@ export class TecnologiaService {
     return this.http.get<Filial>(`${this.urlPeticion}/filial/${id}`)
   }
 
+  getEstadoColab():Observable<ColabEstado[]>{
+    return this.http.get<ColabEstado[]>(`${this.urlPeticion}/colaborador_estado`)
+  }
+
+  getEstadoColabID(id:number):Observable<ColabEstado>{
+    return this.http.get<ColabEstado>(`${this.urlPeticion}/colaborador_estado/${id}`)
+  }
   
 }
