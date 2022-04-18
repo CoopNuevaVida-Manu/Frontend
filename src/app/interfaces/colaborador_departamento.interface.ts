@@ -1,4 +1,4 @@
 export interface RolColabDep {
-    id_colaborador:  number;
+    id:  number;
     id_departamento: number;
 }

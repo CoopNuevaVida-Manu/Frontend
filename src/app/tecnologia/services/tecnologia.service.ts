@@ -16,8 +16,12 @@ export class TecnologiaService {
 
   constructor(private http : HttpClient) { }
 
-  getcolaboradores():Observable<Colaborador[]>{
+  getcolaboradoresActivos():Observable<Colaborador[]>{
     return this.http.get<Colaborador[]>(`${this.urlPeticion}/colaborador`)
+  }
+
+  getcolaboradoresInactivos():Observable<Colaborador[]>{
+    return this.http.get<Colaborador[]>(`${this.urlPeticion}/colaborador/inactivo`)
   }
 
   getcolaboradoresID(id: number):Observable<Colaborador>{

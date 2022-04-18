@@ -1,28 +1,168 @@
 <app-menu></app-menu>
 <div class="container">
-    <div class=" formulario">
-        <p-table [value]="colabotabla" >
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Nombre Colaborador</th>
-                    <th>Usuario</th>
-                    <th>Filial</th>
-                    <th>Estado</th>
-                    <th>Editar
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-colab>
-                <tr>
-                    <td>{{colab.colaborador_nombre}}</td>
-                    <td>{{colab.colaborador_usuario}}</td>
-                    <td>{{colab.oficiona}}</td>
-                    <td>{{colab.estado}}</td>
-                    <td>
-                        <button pButton icon="pi pi-user-edit" type="button" class="p-button-raised p-button-rounded"></button>
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
+    <p-tabView>
+        <p-tabPanel header="Activos" rightIcon="pi pi-users">
+            <div class="container">
+                <div class=" formulario">
+                    <p-table [value]="colabotabla" >
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Nombre Colaborador</th>
+                                <th>Usuario</th>
+                                <th>Filial</th>
+                                <th>Estado</th>
+                                <th>Editar
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-colab>
+                            <tr>
+                                <td>{{colab.colaborador_nombre}}</td>
+                                <td>{{colab.colaborador_usuario}}</td>
+                                <td>{{colab.oficiona}}</td>
+                                <td>{{colab.estado}}</td>
+                                <td>
+                                    <button pButton icon="pi pi-user-edit" type="button" class="p-button-raised p-button-rounded" (click)="editUser(colab)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </p-tabPanel>
+    
+        <p-tabPanel header="Inactivos" rightIcon="pi pi-users">
+            <div class="container">
+                <div class=" formulario">
+                    <p-table [value]="colabotablaInactivos" >
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Nombre Colaborador</th>
+                                <th>Usuario</th>
+                                <th>Filial</th>
+                                <th>Estado</th>
+                                <th>Editar
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-colab>
+                            <tr>
+                                <td>{{colab.colaborador_nombre}}</td>
+                                <td>{{colab.colaborador_usuario}}</td>
+                                <td>{{colab.oficiona}}</td>
+                                <td>{{colab.estado}}</td>
+                                <td>
+                                    <button pButton icon="pi pi-user-edit" type="button" class="p-button-raised p-button-rounded p-button-danger" (click)="editUser(colab)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </p-tabPanel>
+    
+        <p-tabPanel header="Nuevo" rightIcon="pi pi-user-plus">
+            <form class="m-3 row field p-fluid" autocomplete="off">
+                <div class="col-12 text-center mb-3 mt-3">
+                    <h3>Nuevo Colaborador</h3>
+                </div>
+                <div class="form-group col-6 mt-3">
+                    <label for="nombreAfiliadoC">Nombre del Colaborador</label>
+                    <input  class="input-group "
+                            type="text" 
+                            [(ngModel)]="colabNombre"
+                            name="nombreAfiliadoC"
+                            id="nombreAfiliadoC"
+                            autocomplete="off"
+                            pInputText />
+                </div>
+                <div class="form-group col-6 mt-3">
+                    <label for="nombreAutorizado">Usuario</label>
+                    <input  class="input-group "
+                            type="text" 
+                            [(ngModel)]="colabUsuario"
+                            name="nombreAutorizado"
+                            id="nombreAutorizado"
+                            autocomplete="off"
+                            pInputText />
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="">Filial</label>
+                    <p-dropdown [options]="cbxfilial" [(ngModel)]="selectFilial" name="cmbFilial" placeholder="Seleccione una filial" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="">Estado</label>
+                    <p-dropdown [options]="cbxEstadoColab" [(ngModel)]="selectEstadoColab" name="cmbEstadoColab" placeholder="Seleccione el estado del colaborador" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                </div>
+                <div class="form-group col-6 mt-3">
+                    <label for="nombreAutorizado">Contraseña temporal</label>
+                    <input  class="input-group "
+                            type="text" 
+                            [(ngModel)]="password"
+                            name="Pass"
+                            id="nombreAutorizado"
+                            autocomplete="off"
+                            pInputText />
+                </div>
+                <div class="form-group col-6 mt-3 justify-content-center row">
+                    <div class="col-6 mt-4">
+                        <button pButton type="button" label="Crear" class="p-button-primary"></button>
+                    </div>
+                    <div class="col-6 mt-4">
+                        <button pButton type="button" label="Cancelar" class="p-button-warning"></button>
+                    </div>
+                </div>
+            </form>
+        </p-tabPanel>
+    </p-tabView>
+    
+    <p-dialog [(visible)]="editDialog" [style]="{width: '650px'}" header="Colaborador" [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <form class="m-3 row field p-fluid" autocomplete="off">
+                <div class="form-group col-6 mt-3">
+                    <label for="nombreAfiliadoC">Nombre del Colaborador</label>
+                    <input  class="input-group "
+                            type="text" 
+                            [(ngModel)]="usuario.colaborador_nombre"
+                            name="nombreAfiliadoC"
+                            id="nombreAfiliadoC"
+                            autocomplete="off"
+                            pInputText />
+                </div>
+                <div class="form-group col-6 mt-3">
+                    <label for="nombreAutorizado">Usuario</label>
+                    <input  class="input-group "
+                            type="text" 
+                            [(ngModel)]="usuario.colaborador_usuario"
+                            name="nombreAutorizado"
+                            id="nombreAutorizado"
+                            autocomplete="off"
+                            pInputText />
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="">Filial</label>
+                    <p-dropdown [options]="editCbxfilial" [(ngModel)]="usuario.oficiona" name="cmbFilial" placeholder="Seleccione una filial" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                </div>
+                <div class="col-6 mt-3">
+                    <label for="">Estado</label>
+                    <p-dropdown [options]="cbxEstadoColab" [(ngModel)]="usuario.estado" name="cmbEstadoColab" placeholder="Seleccione el estado del colaborador" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                </div>
+                <div class="form-group col-6 mt-3">
+                    <label for="nombreAutorizado">Contraseña temporal</label>
+                    <input  class="input-group "
+                            type="text" 
+                            [(ngModel)]="editPassword"
+                            name="Pass"
+                            id="nombreAutorizado"
+                            autocomplete="off"
+                            pInputText />
+                </div>
+            </form>
+        </ng-template>
+    
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"></button>
+        </ng-template>
+    </p-dialog>
 </div>

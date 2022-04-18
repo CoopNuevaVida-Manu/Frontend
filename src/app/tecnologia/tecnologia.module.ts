@@ -4,6 +4,7 @@ import { CambioPassComponent } from './pages/cambio-pass/cambio-pass.component';
 import { TecnologiaRoutingModule } from './tecnologia-routing.module';
 import { MenuModule } from '../menu/menu.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,6 +16,7 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
     CommonModule,
     TecnologiaRoutingModule,
     PrimeNgModule,
+    FormsModule,
     MenuModule
   ]
 })
