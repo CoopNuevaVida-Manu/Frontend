@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import {ButtonModule} from 'primeng/button';
+import {CheckboxModule} from 'primeng/checkbox';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputMaskModule} from 'primeng/inputmask';
@@ -16,6 +17,7 @@ import {SplitButtonModule} from 'primeng/splitbutton';
 @NgModule({
   exports: [
     ButtonModule,
+    CheckboxModule,
     DialogModule,
     DropdownModule,
     InputMaskModule,

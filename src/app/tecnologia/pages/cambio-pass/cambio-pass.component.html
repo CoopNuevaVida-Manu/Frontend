@@ -94,6 +94,14 @@
                     <label for="">Estado</label>
                     <p-dropdown [options]="cbxEstadoColab" [(ngModel)]="selectEstadoColab" name="cmbEstadoColab" placeholder="Seleccione el estado del colaborador" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
                 </div>
+                <div class="col-12 mt-3 row">
+                    <div class="col-12 text-center mt-3">
+                        <h6>Rol del usuario</h6>
+                    </div>
+                    <div class="col-6 mt-3" *ngFor="let item of departamentos">
+                        <p-checkbox name="groupname" [value]="item.id_departamento" [label]="item.departamento" [(ngModel)]="selectedValues"></p-checkbox>
+                    </div>
+                </div>
                 <div class="form-group col-6 mt-3">
                     <label for="nombreAutorizado">Contraseña temporal</label>
                     <input  class="input-group "
@@ -106,7 +114,7 @@
                 </div>
                 <div class="form-group col-6 mt-3 justify-content-center row">
                     <div class="col-6 mt-4">
-                        <button pButton type="button" label="Crear" class="p-button-primary"></button>
+                        <button pButton type="button" label="Crear" class="p-button-primary" (click)="guardar()"></button>
                     </div>
                     <div class="col-6 mt-4">
                         <button pButton type="button" label="Cancelar" class="p-button-warning"></button>
@@ -141,11 +149,19 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label for="">Filial</label>
-                    <p-dropdown [options]="editCbxfilial" [(ngModel)]="usuario.oficiona" name="cmbFilial" placeholder="Seleccione una filial" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                    <p-dropdown [options]="editCbxfilial" [(ngModel)]="editSelectFilial" name="cmbFilial" placeholder="Seleccione una filial" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
                 </div>
                 <div class="col-6 mt-3">
                     <label for="">Estado</label>
-                    <p-dropdown [options]="cbxEstadoColab" [(ngModel)]="usuario.estado" name="cmbEstadoColab" placeholder="Seleccione el estado del colaborador" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                    <p-dropdown [options]="cbxEstadoColab" [(ngModel)]="editSelectEstadoColab" name="editSelectEstadoColab" placeholder="Seleccione el estado del colaborador" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                </div>
+                <div class="col-12 mt-3 row">
+                    <div class="col-12 text-center mt-3">
+                        <h6>Rol del usuario</h6>
+                    </div>
+                    <div class="col-6 mt-3" *ngFor="let item of departamentos">
+                        <p-checkbox name="groupname" [value]="item.id_departamento" [label]="item.departamento" [(ngModel)]="editValues"></p-checkbox>
+                    </div>
                 </div>
                 <div class="form-group col-6 mt-3">
                     <label for="nombreAutorizado">Contraseña temporal</label>
@@ -159,10 +175,10 @@
                 </div>
             </form>
         </ng-template>
-    
         <ng-template pTemplate="footer">
             <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="print()"></button>
         </ng-template>
     </p-dialog>
+
 </div>

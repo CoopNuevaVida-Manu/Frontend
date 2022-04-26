@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Colaborador } from '../../interfaces/colaboradores.interface';
 import { Filial } from 'src/app/interfaces/filial.interface';
 import { ColabEstado } from '../../interfaces/ColabEstado.interface';
+import { Departamento } from 'src/app/interfaces/departamento.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,9 @@ export class TecnologiaService {
 
   getEstadoColabID(id:number):Observable<ColabEstado>{
     return this.http.get<ColabEstado>(`${this.urlPeticion}/colaborador_estado/${id}`)
+  }
+  getDepartamentos():Observable<Departamento[]>{
+    return this.http.get<Departamento[]>(`${this.urlPeticion}/departamento`)
   }
   
 }

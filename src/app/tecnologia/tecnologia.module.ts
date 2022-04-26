@@ -5,12 +5,16 @@ import { TecnologiaRoutingModule } from './tecnologia-routing.module';
 import { MenuModule } from '../menu/menu.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { FormsModule } from '@angular/forms';
+import { TablasComponent } from './components/tablas/tablas.component';
+import { NewUserComponent } from './components/new-user/new-user.component';
 
 
 
 @NgModule({
   declarations: [
-    CambioPassComponent
+    CambioPassComponent,
+    TablasComponent,
+    NewUserComponent
   ],
   imports: [
     CommonModule,
