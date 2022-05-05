@@ -7,6 +7,7 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { FormsModule } from '@angular/forms';
 import { TablasComponent } from './components/tablas/tablas.component';
 import { NewUserComponent } from './components/new-user/new-user.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 
 
@@ -14,7 +15,8 @@ import { NewUserComponent } from './components/new-user/new-user.component';
   declarations: [
     CambioPassComponent,
     TablasComponent,
-    NewUserComponent
+    NewUserComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,

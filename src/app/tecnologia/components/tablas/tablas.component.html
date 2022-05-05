@@ -1,1 +1,36 @@
-<p>tablas works!</p>
+<p-table [value]="colabotabla" >
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nombre Colaborador</th>
+            <th>Usuario</th>
+            <th>Filial</th>
+            <th>Estado</th>
+            <th>Editar
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-colab>
+        <tr>
+            <td>{{colab.colaborador_nombre}}</td>
+            <td>{{colab.colaborador_usuario}}</td>
+            <td>{{colab.oficiona}}</td>
+            <td>{{colab.estado}}</td>
+            <td>
+                <button pButton icon="pi pi-user-edit" type="button" [class]="estado" (click)="editUser(colab)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="editDialog" [style]="{width: '650px'}" header="Colaborador" [modal]="true" styleClass="p-fluid">
+    <app-edit-user  [colabNombre]="colabNombre" 
+                    [colaborador_usuario]="colabUsuario"
+                    [cbxfilial]="cbxfilial"
+                    [selectFilial]="selectFilial"
+                    [departamentos]="departamentos"
+                    [selectedValues]="selectedValues"
+                    [cbxEstadoColab]="cbxEstadoColab"
+                    [selectEstadoColab]="selectEstadoColab"
+                    [cambio]="cambio"
+                    [editarroles]="editarroles"></app-edit-user>
+</p-dialog>
