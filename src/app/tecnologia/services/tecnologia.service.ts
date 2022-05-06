@@ -47,5 +47,9 @@ export class TecnologiaService {
   getDepartamentos():Observable<Departamento[]>{
     return this.http.get<Departamento[]>(`${this.urlPeticion}/departamento`)
   }
+
+  postNewColab(colaborador : Colaborador, departamentos : number[]){
+    return this.http.post(`${this.urlPeticion}/`)
+  }
   
 }

@@ -22,7 +22,7 @@
     </ng-template>
 </p-table>
 
-<p-dialog [(visible)]="editDialog" [style]="{width: '650px'}" header="Colaborador" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="editDialog" [style]="{width: '650px'}" header="Colaborador" [modal]="true" [closeOnEscape]="false" [closable]="false" styleClass="p-fluid">
     <app-edit-user  [colabNombre]="colabNombre" 
                     [colaborador_usuario]="colabUsuario"
                     [cbxfilial]="cbxfilial"

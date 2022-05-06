@@ -21,7 +21,6 @@ export class TablasComponent implements OnInit {
 
   //Editar usuario
   editDialog: boolean = false
-  usuario !: JSON
   colabNombre: string = ''
   colabUsuario: string = ''
   cbxfilial: combobox[] = []
@@ -62,11 +61,21 @@ export class TablasComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
   async editUser( user: TabColab){
-    
-    this.usuario = JSON.parse(JSON.stringify(user));
+
+    //limpieza
+    this.colabNombre = ""
+    this.colabUsuario = ""
+    this.selectFilial = {code: "0" , name : ""}
+    this.selectedValues = []
+    this.cambio = 0;
+    this.editarroles = false
+    this.selectEstadoColab = {code: "0" , name : ""}
+
+
 
     this.colabNombre = user.colaborador_nombre.toString()
     this.colabUsuario = user.colaborador_usuario
@@ -82,9 +91,7 @@ export class TablasComponent implements OnInit {
     this.selectEstadoColab = this.cbxEstadoColab.find(estado => estado.name === user.estado) || this.cbxEstadoColab[0]
     this.selectFilial = this.cbxfilial.find( filial => filial.name === user.oficiona) || this.cbxfilial[0]
     this.editDialog = true;
-
+    
   }
-
-  
 
 }

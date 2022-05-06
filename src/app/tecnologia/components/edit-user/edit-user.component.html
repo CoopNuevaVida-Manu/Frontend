@@ -39,12 +39,12 @@
             </div>
             <div class="col-12 mt-3 row" *ngIf="editarroles">
                 <div class="col-6 mt-3"  *ngFor="let item of departamentos">
-                    <p-checkbox name="groupname" [value]="item.id_departamento" [label]="item.departamento" [(ngModel)]="prueba3"></p-checkbox>
+                    <p-checkbox name="groupname" [value]="item.id_departamento" [label]="item.departamento" [(ngModel)]="flag"></p-checkbox>
                 </div>
             </div>
             
         </div>
-        <!-- <div class="form-group col-6 mt-3">
+        <div class="form-group col-6 mt-3">
             <label for="nombreAutorizado">Contraseña temporal</label>
             <input  class="input-group "
                     type="text" 
@@ -53,9 +53,9 @@
                     id="nombreAutorizado"
                     autocomplete="off"
                     pInputText />
-        </div> -->
+        </div>
         <div class="form-group col-6 mt-3">
-            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"></button>
-            <button pButton  label="Save" icon="pi pi-check" class="p-button-text" (click)="print()"></button>
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="cancel()"></button>
+            <button pButton  label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
         </div>
     </form>
