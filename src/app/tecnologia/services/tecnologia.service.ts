@@ -48,8 +48,13 @@ export class TecnologiaService {
     return this.http.get<Departamento[]>(`${this.urlPeticion}/departamento`)
   }
 
-  postNewColab(colaborador : Colaborador, departamentos : number[]){
-    return this.http.post(`${this.urlPeticion}/`)
+  postNewColab(colaborador : Colaborador){
+    return this.http.post(`${this.urlPeticion}/`, colaborador)
   }
+
+  postNewRolColab(listDepId : number[]){
+    return this.http.post(`${this.urlPeticion}/colaborador_departamento`, listDepId)
+  }
+
   
 }
