@@ -20,6 +20,8 @@ export class MenuComponent implements OnInit {
   despartamento: string = 'Dep segun URL'
 
   listdep: string[] = []
+
+  
   
 
   constructor(private menuService: MenuService,
@@ -37,12 +39,23 @@ export class MenuComponent implements OnInit {
                   })
                 })
 
+               if(this.router.url.includes('Menu')){
+                 if(this.listdep[0] = "Caja"){
+                  this.router.navigate(['caja/']);
+                 }else if(this.listdep[0] = "Contabilidad"){
+                  this.router.navigate(['caja/']);
+                 }else if(this.listdep[0] == 'Atención al Afiliado'){
+                  this.router.navigate(['atencion-cliente/']);
+                }else if(this.listdep[0] == 'Informática'){
+                  this.router.navigate(['TI/']);
+                }else if(this.listdep[0] == 'Cumplimiento'){
+                  this.router.navigate(['cumplimiento/']);
+                }
+               }
+
 
      }
-     hola(){
-       console.log('Entro freson')
-     }
-
+    
      departamentoactual(dep : string){
       if(dep == 'Caja'){
         this.router.navigate(['caja/']);

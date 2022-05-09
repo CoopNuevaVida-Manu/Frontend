@@ -6,6 +6,7 @@ import { Colaborador } from '../../interfaces/colaboradores.interface';
 import { Filial } from 'src/app/interfaces/filial.interface';
 import { ColabEstado } from '../../interfaces/ColabEstado.interface';
 import { Departamento } from 'src/app/interfaces/departamento.interface';
+import { rolColab } from '../../interfaces/rolDepColap.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -49,10 +50,14 @@ export class TecnologiaService {
   }
 
   postNewColab(colaborador : Colaborador){
-    return this.http.post(`${this.urlPeticion}/`, colaborador)
+    return this.http.post(`${this.urlPeticion}/colaborador`, colaborador)
   }
 
-  postNewRolColab(listDepId : number[]){
+  getColabEnd(): Observable<number>{
+    return this.http.get<number>(`${this.urlPeticion}/colaborador/colabEnd/`)
+  }
+
+  postNewRolColab(listDepId : rolColab[]){
     return this.http.post(`${this.urlPeticion}/colaborador_departamento`, listDepId)
   }
 

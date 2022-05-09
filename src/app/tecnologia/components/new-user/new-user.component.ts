@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { combobox } from 'src/app/interfaces/combobox.interface';
 import { Departamento } from 'src/app/interfaces/departamento.interface';
 import { TecnologiaService } from '../../services/tecnologia.service';
+import { Colaborador } from '../../../interfaces/colaboradores.interface';
 
 @Component({
   selector: 'app-new-user',
@@ -20,6 +21,8 @@ export class NewUserComponent implements OnInit {
 
   departamentos: Departamento[] = []
   selectedValues: number[] = [];
+
+  newColab !: Colaborador
 
   constructor(private tecnologiaService : TecnologiaService) { 
 
@@ -48,7 +51,13 @@ export class NewUserComponent implements OnInit {
 
 
   guardar(){
-    console.log(this.selectedValues)
+    this.newColab = {colaborador_nombre: this.colabNombre, 
+                     colaborador_usuario : this.colabUsuario,
+                     id_estado: Number(this.selectEstadoColab),
+                     id_oficiona: Number(this.selectFilial),
+                     colaborador_password: this.password}
+    
+    this.tecnologiaService.postNewColab(this.newColab).subscribe()
   }
 
   

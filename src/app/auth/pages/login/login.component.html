@@ -25,6 +25,7 @@
                             [feedback]="false" 
                             [(ngModel)]="password"
                             name="password"
+                            (keyup.enter)="login()"
                             pPassword  > 
                     <label for="float-password">Ingrese su contraseña</label>
                 </div>
