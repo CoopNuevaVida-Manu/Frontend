@@ -10,6 +10,7 @@
                 name="nombreAfiliadoC"
                 id="nombreAfiliadoC"
                 autocomplete="off"
+                [required]="true"
                 pInputText />
     </div>
     <div class="form-group col-6 mt-3">
@@ -20,22 +21,23 @@
                 name="nombreAutorizado"
                 id="nombreAutorizado"
                 autocomplete="off"
+                [required]="true"
                 pInputText />
     </div>
     <div class="col-6 mt-3">
         <label for="">Filial</label>
-        <p-dropdown [options]="cbxfilial" [(ngModel)]="selectFilial" name="cmbFilial" placeholder="Seleccione una filial" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+        <p-dropdown [options]="cbxfilial" [required]="true" [(ngModel)]="selectFilial" name="cmbFilial" placeholder="Seleccione una filial" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
     </div>
     <div class="col-6 mt-3">
         <label for="">Estado</label>
-        <p-dropdown [options]="cbxEstadoColab" [(ngModel)]="selectEstadoColab" name="cmbEstadoColab" placeholder="Seleccione el estado del colaborador" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+        <p-dropdown [options]="cbxEstadoColab" [required]="true" [(ngModel)]="selectEstadoColab" name="cmbEstadoColab" placeholder="Seleccione el estado del colaborador" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
     </div>
     <div class="col-12 mt-3 row">
         <div class="col-12 text-center mt-3">
             <h6>Rol del usuario</h6>
         </div>
         <div class="col-6 mt-3" *ngFor="let item of departamentos">
-            <p-checkbox name="groupname" [value]="item.id_departamento" [label]="item.departamento" [(ngModel)]="selectedValues"></p-checkbox>
+            <p-checkbox name="groupname" [required]="true" [value]="item.id_departamento" [label]="item.departamento" [(ngModel)]="selectedValues"></p-checkbox>
         </div>
     </div>
     <div class="form-group col-6 mt-3">
@@ -46,6 +48,7 @@
                 name="Pass"
                 id="nombreAutorizado"
                 autocomplete="off"
+                required 
                 pInputText />
     </div>
     <div class="form-group col-6 mt-3 justify-content-center row">
