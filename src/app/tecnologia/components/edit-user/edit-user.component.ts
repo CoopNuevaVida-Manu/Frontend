@@ -33,6 +33,8 @@ export class EditUserComponent implements OnInit {
   cbxEstadoColab : combobox[] = []
   @Input()
   selectEstadoColab !: combobox
+  @Input()
+  colabId : number = 0
 
   editPassword: string = ""
 
@@ -54,7 +56,7 @@ export class EditUserComponent implements OnInit {
   }
 
   save(){
-    
+    console.log(this.colabId)
   }
 
   roledit(){

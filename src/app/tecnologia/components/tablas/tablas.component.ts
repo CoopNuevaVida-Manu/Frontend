@@ -21,6 +21,7 @@ export class TablasComponent implements OnInit {
 
   //Editar usuario
   editDialog: boolean = false
+  colabId : number = 0
   colabNombre: string = ''
   colabUsuario: string = ''
   cbxfilial: combobox[] = []
@@ -67,6 +68,7 @@ export class TablasComponent implements OnInit {
   async editUser( user: TabColab){
 
     //limpieza
+    this.colabId = 0
     this.colabNombre = ""
     this.colabUsuario = ""
     this.selectFilial = {code: "0" , name : ""}
@@ -76,7 +78,7 @@ export class TablasComponent implements OnInit {
     this.selectEstadoColab = {code: "0" , name : ""}
 
 
-
+    this.colabId = user.id
     this.colabNombre = user.colaborador_nombre.toString()
     this.colabUsuario = user.colaborador_usuario
   
