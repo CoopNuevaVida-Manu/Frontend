@@ -58,7 +58,7 @@ export class NewUserComponent implements OnInit {
   }
 
 
-   async guardar(){
+  guardar(){
     console.log(this.selectedValues)
     if(this.colabNombre==""){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'El nombre del colaborador no fue asignado'});
@@ -82,15 +82,15 @@ export class NewUserComponent implements OnInit {
       this.tecnologiaService.postNewColab(this.newColab).subscribe( resp => {
         if(resp.insert){
           
-          // this.tecnologiaService.getColabEnd().subscribe(id => {
-          // this.newIdColab = id[0].id_colaborador || 0 
-          // this.selectedValues.forEach(element => {
-          //   this.newRolColab = {id_colaborador: this.newIdColab, id_departamento: element}
-          //   this.tecnologiaService.postNewRolColab(this.newRolColab).subscribe(resp => {
-          //     console.log(resp) 
-          //     })
-          //   });
-          // })
+          this.tecnologiaService.getColabEnd().subscribe(id => {
+          this.newIdColab = id[0].id_colaborador || 0 
+          this.selectedValues.forEach(element => {
+            this.newRolColab = {id_colaborador: this.newIdColab, id_departamento: element}
+            this.tecnologiaService.postNewRolColab(this.newRolColab).subscribe(resp => {
+              console.log(resp) 
+              })
+            });
+          })
     
           this.messageService.add({severity:'success', summary: 'Completado', detail: 'Nuevo colaborador creado exitosamente'});
           
