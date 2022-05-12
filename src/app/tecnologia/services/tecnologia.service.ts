@@ -54,8 +54,8 @@ export class TecnologiaService {
     return this.http.post<message>(`${this.urlPeticion}/colaborador`, colaborador)
   }
 
-  getColabEnd(): Observable<Colaborador>{
-    return this.http.get<Colaborador>(`${this.urlPeticion}/colaborador/colabEnd/`)
+  getColabEnd(): Observable<Colaborador[]>{
+    return this.http.get<Colaborador[]>(`${this.urlPeticion}/colaborador/colabEnd/`)
   }
 
   postNewRolColab(listDepId : rolColab):Observable<message>{

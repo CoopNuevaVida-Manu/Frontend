@@ -79,23 +79,31 @@ export class NewUserComponent implements OnInit {
                      id_oficiona: Number(this.selectFilial.code),
                      colaborador_password: this.password}
     
-    // this.tecnologiaService.postNewColab(this.newColab).subscribe( id => {
-    //   console.log(id)
-    // })
-
-    this.tecnologiaService.getColabEnd().subscribe(id => {
-      console.log(id, "Completo")
-      console.log(id.id_colaborador, "id")
-      this.newIdColab = id.id_colaborador || 0
-      console.log(this.newIdColab, "asignado")
-    })
-      
-      // this.selectedValues.forEach(element => {
-      //   this.newRolColab = {id_colaborador: this.newIdColab, id_departamento: element}
-      //   this.tecnologiaService.postNewRolColab(this.newRolColab).subscribe(resp => {
-      //    console.log(resp) 
-      //   })
-      // });
+      this.tecnologiaService.postNewColab(this.newColab).subscribe( resp => {
+        if(resp.insert){
+          
+          // this.tecnologiaService.getColabEnd().subscribe(id => {
+          // this.newIdColab = id[0].id_colaborador || 0 
+          // this.selectedValues.forEach(element => {
+          //   this.newRolColab = {id_colaborador: this.newIdColab, id_departamento: element}
+          //   this.tecnologiaService.postNewRolColab(this.newRolColab).subscribe(resp => {
+          //     console.log(resp) 
+          //     })
+          //   });
+          // })
+    
+          this.messageService.add({severity:'success', summary: 'Completado', detail: 'Nuevo colaborador creado exitosamente'});
+          
+          this.colabNombre = ''
+          this.colabUsuario = ''
+          this.password = ''
+          this.selectedValues = []
+          this.selectEstadoColab = {code: '', name: ''} 
+          this.selectFilial = {code: '', name: ''}
+        }else{
+          this.messageService.add({severity:'error', summary: 'Error', detail: resp.msg});
+        }
+      })
     }
     
   }
