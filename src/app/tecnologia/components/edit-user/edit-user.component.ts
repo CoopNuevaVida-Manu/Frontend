@@ -1,15 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { combobox } from 'src/app/interfaces/combobox.interface';
 import { Departamento } from 'src/app/interfaces/departamento.interface';
-import { TabColab } from 'src/app/interfaces/tablaColab.interface';
-import { Usuario } from '../../../interfaces/usuario.interface';
 import { Colaborador } from '../../../interfaces/colaboradores.interface';
 import { Router } from '@angular/router';
+import { TecnologiaService } from '../../services/tecnologia.service';
+import {MessageService} from 'primeng/api';
+import { RolColabDep } from '../../../interfaces/colaborador_departamento.interface';
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  styleUrls: ['./edit-user.component.css'],
+  providers: [MessageService]
+
 })
 export class EditUserComponent implements OnInit {
 
@@ -41,7 +44,13 @@ export class EditUserComponent implements OnInit {
   desplegarBoton : string = "pi pi-chevron-circle-down"
   flag!: number[]
 
-  constructor(private router: Router) { 
+  rolescolab: RolColabDep[] = []
+
+  editcolab !: Colaborador 
+
+  constructor(private router: Router,
+              private tecnologiaService : TecnologiaService,
+              private messageService: MessageService) { 
    
   }
 
@@ -56,7 +65,53 @@ export class EditUserComponent implements OnInit {
   }
 
   save(){
-    console.log(this.colabId)
+
+    if(this.editPassword.trim() == ""){
+      this.editcolab = {id_colaborador: this.colabId,
+        colaborador_nombre: this.colabNombre ,
+        colaborador_usuario: this.colaborador_usuario,
+        id_estado: Number(this.selectEstadoColab.code),
+        id_oficiona: Number(this.selectFilial.code)}
+    }else{
+      this.editcolab = {id_colaborador: this.colabId,
+        colaborador_nombre: this.colabNombre ,
+        colaborador_usuario: this.colaborador_usuario,
+        id_estado: Number(this.selectEstadoColab.code),
+        id_oficiona: Number(this.selectFilial.code), 
+        colaborador_password: this.editPassword}
+    }
+
+    if(this.flag == undefined || this.flag == this.selectedValues){
+      console.log("Sin cambio de rol")
+    }else{
+      console.log("cambio de rol")
+    }
+
+    this.tecnologiaService.editColab(this.editcolab).subscribe(resp => {
+      if(resp.put){
+        this.messageService.add({severity:'success', summary: 'Completado', detail: 'Se ha editado el colaborador conexito'});
+      }else{
+        this.messageService.add({severity:'error', summary: 'Error', detail: resp.msg});
+      }
+    })
+
+    this.tecnologiaService.eliminarRol(this.colabId).subscribe(resp => {
+      if(resp.put){
+        this.messageService.add({severity:'success', summary: 'Completado', detail: 'Se ha editado el colaborador conexito'});
+      }else{
+        this.messageService.add({severity:'error', summary: 'Error', detail: resp.msg});
+      }
+    })
+    this.flag.forEach(element => {
+      this.rolescolab.push({id_colaborador: this.colabId, id_departamento: element})
+    });
+
+    this.rolescolab.forEach(element => {
+      this.tecnologiaService.rolColab(element).subscribe(resp => {
+      })
+    });
+    
+    console.log(this.flag)
   }
 
   roledit(){

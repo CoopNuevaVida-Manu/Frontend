@@ -6,8 +6,8 @@ import { Colaborador } from '../../interfaces/colaboradores.interface';
 import { Filial } from 'src/app/interfaces/filial.interface';
 import { ColabEstado } from '../../interfaces/ColabEstado.interface';
 import { Departamento } from 'src/app/interfaces/departamento.interface';
-import { rolColab } from '../../interfaces/rolDepColap.interface';
 import { message } from 'src/app/interfaces/AlertMessage.interface';
+import { RolColabDep } from 'src/app/interfaces/colaborador_departamento.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -58,8 +58,25 @@ export class TecnologiaService {
     return this.http.get<Colaborador[]>(`${this.urlPeticion}/colaborador/colabEnd/`)
   }
 
-  postNewRolColab(listDepId : rolColab):Observable<message>{
+  postNewRolColab(listDepId : RolColabDep):Observable<message>{
     return this.http.post<message>(`${this.urlPeticion}/colaborador_departamento`, listDepId)
+  }
+
+  editColab(colab : Colaborador): Observable<message>{
+    if(!colab.colaborador_password){
+      return this.http.put<message>(`${this.urlPeticion}/colaborador`, colab)
+    }else{
+      return this.http.put<message>(`${this.urlPeticion}/colaborador/Pass`, colab)
+    }
+  }
+
+  eliminarRol(idColab: number):Observable<message>{
+    var id = {id_colaborador: idColab}
+    return this.http.delete<message>(`${this.urlPeticion}/colaborador_departamento`, {body: id})
+  }
+
+  rolColab(roles : RolColabDep):Observable<message>{
+    return this.http.post<message>(`${this.urlPeticion}/colaborador_departamento`, roles)
   }
 
   

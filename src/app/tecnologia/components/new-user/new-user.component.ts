@@ -5,7 +5,7 @@ import { TecnologiaService } from '../../services/tecnologia.service';
 import { Colaborador } from '../../../interfaces/colaboradores.interface';
 
 import {MessageService} from 'primeng/api';
-import { rolColab } from 'src/app/interfaces/rolDepColap.interface';
+import { RolColabDep } from 'src/app/interfaces/colaborador_departamento.interface';
 
 @Component({
   selector: 'app-new-user',
@@ -30,7 +30,7 @@ export class NewUserComponent implements OnInit {
 
   newColab !: Colaborador
   newIdColab : number = 0
-  newRolColab !: rolColab
+  newRolColab !: RolColabDep
 
   constructor(private tecnologiaService : TecnologiaService,
               private messageService: MessageService) { 

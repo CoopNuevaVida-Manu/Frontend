@@ -1,4 +1,6 @@
 export interface message {
     msg:  string;
-    insert: boolean;
+    insert?: boolean;
+    delete?: boolean;
+    put?: boolean;
 }
