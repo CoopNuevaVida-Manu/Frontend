@@ -48,6 +48,8 @@ export class EditUserComponent implements OnInit {
 
   editcolab !: Colaborador 
 
+  estadoEdit : boolean = false
+
   constructor(private router: Router,
               private tecnologiaService : TecnologiaService,
               private messageService: MessageService) { 
@@ -81,35 +83,42 @@ export class EditUserComponent implements OnInit {
         colaborador_password: this.editPassword}
     }
 
-    if(this.flag == undefined || this.flag == this.selectedValues){
-      console.log("Sin cambio de rol")
-    }else{
-      console.log("cambio de rol")
-    }
-
-    this.tecnologiaService.editColab(this.editcolab).subscribe(resp => {
-      if(resp.put){
-        this.messageService.add({severity:'success', summary: 'Completado', detail: 'Se ha editado el colaborador conexito'});
-      }else{
-        this.messageService.add({severity:'error', summary: 'Error', detail: resp.msg});
-      }
-    })
-
-    this.tecnologiaService.eliminarRol(this.colabId).subscribe(resp => {
-      if(resp.put){
-        this.messageService.add({severity:'success', summary: 'Completado', detail: 'Se ha editado el colaborador conexito'});
-      }else{
-        this.messageService.add({severity:'error', summary: 'Error', detail: resp.msg});
-      }
-    })
     this.flag.forEach(element => {
       this.rolescolab.push({id_colaborador: this.colabId, id_departamento: element})
     });
 
-    this.rolescolab.forEach(element => {
-      this.tecnologiaService.rolColab(element).subscribe(resp => {
-      })
-    });
+    //editar usuario
+    this.tecnologiaService.editColab(this.editcolab).subscribe(respEdit => {
+      if(respEdit.put){
+        //Eliminar roles
+        this.tecnologiaService.eliminarRol(this.colabId).subscribe(respDelete => {
+          if(respDelete.delete){
+            //crear nuevos usuarios 
+            this.rolescolab.forEach(element => {
+              this.tecnologiaService.rolColab(element).subscribe(respCreate => {
+                if(respCreate.insert){
+                  this.estadoEdit = true
+                }else{
+                  this.estadoEdit = false
+                }
+              })
+            });
+
+            if(this.estadoEdit){
+              this.messageService.add({severity:'success', summary: 'Completado', detail: 'Se ha editado el colaborador conexito'});
+            }else{
+              this.messageService.add({severity:'error', summary: 'Error', detail: 'No se pudo editar el colobarador de forma correcta'});
+            }
+            
+          }else{
+            this.messageService.add({severity:'error', summary: 'Error', detail: respDelete.msg});
+          }
+        })
+      }else{
+        this.messageService.add({severity:'error', summary: 'Error', detail: respEdit.msg});
+      }
+    })
+
     
     console.log(this.flag)
   }
