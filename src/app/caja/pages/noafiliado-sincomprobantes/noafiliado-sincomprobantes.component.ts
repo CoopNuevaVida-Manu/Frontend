@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { combobox } from 'src/app/interfaces/combobox.interface';
-
-import {SelectItem} from 'primeng/api';
-import {SelectItemGroup} from 'primeng/api';
 import { CajaService } from '../../services/caja.service';
-import { transaccion } from 'src/app/interfaces/transaccion.interface';
 
 @Component({
   selector: 'app-noafiliado-sincomprobantes',
@@ -19,12 +15,13 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
   nombreUser : string = '';
   apellidoUser : string = '';
+  estado: boolean = true
 
   cuentasAfiliado: combobox[] = []
   cuentaAfectada !: string
 
 
-  disponible: boolean = true;
+  disponible: boolean = false;
 
   caf1: string = '005'; //005 obligatorio
   caf2: string = '';    //999
@@ -44,6 +41,8 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
   nombreAfiliadoC: string = '';
   monto!: number 
+
+  identidad: string = "";
 
   
   
@@ -73,11 +72,24 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
       {name: 'Rome', code: 'RM'},]
   }
 
-  identidad: number = 0;
+  
   ngOnInit(): void {}
+
+  buscarAfiliado(){
+    this.cajaService.getNoAfiliado(this.identidad).subscribe(respNoAfiliado => {
+      if(respNoAfiliado.length == 0){
+        this.disponible = true;
+        this.estado = false;
+      }else{
+        this.nombreUser = respNoAfiliado[0].nombre
+        this.apellidoUser = respNoAfiliado[0].apellido
+        this.disponible= true;
+      }
+    })
+  }
   
 
-  prueba(){
+  guardar(){
     console.log(this.cuentaAfectada)
   }
 

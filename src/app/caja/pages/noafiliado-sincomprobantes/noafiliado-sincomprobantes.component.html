@@ -15,7 +15,7 @@
                             mask="9999-9999-99999"
                             id="float-identidad"
                             type="text"></p-inputMask>
-                    <button type="button" pButton pRipple icon="pi pi-search"></button>
+                    <button type="button" pButton pRipple icon="pi pi-search" (click)="buscarAfiliado()"></button>
                 </div>
             </div>
             <div class="col-3">
@@ -33,6 +33,7 @@
                         name="nameUsuario"
                         id="nameUsuario"
                         autocomplete="off"
+                        [disabled]="estado"
                         pInputText />
             </div>
             <div class="form-group col-6 mt-3 ">
@@ -43,6 +44,7 @@
                         name="lastNameUsuario"
                         id="lastNameUsuario"
                         autocomplete="off"
+                        [disabled]="estado"
                         pInputText />
             </div>
         </form>
@@ -116,7 +118,7 @@
                 <p-dropdown [options]="cbxRazonOperacio" [(ngModel)]="selectRazonFondo" name="cmbRazonOperacion" placeholder="Seleccione la razon de la operacion" optionLabel="name" [showClear]="true"></p-dropdown>
             </div>
             <div class="col-12 mt-3">
-                <p-button label="Click" (onClick)="prueba()"></p-button>
+                <p-button label="Click" (onClick)="guardar()"></p-button>
             </div>
         </form>
     </div>

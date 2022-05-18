@@ -5,6 +5,8 @@ import { transaccion } from 'src/app/interfaces/transaccion.interface';
 import { Observable } from 'rxjs';
 import { origenFondos } from 'src/app/interfaces/origenFondos.interface';
 import { razonOperacion } from 'src/app/interfaces/razonOperacion.interface';
+import { message } from '../../interfaces/AlertMessage.interface';
+import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,9 @@ export class CajaService {
 
   getRazonOperacion():Observable<razonOperacion[]>{
     return this.http.get<razonOperacion[]>(`${this.urlPeticion}/razon_operacion`)
+  }
+
+  getNoAfiliado(identidad: string):Observable<NoAfiliado[]>{
+    return this.http.get<NoAfiliado[]>(`${this.urlPeticion}/no_afiliado/${identidad}`);
   }
 }
