@@ -14,7 +14,9 @@
                             name="idUduario" 
                             mask="9999-9999-99999"
                             id="float-identidad"
+                            (keyup.enter)="buscarAfiliado()"
                             type="text"></p-inputMask>
+                    <p-toast></p-toast>
                     <button type="button" pButton pRipple icon="pi pi-search" (click)="buscarAfiliado()"></button>
                 </div>
             </div>
@@ -110,6 +112,10 @@
                 </div>
             </div>
             <div class="col-6 mt-3">
+                <label for="">Parentesco</label>
+                <p-dropdown [options]="cbxParentesco" [(ngModel)]="selectParentesco" name="cmbRazonOperacion" placeholder="Seleccione la razon de la operacion" optionLabel="name" [showClear]="true"></p-dropdown>
+            </div>
+            <div class="col-6 mt-3">
                 <label for="">Origen de fondos</label>
                 <p-dropdown [options]="cbxorigenFondos" [(ngModel)]="selectOrigenFondo" name="cmbOrigenfondos" placeholder="Seleccione el origen del fondo" optionLabel="name" [showClear]="true"></p-dropdown>
             </div>
@@ -117,12 +123,24 @@
                 <label for="">Razon de operacion</label>
                 <p-dropdown [options]="cbxRazonOperacio" [(ngModel)]="selectRazonFondo" name="cmbRazonOperacion" placeholder="Seleccione la razon de la operacion" optionLabel="name" [showClear]="true"></p-dropdown>
             </div>
-            <div class="col-12 mt-3">
-                <p-button label="Click" (onClick)="guardar()"></p-button>
+            <div class="form-group col-6 mt-3 ">
+                <label for="nameUsuario">Observaciones</label>
+                <input  class="input-group "
+                        type="text" 
+                        [(ngModel)]="observaciones"
+                        name="observaciones"
+                        id="nameUsuario"
+                        autocomplete="off"
+                        pInputText />
+            </div>
+            <div class="col-6 mt-4">
+                <button pButton type="button" label="Guardar" (click)="guardar()"></button>
+            </div>
+            <div class="col-6 mt-4">
+                <button pButton type="button" label="Cancelar" class="p-button-warning" (click)="guardar()"></button>
             </div>
         </form>
     </div>
-    
 </div>
 
 

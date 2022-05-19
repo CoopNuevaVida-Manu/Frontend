@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { combobox } from 'src/app/interfaces/combobox.interface';
 import { CajaService } from '../../services/caja.service';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-noafiliado-sincomprobantes',
   templateUrl: './noafiliado-sincomprobantes.component.html',
-  styleUrls: ['./noafiliado-sincomprobantes.component.css']
+  styleUrls: ['./noafiliado-sincomprobantes.component.css'],
+  providers: [MessageService]
 })
 
 
@@ -30,13 +32,18 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
   
   cbxTransacciones: combobox[] = [];
-  selectTransaccion !: string;
+  selectTransaccion !: combobox;
 
   cbxorigenFondos : combobox[] = [];
-  selectOrigenFondo!: string;
+  selectOrigenFondo!: combobox;
   
   cbxRazonOperacio: combobox[] = [];
-  selectRazonFondo!: string;
+  selectRazonFondo!: combobox;
+
+  cbxParentesco: combobox[] = [];
+  selectParentesco!: combobox;
+
+  filialcolabo : number = 0
   
 
   nombreAfiliadoC: string = '';
@@ -44,11 +51,12 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
   identidad: string = "";
 
-  
-  
+  observaciones : string = ""
+
 
   constructor(private router : Router,
-              private cajaService :CajaService)  { 
+              private cajaService :CajaService,
+              private messageService: MessageService)  { 
     this.cajaService.gettransacciones().subscribe(resp =>{
       resp.forEach(element => {
         this.cbxTransacciones.push({code: `${element.id_transaccion}` , name: `${element.transaccion}` })
@@ -67,6 +75,17 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
       });
     })
     
+    this.cajaService.getParentesco().subscribe( resp =>{
+      resp.forEach(element => {
+        this.cbxParentesco.push({code: `${element.id_parentesco}` , name: `${element.parentesco}` })
+      });
+    })
+
+    this.cajaService.FilialLogueado(Number(localStorage.getItem('token'))||0).subscribe(resp => {
+      this.filialcolabo = resp[0].id_oficiona
+    })
+
+    //Cambiar al boton o evento de  busqueda de la cuenta
     this.cuentasAfiliado= [
       {name: '1414147', code: 'NY'},
       {name: 'Rome', code: 'RM'},]
@@ -76,21 +95,25 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   ngOnInit(): void {}
 
   buscarAfiliado(){
-    this.cajaService.getNoAfiliado(this.identidad).subscribe(respNoAfiliado => {
-      if(respNoAfiliado.length == 0){
-        this.disponible = true;
-        this.estado = false;
-      }else{
-        this.nombreUser = respNoAfiliado[0].nombre
-        this.apellidoUser = respNoAfiliado[0].apellido
-        this.disponible= true;
-      }
-    })
+    if(this.identidad.length != 15){
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Ingrese una identidad valida'});
+    }else{
+      this.cajaService.getNoAfiliado(this.identidad).subscribe(respNoAfiliado => {
+        if(respNoAfiliado.length == 0){
+          this.disponible = true;
+          this.estado = false;
+        }else{
+          this.nombreUser = respNoAfiliado[0].nombre
+          this.apellidoUser = respNoAfiliado[0].apellido
+          this.disponible= true;
+        }
+      })
+    }
   }
   
 
   guardar(){
-    console.log(this.cuentaAfectada)
+    console.log(Date())
   }
 
 }
