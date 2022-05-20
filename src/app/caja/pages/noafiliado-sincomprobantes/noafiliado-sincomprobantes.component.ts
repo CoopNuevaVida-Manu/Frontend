@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { combobox } from 'src/app/interfaces/combobox.interface';
 import { CajaService } from '../../services/caja.service';
 import {MessageService} from 'primeng/api';
+import { diligenciaNoAfiliado } from '../../../interfaces/Diligencia_No_Afiliado.interface';
 
 @Component({
   selector: 'app-noafiliado-sincomprobantes',
@@ -20,7 +21,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   estado: boolean = true
 
   cuentasAfiliado: combobox[] = []
-  cuentaAfectada !: string
+  cuentaAfectada !: combobox
 
 
   disponible: boolean = false;
@@ -52,6 +53,8 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   identidad: string = "";
 
   observaciones : string = ""
+
+  diligencia!: diligenciaNoAfiliado 
 
 
   constructor(private router : Router,
@@ -87,7 +90,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
     //Cambiar al boton o evento de  busqueda de la cuenta
     this.cuentasAfiliado= [
-      {name: '1414147', code: 'NY'},
+      {name: '1414147', code: '15'},
       {name: 'Rome', code: 'RM'},]
   }
 
@@ -113,7 +116,20 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   
 
   guardar(){
-    console.log(Date())
+    var date: Date = new Date();
+    let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
+                         date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+    this.diligencia = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(this.cuentaAfectada.code), 
+                       fecha_operacion : new Date(formatted_date), id_cajero_operacion: Number(localStorage.getItem('token')),
+                       id_filial: this.filialcolabo, id_no_afiliado : this.identidad,
+                       id_origen_fondos: Number(this.selectOrigenFondo.code), id_parentesco: Number(this.selectParentesco.code),
+                       id_razon_operacion: Number(this.selectRazonFondo.code), id_transaccion: Number(this.selectTransaccion.code),
+                       monto_transaccion: this.monto, observaciones: this.observaciones}
+    
+    console.log(this.diligencia)
+    this.cajaService.postDiligenciaNoAfiliado(this.diligencia).subscribe(resp => {
+      console.log(resp)
+    })
   }
 
 }
