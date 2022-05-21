@@ -29,7 +29,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   caf1: string = '005'; //005 obligatorio
   caf2: string = '';    //999
   caf3: string = '';    //999999999 
-  codigoAfiliado : string = `${this.caf1}-${this.caf2}-${this.caf3}`
+  codigoAfiliado !: string 
 
   
   cbxTransacciones: combobox[] = [];
@@ -116,6 +116,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   
 
   guardar(){
+    this.codigoAfiliado = `${this.caf1}-${this.caf2}-${this.caf3}`
     var date: Date = new Date();
     let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
                          date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
