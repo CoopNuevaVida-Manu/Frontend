@@ -5,6 +5,8 @@ import { origenFondos } from 'src/app/interfaces/origenFondos.interface';
 import { environment } from 'src/environments/environment';
 import { Parentesco } from 'src/app/interfaces/parentesco.interface';
 import { Destino } from '../../interfaces/destino.interface';
+import { chequesTerceros } from '../../interfaces/Cheques_terceros.interface';
+import { message } from '../../interfaces/AlertMessage.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,10 @@ export class ContabilidadService {
 
   getDestino():Observable<Destino[]>{
     return this.http.get<Destino[]>(`${this.urlPeticion}/destino`)
+  }
+
+  postChequesTerceros(chequeTerceros : chequesTerceros): Observable<message>{
+    return this.http.post<message>(`${this.urlPeticion}/cheques_terceros`, chequeTerceros)
   }
   
 }

@@ -26,6 +26,8 @@ export class FirmasAutorizadasComponent implements OnInit {
   cbxFirma : combobox[] = [];
   selectFirma!: string;
 
+  observaciones: string = ""
+
   constructor(private atencionService : AtencionService) { 
     this.atencionService.getParentesco().subscribe(resp => {
       resp.forEach(element => {

@@ -9,7 +9,7 @@ export interface diligenciaNoAfiliado {
     id_razon_operacion:  number;
     id_transaccion:      number;
     monto_transaccion:   number;
-    fecha_operacion:     Date;
+    fecha_operacion:     string;
     id_cajero_operacion: number;
     observaciones:       string;
 }

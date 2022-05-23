@@ -45,6 +45,8 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   cbxParentesco: combobox[] = [];
   selectParentesco!: combobox;
 
+  borrarcbx!: combobox
+
   filialcolabo : number = 0
   
 
@@ -119,27 +121,46 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   
 
   guardar(){
-    this.codigoAfiliado = `${this.caf1}-${this.caf2}-${this.caf3}`
-    var date: Date = new Date();
-    let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
-                         date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-    this.diligencia = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(this.cuentaAfectada.code), 
-                       fecha_operacion : new Date(formatted_date), id_cajero_operacion: Number(localStorage.getItem('token')),
-                       id_filial: this.filialcolabo, id_no_afiliado : this.identidad,
-                       id_origen_fondos: Number(this.selectOrigenFondo.code), id_parentesco: Number(this.selectParentesco.code),
-                       id_razon_operacion: Number(this.selectRazonFondo.code), id_transaccion: Number(this.selectTransaccion.code),
-                       monto_transaccion: this.monto, observaciones: this.observaciones}
-    
-    console.log(this.diligencia)
-    this.cajaService.postDiligenciaNoAfiliado(this.diligencia).subscribe(resp => {
-      if(resp.insert){
-        this.messageService.add({severity:'success', summary: 'Guardado exitosamente'});
-        this.clear();
-      }else{
-        this.messageService.add({severity:'error', summary: 'Verifique que todos los campos esten llenos'});
-      }
+    if(this.caf2 == ""){
+      this.messageService.add({severity:'error', summary: 'Complete el codigo de afiliado'});
+    }else if(this.caf3 == ""){
+      this.messageService.add({severity:'error', summary: 'Complete el codigo de afiliado'});
+    }else if(this.cuentaAfectada == undefined){
+      this.messageService.add({severity:'error', summary: 'Seleccione una cuenta a afectar'});
+    }else if(this.selectTransaccion == undefined){
+      this.messageService.add({severity:'error', summary: 'Seleccione un tipo de transacción'});
+    }else if(this.monto == 0 || this.monto == undefined){
+      this.messageService.add({severity:'error', summary: 'Agregue un monto de la transacción'});
+    }else if(this.selectParentesco == undefined){
+      this.messageService.add({severity:'error', summary: 'Seleccione un parentesco'});
+    }else if(this.selectOrigenFondo == undefined){
+      this.messageService.add({severity:'error', summary: 'Seleccione un origen de fondo'});
+    }else if(this.selectRazonFondo == undefined){
+      this.messageService.add({severity:'error', summary: 'Seleccione una razon de operacion'});
+    }else{
+      this.codigoAfiliado = `${this.caf1}-${this.caf2}-${this.caf3}`
+      var date: Date = new Date();
+      let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
+                            date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+      this.diligencia = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(this.cuentaAfectada.code), 
+                          fecha_operacion : formatted_date, id_cajero_operacion: Number(localStorage.getItem('token')),
+                          id_filial: this.filialcolabo, id_no_afiliado : this.identidad,
+                          id_origen_fondos: Number(this.selectOrigenFondo.code), id_parentesco: Number(this.selectParentesco.code),
+                          id_razon_operacion: Number(this.selectRazonFondo.code), id_transaccion: Number(this.selectTransaccion.code),
+                          monto_transaccion: this.monto, observaciones: this.observaciones}
       
-    })
+      console.log(this.diligencia)
+      this.cajaService.postDiligenciaNoAfiliado(this.diligencia).subscribe(resp => {
+        if(resp.insert){
+          this.messageService.add({severity:'success', summary: 'Guardado exitosamente'});
+          this.clear();
+        }else{
+          this.messageService.add({severity:'error', summary: 'Error al guardar la diligencia'});
+        }
+        
+      })
+    }
+    
   }
 
   clear(){
@@ -149,11 +170,11 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
     this.apellidoUser = ''
     this.caf2 = ''
     this.caf3 = ''
-    this.cuentaAfectada = {code: '', name: ''}
-    this.selectOrigenFondo = {code: '', name: ''}
-    this.selectParentesco = {code: '', name: ''}
-    this.selectRazonFondo = {code: '', name: ''}
-    this.selectTransaccion = {code: '', name: ''}
+    this.cuentaAfectada = this.borrarcbx
+    this.selectOrigenFondo = this.borrarcbx
+    this.selectParentesco = this.borrarcbx
+    this.selectRazonFondo = this.borrarcbx
+    this.selectTransaccion = this.borrarcbx
     this.observaciones = ''
     this.monto = 0
   }

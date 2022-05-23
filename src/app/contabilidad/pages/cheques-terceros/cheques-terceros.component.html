@@ -69,6 +69,7 @@
                             name="idbeneficiario" 
                             mask="9999-9999-99999"
                             id="idbeneficiario"
+                            (keyup.enter)="buscarAfiliado()"
                             type="text"></p-inputMask>
             </div>
             <div class="form-group col-6 mt-3">
@@ -79,19 +80,20 @@
                         name="nombreBeneficiario"
                         id="nombreBeneficiario"
                         autocomplete="off"
+                        [disabled]="editnombre"
                         pInputText />
             </div>
             <div class="col-6 mt-3">
                 <label for="">Parentesco con el afiliado</label>
-                <p-dropdown [options]="cbxParentesco" [(ngModel)]="selectParentesco" name="cmbParentesco" placeholder="Seleccione el parentesco" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                <p-dropdown [options]="cbxParentesco" [(ngModel)]="selectParentesco" name="cmbParentesco" placeholder="Seleccione el parentesco" optionLabel="name" [showClear]="true"></p-dropdown>
             </div>
             <div class="col-6 mt-3">
                 <label for="">Origen de los fondos</label>
-                <p-dropdown [options]="cbxorigenFondos" [(ngModel)]="selectOrigenFondo" name="cmbOrigenfondos" placeholder="Seleccione el origen del fondo" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                <p-dropdown [options]="cbxorigenFondos" [(ngModel)]="selectOrigenFondo" name="cmbOrigenfondos" placeholder="Seleccione el origen del fondo" optionLabel="name" [showClear]="true" ></p-dropdown>
             </div>
             <div class="col-6 mt-3">
                 <label for="">Destino de los fondos</label>
-                <p-dropdown [options]="cbxDestino" [(ngModel)]="selectDestino" name="cmbDestino" placeholder="Seleccione el destino del fondo" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                <p-dropdown #drop [options]="cbxDestino" [(ngModel)]="selectDestino" name="cmbDestino" placeholder="Seleccione el destino del fondo" optionLabel="name" [showClear]="true" ></p-dropdown>
             </div>
             <div class="form-group col-6 mt-3">
                 <label for="observacion">Observación</label>
@@ -103,8 +105,12 @@
                         autocomplete="off"
                         pInputText />
             </div>
-            <div class="col-12 mt-3">
-                <p-button label="Click" (onClick)="prueba()"></p-button>
+            <p-toast></p-toast>
+            <div class="col-6 mt-4">
+                <button pButton type="button" label="Guardar" (click)="guardar()"></button>
+            </div>
+            <div class="col-6 mt-4">
+                <button pButton type="button" label="Cancelar" class="p-button-warning" (click)="clear()"></button>
             </div>
         </form>
     </div>    
