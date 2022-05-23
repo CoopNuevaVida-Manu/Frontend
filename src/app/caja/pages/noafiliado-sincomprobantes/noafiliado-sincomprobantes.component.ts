@@ -5,6 +5,7 @@ import { CajaService } from '../../services/caja.service';
 import {MessageService} from 'primeng/api';
 import { diligenciaNoAfiliado } from '../../../interfaces/Diligencia_No_Afiliado.interface';
 
+
 @Component({
   selector: 'app-noafiliado-sincomprobantes',
   templateUrl: './noafiliado-sincomprobantes.component.html',
@@ -55,6 +56,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   observaciones : string = ""
 
   diligencia!: diligenciaNoAfiliado 
+  
 
 
   constructor(private router : Router,
@@ -92,6 +94,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
     this.cuentasAfiliado= [
       {name: '1414147', code: '15'},
       {name: 'Rome', code: 'RM'},]
+    
   }
 
   
@@ -129,8 +132,30 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
     
     console.log(this.diligencia)
     this.cajaService.postDiligenciaNoAfiliado(this.diligencia).subscribe(resp => {
-      console.log(resp)
+      if(resp.insert){
+        this.messageService.add({severity:'success', summary: 'Guardado exitosamente'});
+        this.clear();
+      }else{
+        this.messageService.add({severity:'error', summary: 'Verifique que todos los campos esten llenos'});
+      }
+      
     })
+  }
+
+  clear(){
+    this.disponible = false
+    this.identidad = ''
+    this.nombreUser = ''
+    this.apellidoUser = ''
+    this.caf2 = ''
+    this.caf3 = ''
+    this.cuentaAfectada = {code: '', name: ''}
+    this.selectOrigenFondo = {code: '', name: ''}
+    this.selectParentesco = {code: '', name: ''}
+    this.selectRazonFondo = {code: '', name: ''}
+    this.selectTransaccion = {code: '', name: ''}
+    this.observaciones = ''
+    this.monto = 0
   }
 
 }
