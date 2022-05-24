@@ -4,6 +4,8 @@ import { Parentesco } from 'src/app/interfaces/parentesco.interface';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Firma } from '../../interfaces/firmas.interface';
+import { firmaTercero } from '../../interfaces/Firmas_Terceros.interface';
+import { message } from '../../interfaces/AlertMessage.interface';
 
 
 @Injectable({
@@ -21,5 +23,9 @@ export class AtencionService {
 
   getFirmas():Observable<Firma[]>{
     return this.http.get<Firma[]>(`${this.urlPeticion}/firma`)
+  }
+
+  postFirmaAutorizada(firmaAutorizada : firmaTercero):Observable<message>{
+    return this.http.post<message>(`${this.urlPeticion}/firmas_autorizadas_terceros`, firmaAutorizada)
   }
 }

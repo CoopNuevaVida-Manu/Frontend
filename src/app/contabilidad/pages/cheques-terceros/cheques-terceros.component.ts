@@ -91,17 +91,17 @@ export class ChequesTercerosComponent implements OnInit {
 
   guardar(){
     
-    if(this.caf2 == ""){
+    if(this.caf2.trim() == ""){
       this.messageService.add({severity:'error', summary: 'Complete el codigo de afiliado'});
-    }else if(this.caf3 == ""){
+    }else if(this.caf3.trim() == ""){
       this.messageService.add({severity:'error', summary: 'Complete el codigo de afiliado'});
     }else if(this.numCheque == 0 || this.numCheque == undefined){
       this.messageService.add({severity:'error', summary: 'Agregue un numero de cheque'});
     }else if(this.monto == 0 || this.monto == undefined){
       this.messageService.add({severity:'error', summary: 'Agregue un monto de la transacción'});
-    }else if(this.idbeneficiario == ""){
+    }else if(this.idbeneficiario.trim() == ""){
       this.messageService.add({severity:'error', summary: 'Agregue la identidad del beneficiario'});
-    }else if(this.nombreBeneficiario == ""){
+    }else if(this.nombreBeneficiario.trim() == ""){
       this.messageService.add({severity:'error', summary: 'Agregue el nombre del beneficiario'}); 
     }else if(this.selectParentesco == undefined ){
       this.messageService.add({severity:'error', summary: 'Seleccione un parentesco'});

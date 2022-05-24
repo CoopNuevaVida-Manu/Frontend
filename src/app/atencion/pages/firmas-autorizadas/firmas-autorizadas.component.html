@@ -8,7 +8,7 @@
             <div class="form-group col-6 mt-3">
                 <div class="col-12 row">
                     <label for="codigoafiliado">Codigo de Afiliado</label>
-                <div class="col-3 form-group">
+                <div class="col-2 form-group">
                     <input  class="input-group "
                     type="text" 
                     [(ngModel)]="caf1"
@@ -18,7 +18,7 @@
                     [disabled]="true"
                     pInputText />
                 </div>
-                <div class="col-3 form-group">
+                <div class="col-2 form-group">
                     <input  class="input-group "
                     type="text" 
                     [(ngModel)]="caf2"
@@ -27,7 +27,7 @@
                     maxlength="3"
                     pInputText />
                 </div>
-                <div class="col-6 form-group">
+                <div class="col-3 form-group">
                     <input  class="input-group "
                     type="text" 
                     [(ngModel)]="caf3"
@@ -35,6 +35,9 @@
                     autocomplete="off"
                     maxlength="9"
                     pInputText />
+                </div>
+                <div class="col-5 form-group">
+                    <p-dropdown [options]="cuentasAfiliado" [(ngModel)]="cuentaAfectada" name="cmbCuentasAfiliado" [editable]="true" placeholder="Cuenta" optionLabel="name" [showClear]="true"></p-dropdown>
                 </div>
                 </div>
             </div>
@@ -56,6 +59,7 @@
                             name="idbeneficiario" 
                             mask="9999-9999-99999"
                             id="idbeneficiario"
+                            (keyup.enter)="buscarAfiliado()"
                             type="text"></p-inputMask>
             </div>
             <div class="form-group col-6 mt-3">
@@ -66,6 +70,7 @@
                         name="nombreAutorizado"
                         id="nombreAutorizado"
                         autocomplete="off"
+                        [disabled]="editarNombreA"
                         pInputText />
             </div>
             <div class="col-6 mt-3">
@@ -86,11 +91,12 @@
                         autocomplete="off"
                         pInputText />
             </div>
+            <p-toast></p-toast>
             <div class="col-6 mt-4">
-                <button pButton type="button" label="Guardar" ></button>
+                <button pButton type="button" label="Guardar" (click)="guardar()"></button>
             </div>
             <div class="col-6 mt-4">
-                <button pButton type="button" label="Cancelar" class="p-button-warning"></button>
+                <button pButton type="button" label="Cancelar" class="p-button-warning" (click)="clear()"></button>
             </div>
         </form>
     </div>

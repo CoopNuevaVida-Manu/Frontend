@@ -121,9 +121,9 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   
 
   guardar(){
-    if(this.caf2 == ""){
+    if(this.caf2.trim() == ""){
       this.messageService.add({severity:'error', summary: 'Complete el codigo de afiliado'});
-    }else if(this.caf3 == ""){
+    }else if(this.caf3.trim() == ""){
       this.messageService.add({severity:'error', summary: 'Complete el codigo de afiliado'});
     }else if(this.cuentaAfectada == undefined){
       this.messageService.add({severity:'error', summary: 'Seleccione una cuenta a afectar'});
