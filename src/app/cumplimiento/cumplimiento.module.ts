@@ -6,11 +6,13 @@ import { MenuModule } from '../menu/menu.module';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
+import { DDNoAfiliadosComponent } from './components/dd-no-afiliados/dd-no-afiliados.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    DDNoAfiliadosComponent
   ],
   imports: [
     CommonModule,

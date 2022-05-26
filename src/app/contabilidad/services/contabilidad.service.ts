@@ -7,6 +7,7 @@ import { Parentesco } from 'src/app/interfaces/parentesco.interface';
 import { Destino } from '../../interfaces/destino.interface';
 import { chequesTerceros } from '../../interfaces/Cheques_terceros.interface';
 import { message } from '../../interfaces/AlertMessage.interface';
+import { Firma } from 'src/app/interfaces/firmas.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,10 @@ export class ContabilidadService {
 
   getDestino():Observable<Destino[]>{
     return this.http.get<Destino[]>(`${this.urlPeticion}/destino`)
+  }
+
+  getFirmas():Observable<Firma[]>{
+    return this.http.get<Firma[]>(`${this.urlPeticion}/firma`)
   }
 
   postChequesTerceros(chequeTerceros : chequesTerceros): Observable<message>{
