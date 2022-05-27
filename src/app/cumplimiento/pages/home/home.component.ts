@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { dd_no_afiliado } from 'src/app/interfaces/DD_NoAfiliados.interface';
+import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
 import { CumplimientoService } from '../../services/cumplimiento.service';
+import { Parentesco } from 'src/app/interfaces/parentesco.interface';
+import { Filial } from 'src/app/interfaces/filial.interface';
+import { origenFondos } from 'src/app/interfaces/origenFondos.interface';
+import { razonOperacion } from 'src/app/interfaces/razonOperacion.interface';
+import { transaccion } from 'src/app/interfaces/transaccion.interface';
+import { Colaborador } from '../../../interfaces/colaboradores.interface';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +18,53 @@ export class HomeComponent implements OnInit {
 
   dd_noAfiliado : dd_no_afiliado[] = [] 
 
+  noAfiliados : NoAfiliado[] = []
+
+  parentesco : Parentesco[] = []
+
+  filial : Filial[] = []
+
+  origen_fondos : origenFondos[] = []
+
+  razon_operacion : razonOperacion[] = []
+
+  transaccion : transaccion[] = []
+
+  colaborador : Colaborador[] = []
+
   constructor(private cumplimientoService: CumplimientoService) { 
 
     cumplimientoService.getDDNoafiliados().subscribe(resp => {
       this.dd_noAfiliado = resp
-    })
+    });
+
+    cumplimientoService.getNoAfiliado().subscribe( resp => {
+      this.noAfiliados = resp
+    });
+
+    cumplimientoService.getParentesco().subscribe( resp => {
+      this.parentesco = resp 
+    });
+
+    cumplimientoService.getFilial().subscribe( resp =>{
+      this.filial = resp
+    });
+
+    cumplimientoService.getOrigenFondos().subscribe( resp =>{
+      this.origen_fondos = resp
+    });
+
+    cumplimientoService.getRazonOperacion().subscribe( resp => {
+      this.razon_operacion = resp
+    });
+
+    cumplimientoService.gettransacciones().subscribe( resp => {
+      this.transaccion = resp
+    });
+
+    cumplimientoService.getAllColab().subscribe( resp => {
+      this.colaborador = resp
+    });
   }
 
   ngOnInit(): void {

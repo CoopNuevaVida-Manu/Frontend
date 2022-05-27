@@ -1,21 +1,37 @@
-<!-- <p-table [value]="colabotabla" >
+<p-table [value]="dd_noAfiliado" >
     <ng-template pTemplate="header">
         <tr>
-            <th>Nombre Colaborador</th>
-            <th>Usuario</th>
+            <th>Nombre no afiliado</th>
+            <th>Numero de identidad</th>
+            <th>Parentesco</th>
             <th>Filial</th>
-            <th>Estado</th>
-            <th>Editar
-            </th>
+            <th>Codigo del afiliado</th>
+            <th>Numero de cuenta afectada</th>
+            <th>Origen de fondos</th>
+            <th>Razon de operacion</th>
+            <th>Transaccion</th>
+            <th>Monto</th>
+            <th>Fecha de operacion</th>
+            <th>Cajero</th>
+            <th>Observacion</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-colab>
+    <ng-template pTemplate="body" let-DNA>
         <tr>
-            <td>{{colab.colaborador_nombre}}</td>
-            <td>{{colab.colaborador_usuario}}</td>
-            <td>{{colab.oficiona}}</td>
-            <td>{{colab.estado}}</td>
-            <td></td>
+            <td>{{getNombre(DNA.id_no_afiliado)}}</td>
+            <td>{{DNA.id_no_afiliado}}</td>
+            <td>{{getParentesco(DNA.id_parentesco)}}</td>
+            <td>{{getFilial(DNA.id_filial)}}</td>
+            <td>{{DNA.codigo_afiliado}}</td>
+            <td>{{DNA.cuenta_afectada}}</td>
+            <td>{{getOrigenFondos(DNA.id_origen_fondos)}}</td>
+            <td>{{getRazonOperacion(DNA.id_razon_operacion)}}</td>
+            <td>{{getTransaccion(DNA.id_transaccion)}}</td>
+            <td>{{DNA.monto_transaccion}}</td>
+            <td>{{DNA.fecha_operacion | date:'M/d/yyyy, h:mm a'}}</td>
+            <td>{{getCajero(DNA.id_cajero_operacion)}}</td>
+            <td>{{DNA.observaciones}}</td>
+            
         </tr>
     </ng-template>
-</p-table> -->
+</p-table>
