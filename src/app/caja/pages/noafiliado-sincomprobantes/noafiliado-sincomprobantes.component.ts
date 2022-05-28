@@ -159,6 +159,10 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
         }
         
       })
+
+      if(this.monto >= 100000){
+        
+      }
     }
     
   }

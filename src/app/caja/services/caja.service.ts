@@ -10,6 +10,7 @@ import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
 import { Parentesco } from 'src/app/interfaces/parentesco.interface';
 import { Colaborador } from '../../interfaces/colaboradores.interface';
 import { diligenciaNoAfiliado } from '../../interfaces/Diligencia_No_Afiliado.interface';
+import { sinComprobante } from '../../interfaces/RTE_Sin_Comprobante.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +50,9 @@ export class CajaService {
 
   postNoAfiliado(noAfiliado : NoAfiliado):Observable<message>{
     return this.http.post<message>(`${this.urlPeticion}/no_afiliado`, noAfiliado)
+  }
+
+  postRET( rte : sinComprobante):Observable<message>{
+    return this.http.post<message>(`${this.urlPeticion}/transacciones_sin_comprobantes`,rte)
   }
 }
