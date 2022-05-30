@@ -30,9 +30,6 @@ export class ChequesEmitidosTercerosComponent implements OnInit {
   razon_operacion : razonOperacion[] = []
 
   @Input()
-  transaccion : transaccion[] = []
-
-  @Input()
   colaborador : Colaborador[] = []
 
   constructor() { }

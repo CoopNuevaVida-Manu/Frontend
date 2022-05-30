@@ -34,7 +34,7 @@ export class DDNoAfiliadosComponent implements OnInit {
   origen_fondos : origenFondos[] = []
 
   @Input()
-  razon_operacion : NewType[] = []
+  razon_operacion : razonOperacion[] = []
 
   @Input()
   transaccion : transaccion[] = []
