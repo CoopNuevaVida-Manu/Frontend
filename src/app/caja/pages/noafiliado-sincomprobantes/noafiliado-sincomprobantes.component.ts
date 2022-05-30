@@ -4,6 +4,9 @@ import { combobox } from 'src/app/interfaces/combobox.interface';
 import { CajaService } from '../../services/caja.service';
 import {MessageService} from 'primeng/api';
 import { diligenciaNoAfiliado } from '../../../interfaces/Diligencia_No_Afiliado.interface';
+import { Filial } from '../../../interfaces/filial.interface';
+import { sinComprobante } from 'src/app/interfaces/RTE_Sin_Comprobante.interface';
+import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
 
 
 @Component({
@@ -58,6 +61,13 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   observaciones : string = ""
 
   diligencia!: diligenciaNoAfiliado 
+  filiales!: Filial[]
+  filialA: boolean = true
+
+  rte!: sinComprobante
+
+  noafiliado !: NoAfiliado
+  
   
 
 
@@ -92,6 +102,10 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
       this.filialcolabo = resp[0].id_oficiona
     })
 
+    this.cajaService.getFilial().subscribe( resp => {
+      this.filiales = resp
+    })
+
     //Cambiar al boton o evento de  busqueda de la cuenta
     this.cuentasAfiliado= [
       {name: '1414147', code: '15'},
@@ -121,8 +135,23 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   
 
   guardar(){
-    if(this.caf2.trim() == ""){
+
+    this.filialA= true
+
+    this.filiales.forEach(element => {
+      if(element.id_filial == parseInt(this.caf2)){
+        this.filialA = false
+      }
+    });
+
+    if(this.nombreUser == ""){
+      this.messageService.add({severity:'error', summary: 'Agregue un nombre del cliente'});
+    }else if(this.apellidoUser == ""){
+      this.messageService.add({severity:'error', summary: 'Agregue un apellido del cliente'});
+    }else if(this.caf2.trim() == ""){
       this.messageService.add({severity:'error', summary: 'Complete el codigo de afiliado'});
+    }else if(this.filialA){
+      this.messageService.add({severity:'error', summary: 'Filial erronea en el codigo de usuario'});
     }else if(this.caf3.trim() == ""){
       this.messageService.add({severity:'error', summary: 'Complete el codigo de afiliado'});
     }else if(this.cuentaAfectada == undefined){
@@ -160,8 +189,30 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
         
       })
 
+      this.rte = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(this.cuentaAfectada.code),
+                  fecha_operacion: formatted_date, id_cliente: this.identidad, id_colaborador: Number(localStorage.getItem('token')), 
+                  id_filial_ac: parseInt(this.caf2), id_filial_realizo_transaccion: this.filialcolabo,
+                  id_origen_fondos: Number(this.selectOrigenFondo.code), id_transaccion: Number(this.selectTransaccion.code),
+                  monto_transaccion: this.monto, observaciones: this.observaciones}
+
       if(this.monto >= 100000){
-        
+        this.cajaService.postRET(this.rte).subscribe( resp => {
+          if(resp.insert){
+          }else{
+            this.messageService.add({severity:'error', summary: 'Error al guardar la transaccion mayor de 100,000'});
+          }
+          console.log(resp)
+        })
+      }
+
+      if(this.estado == false){
+        this.noafiliado = {identidad: this.identidad, apellido: this.apellidoUser, nombre: this.nombreUser}
+        this.cajaService.postNoAfiliado(this.noafiliado).subscribe( resp => {
+          if(resp.insert){
+          }else{
+            this.messageService.add({severity:'success', summary: 'Error al guardado del no afiliado'});
+          }
+        })
       }
     }
     
@@ -181,6 +232,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
     this.selectTransaccion = this.borrarcbx
     this.observaciones = ''
     this.monto = 0
+    this.nombreAfiliadoC = ''
   }
 
 }

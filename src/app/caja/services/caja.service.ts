@@ -11,6 +11,7 @@ import { Parentesco } from 'src/app/interfaces/parentesco.interface';
 import { Colaborador } from '../../interfaces/colaboradores.interface';
 import { diligenciaNoAfiliado } from '../../interfaces/Diligencia_No_Afiliado.interface';
 import { sinComprobante } from '../../interfaces/RTE_Sin_Comprobante.interface';
+import { Filial } from 'src/app/interfaces/filial.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,10 @@ export class CajaService {
     return this.http.get<Colaborador[]>(`${this.urlPeticion}/colaborador/${idcolab}`)
   }
 
+  getFilial():Observable<Filial[]>{
+    return this.http.get<Filial[]>(`${this.urlPeticion}/filial`)
+  }
+
   postDiligenciaNoAfiliado(diligencia : diligenciaNoAfiliado):Observable<message>{
     return this.http.post<message>(`${this.urlPeticion}/diligencias_no_afiliados`, diligencia)
   }
@@ -55,4 +60,5 @@ export class CajaService {
   postRET( rte : sinComprobante):Observable<message>{
     return this.http.post<message>(`${this.urlPeticion}/transacciones_sin_comprobantes`,rte)
   }
+
 }

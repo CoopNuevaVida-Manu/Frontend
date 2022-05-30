@@ -1,4 +1,4 @@
-<p-table [value]="dd_noAfiliado" >
+<p-table [value]="dd_noAfiliado" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
             <th>Nombre no afiliado</th>
@@ -16,7 +16,7 @@
             <th>Observacion</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-DNA>
+    <ng-template pTemplate="body"  let-DNA>
         <tr>
             <td>{{getNombre(DNA.id_no_afiliado)}}</td>
             <td>{{DNA.id_no_afiliado}}</td>
@@ -27,7 +27,7 @@
             <td>{{getOrigenFondos(DNA.id_origen_fondos)}}</td>
             <td>{{getRazonOperacion(DNA.id_razon_operacion)}}</td>
             <td>{{getTransaccion(DNA.id_transaccion)}}</td>
-            <td>{{DNA.monto_transaccion}}</td>
+            <td>{{DNA.monto_transaccion | currency:'Lps. '}}</td>
             <td>{{DNA.fecha_operacion | date:'M/d/yyyy, h:mm a'}}</td>
             <td>{{getCajero(DNA.id_cajero_operacion)}}</td>
             <td>{{DNA.observaciones}}</td>

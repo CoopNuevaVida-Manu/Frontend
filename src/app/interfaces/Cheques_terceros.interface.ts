@@ -1,4 +1,5 @@
 export interface chequesTerceros {
+    id_cheque_tercero?:   number;
     codigo_de_afiliado:   string;
     id_filial:            number;
     n_cheque:             number;

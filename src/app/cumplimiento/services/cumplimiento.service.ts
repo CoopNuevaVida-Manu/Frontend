@@ -11,6 +11,9 @@ import { transaccion } from 'src/app/interfaces/transaccion.interface';
 import { razonOperacion } from 'src/app/interfaces/razonOperacion.interface';
 import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
 import { Filial } from 'src/app/interfaces/filial.interface';
+import { sinComprobante } from '../../interfaces/RTE_Sin_Comprobante.interface';
+import { chequesTerceros } from '../../interfaces/Cheques_terceros.interface';
+import { EstadoAfiliado } from 'src/app/interfaces/EstadoAfiliado.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +51,10 @@ export class CumplimientoService {
   getFilial():Observable<Filial[]>{
     return this.http.get<Filial[]>(`${this.urlPeticion}/filial`)
   }
+
+  getEstadoAfiliado():Observable<EstadoAfiliado[]>{
+    return this.http.get<EstadoAfiliado[]>(`${this.urlPeticion}/afiliado_estado`)
+  }
   
   getNoAfiliado():Observable<NoAfiliado[]>{
     return this.http.get<NoAfiliado[]>(`${this.urlPeticion}/no_afiliado`);
@@ -55,4 +62,13 @@ export class CumplimientoService {
   getDDNoafiliados():Observable<dd_no_afiliado[]>{
     return this.http.get<dd_no_afiliado[]>(`${this.urlPeticion}/diligencias_no_afiliados`)
   }
+
+  getRTE_SinComprobante():Observable<sinComprobante[]>{
+    return this.http.get<sinComprobante[]>(`${this.urlPeticion}/transacciones_sin_comprobantes`)
+  }
+
+  getChequesTerceros():Observable<chequesTerceros[]>{
+    return this.http.get<chequesTerceros[]>(`${this.urlPeticion}/cheques_terceros`)
+  }
+
 }

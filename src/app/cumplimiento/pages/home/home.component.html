@@ -19,7 +19,12 @@
         <p-tabPanel header="RTE sin comprobante" rightIcon="pi pi-users">
             <div class="container">
                 <div class=" formulario">
-                    
+                    <app-rte-sin-comprobante [RTEsinComprobate]="RTEsinComprobate"
+                                             [colaborador]="colaborador"
+                                             [filial]="filial"
+                                             [noAfiliados]="noAfiliados"
+                                             [transaccion]="transaccion"
+                                             [origen_fondos]="origen_fondos"></app-rte-sin-comprobante>
                 </div>
             </div>
         </p-tabPanel>

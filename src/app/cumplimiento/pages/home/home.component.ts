@@ -8,6 +8,9 @@ import { origenFondos } from 'src/app/interfaces/origenFondos.interface';
 import { razonOperacion } from 'src/app/interfaces/razonOperacion.interface';
 import { transaccion } from 'src/app/interfaces/transaccion.interface';
 import { Colaborador } from '../../../interfaces/colaboradores.interface';
+import { sinComprobante } from '../../../interfaces/RTE_Sin_Comprobante.interface';
+import { chequesTerceros } from '../../../interfaces/Cheques_terceros.interface';
+import { EstadoAfiliado } from '../../../interfaces/EstadoAfiliado.interface';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +19,11 @@ import { Colaborador } from '../../../interfaces/colaboradores.interface';
 })
 export class HomeComponent implements OnInit {
 
-  dd_noAfiliado : dd_no_afiliado[] = [] 
+  
 
   noAfiliados : NoAfiliado[] = []
+
+  estadoAfiliado !: EstadoAfiliado[]
 
   parentesco : Parentesco[] = []
 
@@ -32,15 +37,21 @@ export class HomeComponent implements OnInit {
 
   colaborador : Colaborador[] = []
 
-  constructor(private cumplimientoService: CumplimientoService) { 
+  dd_noAfiliado : dd_no_afiliado[] = [] 
 
-    cumplimientoService.getDDNoafiliados().subscribe(resp => {
-      this.dd_noAfiliado = resp
-    });
+  RTEsinComprobate !: sinComprobante[]
+
+  chequesTerceros !: chequesTerceros[]
+
+  constructor(private cumplimientoService: CumplimientoService) { 
 
     cumplimientoService.getNoAfiliado().subscribe( resp => {
       this.noAfiliados = resp
     });
+
+    cumplimientoService.getEstadoAfiliado().subscribe( resp =>{
+      this.estadoAfiliado = resp
+    })
 
     cumplimientoService.getParentesco().subscribe( resp => {
       this.parentesco = resp 
@@ -65,6 +76,21 @@ export class HomeComponent implements OnInit {
     cumplimientoService.getAllColab().subscribe( resp => {
       this.colaborador = resp
     });
+
+    cumplimientoService.getDDNoafiliados().subscribe(resp => {
+      this.dd_noAfiliado = resp
+    });
+
+    cumplimientoService.getRTE_SinComprobante().subscribe( resp =>{
+      this.RTEsinComprobate = resp
+    });
+
+    cumplimientoService.getChequesTerceros().subscribe( resp => {
+      this.chequesTerceros = resp
+    })
+    
+
+    
   }
 
   ngOnInit(): void {
