@@ -12,6 +12,8 @@ import { Colaborador } from '../../interfaces/colaboradores.interface';
 import { diligenciaNoAfiliado } from '../../interfaces/Diligencia_No_Afiliado.interface';
 import { sinComprobante } from '../../interfaces/RTE_Sin_Comprobante.interface';
 import { Filial } from 'src/app/interfaces/filial.interface';
+import { Afiliado } from 'src/app/interfaces/Afiliado.interface';
+import { cuentasAfiliado } from '../../interfaces/AfiliadoCuentas.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +49,18 @@ export class CajaService {
 
   getFilial():Observable<Filial[]>{
     return this.http.get<Filial[]>(`${this.urlPeticion}/filial`)
+  }
+
+  getAfiliadoID(id: string):Observable<Afiliado[]>{
+    return this.http.get<Afiliado[]>(`${this.urlPeticion}/Afiliado/${id}`)
+  }
+
+  getAfiliadoCli(idSuc: string, idCli: string):Observable<Afiliado[]>{
+    return this.http.get<Afiliado[]>(`${this.urlPeticion}/Afiliado/Cli/${idSuc}/${idCli}`)
+  }
+
+  getCuentasAfiliado(idSuc: string, idCli: string):Observable<cuentasAfiliado[]>{
+    return this.http.get<cuentasAfiliado[]>(`${this.urlPeticion}/Afiliado/cuenta/${idSuc}/${idCli}`)
   }
 
   postDiligenciaNoAfiliado(diligencia : diligenciaNoAfiliado):Observable<message>{
