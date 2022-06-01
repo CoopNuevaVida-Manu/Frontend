@@ -109,11 +109,6 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
     this.cajaService.getFilial().subscribe( resp => {
       this.filiales = resp
     })
-
-    //Cambiar al boton o evento de  busqueda de la cuenta
-    this.cuentasAfiliado= [
-      {name: '1414147', code: '15'},
-      {name: 'Rome', code: 'RM'},]
     
   }
 
@@ -129,10 +124,8 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Ingrese una identidad valida'});
     }else{
       this.cajaService.getAfiliadoID(this.identidad.replace(/-/g,"")).subscribe(resp => {
-        console.log(this.identidad.replace(/-/g,""))
         if(resp.length > 0){
           let nombresApellidos = resp[0].OUTAFF_NAME.split(" ")
-          console.log(nombresApellidos)
           if(nombresApellidos.length >= 4){
             this.nombreUser = `${nombresApellidos[0]} ${nombresApellidos[1]}`
             this.apellidoUser = `${nombresApellidos[2]} ${nombresApellidos[3]}`
@@ -161,24 +154,36 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   }
   
   buscarCuentas(){
+    this.cuentasAfiliado = []
+    this.cuentaAfectada = this.borrarcbx
+    this.nombreAfiliadoC = ""
     let idSuc  = 3
     let idCli = 9
-    let concatSuc : string = ""
-    let concatCli : string = ""
+    let concatSuc : string = "000"
+    let concatCli : string = "000000000"
 
     idSuc = idSuc - this.caf2.length
     idCli = idCli - this.caf3.length
 
-    for (let index = 1; index < idSuc; index++) {
-      concatSuc.concat("0")
-    }
+    concatSuc=concatSuc.substring(0, idSuc).concat(this.caf2)
+    concatCli=concatCli.substring(0, idCli).concat(this.caf3)
 
-    for (let index = 1; index < idCli; index++) {
-      concatCli.concat("0")
-    }
+    this.cajaService.getCuentasAfiliado(concatSuc,concatCli).subscribe( resp => {
+      if(resp.length > 0){
+        resp.forEach(element => {
+          this.cuentasAfiliado.push({code: element.OUTSAV_CLI_NOSEC.toString(), name: element.OUTSAV_CLI_NOSEC.toString()})
+        });
+        this.cajaService.getAfiliadoCli(concatSuc,concatCli).subscribe( resp => {
+          if(resp.length > 0){
+            this.nombreAfiliadoC = resp[0].OUTAFF_NAME
+          }
+        });
+      }else{
+        this.messageService.add({severity:'error', summary: 'Cuenta inexistente', detail : 'Asegurese que el numero sea correcto'});
+      }
+    })
 
-    console.log(concatSuc);
-    console.log(concatCli);
+
   }
 
   guardar(){
@@ -220,6 +225,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
       var date: Date = new Date();
       let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
                             date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
       this.diligencia = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(this.cuentaAfectada.code), 
                           fecha_operacion : formatted_date, id_cajero_operacion: Number(localStorage.getItem('token')),
                           id_filial: this.filialcolabo, id_no_afiliado : this.identidad,
@@ -227,16 +233,23 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
                           id_razon_operacion: Number(this.selectRazonFondo.code), id_transaccion: Number(this.selectTransaccion.code),
                           monto_transaccion: this.monto, observaciones: this.observaciones}
 
+      this.rte = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(this.cuentaAfectada.code),
+                  fecha_operacion: formatted_date, id_cliente: this.identidad, id_colaborador: Number(localStorage.getItem('token')), 
+                  id_filial_ac: parseInt(this.caf2), id_filial_realizo_transaccion: this.filialcolabo,
+                  id_origen_fondos: Number(this.selectOrigenFondo.code), id_transaccion: Number(this.selectTransaccion.code),
+                  monto_transaccion: this.monto, observaciones: this.observaciones}
+
 
       if(this.afiliadoMonto){
 
         if(this.monto >= 100000){
           this.cajaService.postRET(this.rte).subscribe( resp => {
             if(resp.insert){
+              this.messageService.add({severity:'success', summary: 'Guardado exitosamente'});
+              this.clear();
             }else{
               this.messageService.add({severity:'error', summary: 'Error al guardar la transaccion mayor de 100,000'});
             }
-            console.log(resp)
           })
         }else{
           this.messageService.add({severity:'error', summary: 'El monto tiene que ser mayor o igual que Lps. 100,000.00'});
@@ -244,37 +257,34 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
         
 
       }else{
-        
-     
-      this.cajaService.postDiligenciaNoAfiliado(this.diligencia).subscribe(resp => {
-        if(resp.insert){
-          this.messageService.add({severity:'success', summary: 'Guardado exitosamente'});
-          this.clear();
-        }else{
-          this.messageService.add({severity:'error', summary: 'Error al guardar la diligencia'});
+        this.cajaService.postDiligenciaNoAfiliado(this.diligencia).subscribe(resp => {
+          if(resp.insert){
+            this.messageService.add({severity:'success', summary: 'Guardado exitosamente'});
+            this.clear();
+          }else{
+            this.messageService.add({severity:'error', summary: 'Error al guardar la diligencia'});
+          }
+          
+        })
+
+        if(this.monto >= 100000){
+          this.cajaService.postRET(this.rte).subscribe( resp => {
+            if(resp.insert){
+            }else{
+              this.messageService.add({severity:'error', summary: 'Error al guardar la transaccion mayor de 100,000'});
+            }
+          })
         }
-        
-      })
 
-      if(this.monto >= 100000){
-        this.cajaService.postRET(this.rte).subscribe( resp => {
-          if(resp.insert){
-          }else{
-            this.messageService.add({severity:'error', summary: 'Error al guardar la transaccion mayor de 100,000'});
-          }
-          console.log(resp)
-        })
-      }
-
-      if(this.estado == false){
-        this.noafiliado = {identidad: this.identidad, apellido: this.apellidoUser, nombre: this.nombreUser}
-        this.cajaService.postNoAfiliado(this.noafiliado).subscribe( resp => {
-          if(resp.insert){
-          }else{
-            this.messageService.add({severity:'success', summary: 'Error al guardado del no afiliado'});
-          }
-        })
-      }
+        if(this.estado == false){
+          this.noafiliado = {identidad: this.identidad, apellido: this.apellidoUser, nombre: this.nombreUser}
+          this.cajaService.postNoAfiliado(this.noafiliado).subscribe( resp => {
+            if(resp.insert){
+            }else{
+              this.messageService.add({severity:'success', summary: 'Error al guardado del no afiliado'});
+            }
+          })
+        }
       }
     }
     

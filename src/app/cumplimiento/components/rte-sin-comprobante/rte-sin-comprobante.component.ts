@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CajaService } from 'src/app/caja/services/caja.service';
 import { Colaborador } from 'src/app/interfaces/colaboradores.interface';
 import { Filial } from 'src/app/interfaces/filial.interface';
 import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
 import { origenFondos } from 'src/app/interfaces/origenFondos.interface';
 import { sinComprobante } from 'src/app/interfaces/RTE_Sin_Comprobante.interface';
 import { transaccion } from 'src/app/interfaces/transaccion.interface';
+import { CumplimientoService } from '../../services/cumplimiento.service';
 
 @Component({
   selector: 'app-rte-sin-comprobante',
@@ -28,7 +30,6 @@ export class RTESinComprobanteComponent implements OnInit {
   @Input()
   colaborador : Colaborador[] = []
 
-  @Input()
   RTEsinComprobate !: sinComprobante[]
 
   nombreNA!: NoAfiliado
@@ -37,14 +38,39 @@ export class RTESinComprobanteComponent implements OnInit {
   transaccionNA !: transaccion
   cajeroNA !: Colaborador
 
+  entradas: number = 1;
 
-  constructor() { }
+
+  constructor(private cajaService :CajaService, private cumplimientoService: CumplimientoService) {
+
+    cumplimientoService.getRTE_SinComprobante().subscribe( resp =>{
+      console.log(resp)
+      this.RTEsinComprobate = resp
+    });
+
+   }
 
   ngOnInit(): void {
   }
 
+  numentradas(){
+    this.entradas = this.entradas +1
+    return this.entradas
+  }
+
   getNombre(id : string){
-    this.nombreNA = this.noAfiliados.find( afiliado => afiliado.identidad == id) || {apellido: "", id_no_afiliado: 0, identidad: "", nombre: ""}
+    
+    // this.nombreNA = {apellido: "", id_no_afiliado: 0, identidad: "", nombre: ""}
+    // if(id.includes("-")){
+    //   this.nombreNA = this.noAfiliados.find( afiliado => afiliado.identidad == id) || {apellido: "", id_no_afiliado: 0, identidad: "", nombre: ""}
+    // }else{
+    //   let idNuevo = id.replace(/-/g,"");
+    //   // console.log(idNuevo)
+    //   this.cajaService.getAfiliadoID(idNuevo).subscribe( resp => {
+    //     this.nombreNA = {nombre: resp[0].OUTAFF_NAME.toString(), apellido:"", identidad: ""}
+    //     return
+    //   })
+    // }
     return `${this.nombreNA.nombre} ${this.nombreNA.apellido}`
   }
 

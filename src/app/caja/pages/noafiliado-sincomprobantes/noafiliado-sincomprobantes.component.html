@@ -87,7 +87,7 @@
                     pInputText />
                 </div>
                 <div class="col-5 form-group">
-                    <p-dropdown [options]="cuentasAfiliado" [(ngModel)]="cuentaAfectada" name="cmbCuentasAfiliado" [editable]="true" placeholder="Cuenta" optionLabel="name" [showClear]="true"></p-dropdown>
+                    <p-dropdown [options]="cuentasAfiliado" [(ngModel)]="cuentaAfectada" name="cmbCuentasAfiliado"  placeholder="Cuenta" optionLabel="name" [showClear]="true"></p-dropdown>
                 </div>
                 </div>
             </div>
@@ -103,6 +103,7 @@
                         name="nombreAfiliadoC"
                         id="nombreAfiliadoC"
                         autocomplete="off"
+                        disabled="true"
                         pInputText />
             </div>
             <div class="col-6 p-fluid mt-3">

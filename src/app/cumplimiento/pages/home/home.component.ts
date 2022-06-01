@@ -81,9 +81,7 @@ export class HomeComponent implements OnInit {
       this.dd_noAfiliado = resp
     });
 
-    cumplimientoService.getRTE_SinComprobante().subscribe( resp =>{
-      this.RTEsinComprobate = resp
-    });
+    
 
     cumplimientoService.getChequesTerceros().subscribe( resp => {
       this.chequesTerceros = resp
