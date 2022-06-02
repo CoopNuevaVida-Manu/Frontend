@@ -4,14 +4,7 @@
         <p-tabPanel header="DD con no afiliados" rightIcon="pi pi-users">
             <div class="container">
                 <div class=" formulario">
-                    <app-dd-no-afiliados [dd_noAfiliado]="dd_noAfiliado"
-                                         [noAfiliados]="noAfiliados"
-                                         [parentesco]="parentesco"
-                                         [filial]="filial"
-                                         [origen_fondos]="origen_fondos"
-                                         [razon_operacion]="razon_operacion"
-                                         [transaccion]="transaccion"
-                                         [colaborador]="colaborador"></app-dd-no-afiliados>
+                    <app-dd-no-afiliados></app-dd-no-afiliados>
                 </div>
             </div>
         </p-tabPanel>
@@ -19,11 +12,7 @@
         <p-tabPanel header="RTE sin comprobante" rightIcon="pi pi-users">
             <div class="container">
                 <div class=" formulario">
-                    <app-rte-sin-comprobante [colaborador]="colaborador"
-                                             [filial]="filial"
-                                             [noAfiliados]="noAfiliados"
-                                             [transaccion]="transaccion"
-                                             [origen_fondos]="origen_fondos"></app-rte-sin-comprobante>
+                    <app-rte-sin-comprobante></app-rte-sin-comprobante>
                 </div>
             </div>
         </p-tabPanel>

@@ -14,6 +14,8 @@ import { Filial } from 'src/app/interfaces/filial.interface';
 import { sinComprobante } from '../../interfaces/RTE_Sin_Comprobante.interface';
 import { chequesTerceros } from '../../interfaces/Cheques_terceros.interface';
 import { EstadoAfiliado } from 'src/app/interfaces/EstadoAfiliado.interface';
+import { rteCumplimiento } from '../../interfaces/CumplimientoRTE.interface';
+import { ddCumplimiento } from '../../interfaces/CumplimientoDD.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +71,15 @@ export class CumplimientoService {
 
   getChequesTerceros():Observable<chequesTerceros[]>{
     return this.http.get<chequesTerceros[]>(`${this.urlPeticion}/cheques_terceros`)
+  }
+
+  //Cumplimiento Nuevo
+  getTSC():Observable<rteCumplimiento[]>{
+    return this.http.get<rteCumplimiento[]>(`${this.urlPeticion}/Cumplimiento/TSC`)
+  }
+
+  getDD():Observable<ddCumplimiento[]>{
+    return this.http.get<ddCumplimiento[]>(`${this.urlPeticion}/Cumplimiento/DD`)
   }
 
 }

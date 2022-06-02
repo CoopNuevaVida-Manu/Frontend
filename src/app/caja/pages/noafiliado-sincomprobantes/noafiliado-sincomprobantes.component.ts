@@ -69,7 +69,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
   noafiliado !: NoAfiliado
 
-  afiliado!: Afiliado[]
+  afiliado!: Afiliado
   afiliadoMonto: boolean = false
   
   
@@ -120,11 +120,14 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
     this.nombreUser = ''
     this.apellidoUser = ''
 
+    let NuevaIdentidad = this.identidad.replace(/-/g,"");
+
     if(this.identidad.length != 15){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Ingrese una identidad valida'});
     }else{
-      this.cajaService.getAfiliadoID(this.identidad.replace(/-/g,"")).subscribe(resp => {
+      this.cajaService.getAfiliadoID(NuevaIdentidad).subscribe(resp => {
         if(resp.length > 0){
+          this.afiliado = resp[0]
           let nombresApellidos = resp[0].OUTAFF_NAME.split(" ")
           if(nombresApellidos.length >= 4){
             this.nombreUser = `${nombresApellidos[0]} ${nombresApellidos[1]}`
@@ -138,7 +141,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
           this.disponible= true;
 
         }else{
-          this.cajaService.getNoAfiliado(this.identidad).subscribe(respNoAfiliado => {
+          this.cajaService.getNoAfiliado(NuevaIdentidad).subscribe(respNoAfiliado => {
             if(respNoAfiliado.length == 0){
               this.disponible = true;
               this.estado = false;
@@ -170,6 +173,8 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
     this.cajaService.getCuentasAfiliado(concatSuc,concatCli).subscribe( resp => {
       if(resp.length > 0){
+        this.caf2 = concatSuc
+        this.caf3 = concatCli
         resp.forEach(element => {
           this.cuentasAfiliado.push({code: element.OUTSAV_CLI_NOSEC.toString(), name: element.OUTSAV_CLI_NOSEC.toString()})
         });
@@ -187,7 +192,6 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
   }
 
   guardar(){
-
     this.filialA= true
 
     this.filiales.forEach(element => {
@@ -220,6 +224,8 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
       this.messageService.add({severity:'error', summary: 'Seleccione una razon de operacion'});
     }else{
 
+      let NuevaIdentidad = this.identidad.replace(/-/g,"");
+
       this.codigoAfiliado = `${this.caf1}-${this.caf2}-${this.caf3}`
 
       var date: Date = new Date();
@@ -228,34 +234,38 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
       this.diligencia = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(this.cuentaAfectada.code), 
                           fecha_operacion : formatted_date, id_cajero_operacion: Number(localStorage.getItem('token')),
-                          id_filial: this.filialcolabo, id_no_afiliado : this.identidad,
+                          id_filial: this.filialcolabo, id_no_afiliado : NuevaIdentidad,
                           id_origen_fondos: Number(this.selectOrigenFondo.code), id_parentesco: Number(this.selectParentesco.code),
                           id_razon_operacion: Number(this.selectRazonFondo.code), id_transaccion: Number(this.selectTransaccion.code),
                           monto_transaccion: this.monto, observaciones: this.observaciones}
 
       this.rte = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(this.cuentaAfectada.code),
-                  fecha_operacion: formatted_date, id_cliente: this.identidad, id_colaborador: Number(localStorage.getItem('token')), 
+                  fecha_operacion: formatted_date, id_cliente: NuevaIdentidad, id_colaborador: Number(localStorage.getItem('token')), 
                   id_filial_ac: parseInt(this.caf2), id_filial_realizo_transaccion: this.filialcolabo,
                   id_origen_fondos: Number(this.selectOrigenFondo.code), id_transaccion: Number(this.selectTransaccion.code),
                   monto_transaccion: this.monto, observaciones: this.observaciones}
 
 
       if(this.afiliadoMonto){
-
         if(this.monto >= 100000){
           this.cajaService.postRET(this.rte).subscribe( resp => {
             if(resp.insert){
               this.messageService.add({severity:'success', summary: 'Guardado exitosamente'});
-              this.clear();
-            }else{
-              this.messageService.add({severity:'error', summary: 'Error al guardar la transaccion mayor de 100,000'});
+              this.cajaService.getAfiliadoPSQL(this.afiliado.OUTAFF_ID).subscribe( resp =>{
+                if(resp.length == 0){
+                  this.cajaService.postAfiliadoPSQL(this.afiliado).subscribe( resp => {
+                    this.clear()
+                  })
+                }else{
+                  this.clear()
+                }
+              })
             }
-          })
+          });
         }else{
           this.messageService.add({severity:'error', summary: 'El monto tiene que ser mayor o igual que Lps. 100,000.00'});
         }
         
-
       }else{
         this.cajaService.postDiligenciaNoAfiliado(this.diligencia).subscribe(resp => {
           if(resp.insert){
@@ -277,7 +287,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
         }
 
         if(this.estado == false){
-          this.noafiliado = {identidad: this.identidad, apellido: this.apellidoUser, nombre: this.nombreUser}
+          this.noafiliado = {identidad: NuevaIdentidad, apellido: this.apellidoUser, nombre: this.nombreUser}
           this.cajaService.postNoAfiliado(this.noafiliado).subscribe( resp => {
             if(resp.insert){
             }else{

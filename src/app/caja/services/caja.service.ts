@@ -75,4 +75,12 @@ export class CajaService {
     return this.http.post<message>(`${this.urlPeticion}/transacciones_sin_comprobantes`,rte)
   }
 
+  getAfiliadoPSQL(id: string):Observable<Afiliado[]>{
+    return this.http.get<Afiliado[]>(`${this.urlPeticion}/Afiliado/PSQL/${id}`)
+  }
+
+  postAfiliadoPSQL(afiliado: Afiliado):Observable<message>{
+    return this.http.post<message>(`${this.urlPeticion}/Afiliado`, afiliado)
+  }
+
 }

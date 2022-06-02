@@ -1,10 +1,10 @@
-<!-- <p-table [value]="RTEsinComprobate" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+<p-table [value]="RTEsinComprobate" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
             <th>Codigo del afiliado</th>
             <th>Numero de cuenta afectada</th>
             <th>Filial donde aperturo</th>
-            <th>Nombre no afiliado</th>
+            <th>Nombre cliente</th>
             <th>Numero de identidad</th>
             <th>Origen de fondos</th>
             <th>Transaccion</th>
@@ -13,30 +13,27 @@
             <th>Filial realizo operacion</th>
             <th>Cajero</th>
             <th>Observacion</th>
-            <th>Entradas</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-RTE let-rowIndex="rowIndex">
         <tr>
             <td>{{RTE.codigo_afiliado}}</td>
             <td>{{RTE.cuenta_afectada}}</td>
-            <td>{{getFilial(RTE.id_filial_ac)}}</td>
-            <td>{{getNombre(RTE.id_cliente)}}</td>
+            <td>{{RTE.filialac}}</td>
+            <td>{{RTE.name}}</td>
             <td>{{RTE.id_cliente}}</td>
-            <td>{{getOrigenFondos(RTE.id_origen_fondos)}}</td>
-            <td>{{getTransaccion(RTE.id_transaccion)}}</td>
+            <td>{{RTE.origen_fondos}}</td>
+            <td>{{RTE.transaccion}}</td>
             <td>{{RTE.fecha_operacion | date:'M/d/yyyy, h:mm a'}}</td>
             <td>{{RTE.monto_transaccion | currency:'Lps. '}}</td>
-            <td>{{getFilial(RTE.id_filial_realizo_transaccion)}}</td>
-            <td>{{getCajero(RTE.id_colaborador)}}</td>
+            <td>{{RTE.filial}}</td>
+            <td>{{RTE.colaborador_usuario}}</td>
             <td>{{RTE.observaciones}}</td>
-            <th>{{numentradas()}}</th>
-            
         </tr>
     </ng-template>
-</p-table> -->
+</p-table>
 
-<table class="table">
+<!-- <table class="table">
     <thead>
       <tr>
         <th scope="col">Codigo del afiliado</th>
@@ -58,17 +55,17 @@
       <tr *ngFor="let RTE of RTEsinComprobate">
         <td>{{RTE.codigo_afiliado}}</td>
         <td>{{RTE.cuenta_afectada}}</td>
-        <!-- <td>{{getFilial(RTE.id_filial_ac)}}</td> -->
-        <!-- <td>{{getNombre(RTE.id_cliente)}}</td> -->
+        <td>{{getFilial(RTE.id_filial_ac)}}</td>
+        <td>{{getNombre(RTE.id_cliente)}}</td>
         <td>{{RTE.id_cliente}}</td>
-        <!-- <td>{{getOrigenFondos(RTE.id_origen_fondos)}}</td>
-        <td>{{getTransaccion(RTE.id_transaccion)}}</td> -->
+        <td>{{getOrigenFondos(RTE.id_origen_fondos)}}</td>
+        <td>{{getTransaccion(RTE.id_transaccion)}}</td>
         <td>{{RTE.fecha_operacion | date:'M/d/yyyy, h:mm a'}}</td>
         <td>{{RTE.monto_transaccion | currency:'Lps. '}}</td>
-        <!-- <td>{{getFilial(RTE.id_filial_realizo_transaccion)}}</td> -->
-        <!-- <td>{{getCajero(RTE.id_colaborador)}}</td> -->
+        <td>{{getFilial(RTE.id_filial_realizo_transaccion)}}</td>
+        <td>{{getCajero(RTE.id_colaborador)}}</td>
         <td>{{RTE.observaciones}}</td>
         <th>{{numentradas()}}</th>
       </tr>
     </tbody>
-  </table>
+  </table> -->
