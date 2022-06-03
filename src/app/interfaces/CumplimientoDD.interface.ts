@@ -1,5 +1,6 @@
 export interface ddCumplimiento {
     id_diligencia:       number;
+    name:                string;
     id_no_afiliado:      string;
     parentesco:          string;
     filial:              string;

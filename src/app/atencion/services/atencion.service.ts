@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Firma } from '../../interfaces/firmas.interface';
 import { firmaTercero } from '../../interfaces/Firmas_Terceros.interface';
 import { message } from '../../interfaces/AlertMessage.interface';
+import { Afiliado } from 'src/app/interfaces/Afiliado.interface';
+import { cuentasAfiliado } from 'src/app/interfaces/AfiliadoCuentas.interface';
 
 
 @Injectable({
@@ -27,5 +29,25 @@ export class AtencionService {
 
   postFirmaAutorizada(firmaAutorizada : firmaTercero):Observable<message>{
     return this.http.post<message>(`${this.urlPeticion}/firmas_autorizadas_terceros`, firmaAutorizada)
+  }
+
+  getAfiliadoID(id: string):Observable<Afiliado[]>{
+    return this.http.get<Afiliado[]>(`${this.urlPeticion}/Afiliado/${id}`)
+  }
+
+  getAfiliadoCli(idSuc: string, idCli: string):Observable<Afiliado[]>{
+    return this.http.get<Afiliado[]>(`${this.urlPeticion}/Afiliado/Cli/${idSuc}/${idCli}`)
+  }
+
+  getCuentasAfiliado(idSuc: string, idCli: string):Observable<cuentasAfiliado[]>{
+    return this.http.get<cuentasAfiliado[]>(`${this.urlPeticion}/Afiliado/cuenta/${idSuc}/${idCli}`)
+  }
+
+  getAfiliadoPSQL(id: string):Observable<Afiliado[]>{
+    return this.http.get<Afiliado[]>(`${this.urlPeticion}/Afiliado/PSQL/${id}`)
+  }
+
+  postAfiliadoPSQL(afiliado: Afiliado):Observable<message>{
+    return this.http.post<message>(`${this.urlPeticion}/Afiliado`, afiliado)
   }
 }

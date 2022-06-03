@@ -1,4 +1,4 @@
-<!-- <p-table [value]="dd_noAfiliado" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+<p-table [value]="dd_noAfiliado" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
             <th>Nombre no afiliado</th>
@@ -18,20 +18,20 @@
     </ng-template>
     <ng-template pTemplate="body"  let-DNA>
         <tr>
-            <td>{{getNombre(DNA.id_no_afiliado)}}</td>
+            <td>{{DNA.name}}</td>
             <td>{{DNA.id_no_afiliado}}</td>
-            <td>{{getParentesco(DNA.id_parentesco)}}</td>
-            <td>{{getFilial(DNA.id_filial)}}</td>
+            <td>{{DNA.parentesco}}</td>
+            <td>{{DNA.filial}}</td>
             <td>{{DNA.codigo_afiliado}}</td>
             <td>{{DNA.cuenta_afectada}}</td>
-            <td>{{getOrigenFondos(DNA.id_origen_fondos)}}</td>
-            <td>{{getRazonOperacion(DNA.id_razon_operacion)}}</td>
-            <td>{{getTransaccion(DNA.id_transaccion)}}</td>
+            <td>{{DNA.origen_fondos}}</td>
+            <td>{{DNA.razon_operacion}}</td>
+            <td>{{DNA.transaccion}}</td>
             <td>{{DNA.monto_transaccion | currency:'Lps. '}}</td>
             <td>{{DNA.fecha_operacion | date:'M/d/yyyy, h:mm a'}}</td>
-            <td>{{getCajero(DNA.id_cajero_operacion)}}</td>
+            <td>{{DNA.colaborador_usuario}}</td>
             <td>{{DNA.observaciones}}</td>
             
         </tr>
     </ng-template>
-</p-table> -->
+</p-table>

@@ -4,6 +4,7 @@ import { AtencionService } from '../../services/atencion.service';
 import {MessageService} from 'primeng/api';
 import { CajaService } from '../../../caja/services/caja.service';
 import { firmaTercero } from 'src/app/interfaces/Firmas_Terceros.interface';
+import { Afiliado } from '../../../interfaces/Afiliado.interface';
 
 
 @Component({
@@ -43,6 +44,8 @@ export class FirmasAutorizadasComponent implements OnInit {
   estadoAfiliado: number = 2
   filialcolabo!: number
 
+  nuevoAfiliado!: Afiliado
+
   constructor(private atencionService : AtencionService,
               private messageService: MessageService,
               private cajaService : CajaService) { 
@@ -62,27 +65,89 @@ export class FirmasAutorizadasComponent implements OnInit {
       this.filialcolabo = resp[0].id_oficiona
     })
 
-    this.cuentasAfiliado= [
-      {name: '1414147', code: '15'},
-      {name: 'Rome', code: 'RM'},]
   }
 
   ngOnInit(): void {
   }
 
+  // buscarAfiliado(){
+  //   if(this.idAutorizado.length != 15){
+  //     this.messageService.add({severity:'error', summary: 'Error', detail: 'Ingrese una identidad valida'});
+  //   }else{
+  //     this.cajaService.getNoAfiliado(this.idAutorizado).subscribe(respNoAfiliado => {
+  //       if(respNoAfiliado.length == 0){
+  //         this.editarNombreA = false;
+  //       }else{
+  //         this.nombreAutorizado = respNoAfiliado[0].nombre
+  //       }
+  //     })
+  //   }
+  // }
+
   buscarAfiliado(){
+    this.nombreAutorizado = ""
+
+    let NuevaIdentidad = this.idAutorizado.replace(/-/g,"");
+
     if(this.idAutorizado.length != 15){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Ingrese una identidad valida'});
     }else{
-      this.cajaService.getNoAfiliado(this.idAutorizado).subscribe(respNoAfiliado => {
-        if(respNoAfiliado.length == 0){
-          this.editarNombreA = false;
+      this.atencionService.getAfiliadoID(NuevaIdentidad).subscribe( resp => {
+        if(resp.length == 0){
+          this.cajaService.getNoAfiliado(NuevaIdentidad).subscribe(respNoAfiliado => {
+              if(respNoAfiliado.length == 0){
+                this.editarNombreA = false;
+              }else{
+                this.nombreAfiliadoC = respNoAfiliado[0].nombre + ' ' + respNoAfiliado[0].apellido
+                this.editarNombreA= true;
+              }
+            })
         }else{
-          this.nombreAutorizado = respNoAfiliado[0].nombre
+          this.nuevoAfiliado = resp[0]
+          this.nombreAutorizado = resp[0].OUTAFF_NAME
         }
       })
     }
   }
+
+
+  buscarCuentas(){
+    this.cuentasAfiliado = []
+    this.cuentaAfectada = this.borrarcbx
+    this.nombreAfiliadoC = ""
+    let idSuc  = 3
+    let idCli = 9
+    let concatSuc : string = "000"
+    let concatCli : string = "000000000"
+
+    idSuc = idSuc - this.caf2.length
+    idCli = idCli - this.caf3.length
+
+    concatSuc=concatSuc.substring(0, idSuc).concat(this.caf2)
+    concatCli=concatCli.substring(0, idCli).concat(this.caf3)
+
+    this.cajaService.getCuentasAfiliado(concatSuc,concatCli).subscribe( resp => {
+      if(resp.length > 0){
+        this.caf2 = concatSuc
+        this.caf3 = concatCli
+        resp.forEach(element => {
+          this.cuentasAfiliado.push({code: element.OUTSAV_CLI_NOSEC.toString(), name: element.OUTSAV_CLI_NOSEC.toString()})
+        });
+        this.cajaService.getAfiliadoCli(concatSuc,concatCli).subscribe( resp => {
+          if(resp.length > 0){
+            this.nombreAfiliadoC = resp[0].OUTAFF_NAME
+          }
+        });
+      }else{
+        this.messageService.add({severity:'error', summary: 'Cuenta inexistente', detail : 'Asegurese que el numero sea correcto'});
+      }
+    })
+
+
+  }
+
+
+
 
   guardar(){
     if(this.caf2.trim() == ""){

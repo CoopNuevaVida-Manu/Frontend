@@ -4,6 +4,8 @@ import { combobox } from 'src/app/interfaces/combobox.interface';
 import { ContabilidadService } from '../../services/contabilidad.service';
 import {MessageService} from 'primeng/api';
 import { CajaService } from '../../../caja/services/caja.service';
+import { Afiliado } from '../../../interfaces/Afiliado.interface';
+import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
 @Component({
   selector: 'app-cheques-terceros',
   templateUrl: './cheques-terceros.component.html',
@@ -46,6 +48,10 @@ export class ChequesTercerosComponent implements OnInit {
 
   controlCheque!: chequesTerceros
 
+  nuevoAfiliado!: Afiliado
+
+  nuevoNoAfiliado!: NoAfiliado
+
   constructor(private contabilidadService : ContabilidadService,
               private messageService: MessageService,
               private cajaService: CajaService) { 
@@ -74,16 +80,58 @@ export class ChequesTercerosComponent implements OnInit {
 
   }
 
+  buscarColaborador(){
+    this.nombreAfiliadoC = ""
+    let idSuc  = 3
+    let idCli = 9
+    let concatSuc : string = "000"
+    let concatCli : string = "000000000"
+
+    idSuc = idSuc - this.caf2.length
+    idCli = idCli - this.caf3.length
+
+    concatSuc=concatSuc.substring(0, idSuc).concat(this.caf2)
+    concatCli=concatCli.substring(0, idCli).concat(this.caf3)
+
+    this.contabilidadService.getColaboradorCli(concatSuc, concatCli).subscribe( resp => {
+      if(resp.length == 0){
+        this.messageService.add({severity:'error', summary: 'Error en la cuenta', detail: 'Verifique que el codigo del colaborador sea correcto'});
+      }else{
+        console.log(resp)
+        if(resp[0].OUTAFF_EMPLOYEE.trim() != "E"){
+          this.messageService.add({severity:'error', summary: 'El afiliado no es un empleado'});
+        }else{
+          this.caf2 = concatSuc
+          this.caf3 = concatCli
+          this.nombreAfiliadoC = resp[0].OUTAFF_NAME
+        }
+      }
+    })
+  }
+
   buscarAfiliado(){
+    this.nombreBeneficiario = ""
+    this.afiliado = 2
+
+    let NuevaIdentidad = this.idbeneficiario.replace(/-/g,"");
+
     if(this.idbeneficiario.length != 15){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Ingrese una identidad valida'});
     }else{
-      this.cajaService.getNoAfiliado(this.idbeneficiario).subscribe(respNoAfiliado => {
-        if(respNoAfiliado.length == 0){
-          this.editnombre = false;
+      this.contabilidadService.getAfiliadoID(NuevaIdentidad).subscribe( resp => {
+        if(resp.length == 0){
+          this.cajaService.getNoAfiliado(NuevaIdentidad).subscribe(respNoAfiliado => {
+              if(respNoAfiliado.length == 0){
+                this.editnombre = false;
+              }else{
+                this.nombreBeneficiario = respNoAfiliado[0].nombre + ' ' + respNoAfiliado[0].apellido
+                this.editnombre= true;
+              }
+            })
         }else{
-          this.nombreBeneficiario = respNoAfiliado[0].nombre
-          this.editnombre= true;
+          this.nuevoAfiliado = resp[0]
+          this.afiliado = 1
+          this.nombreBeneficiario = resp[0].OUTAFF_NAME
         }
       })
     }
@@ -91,11 +139,15 @@ export class ChequesTercerosComponent implements OnInit {
   
 
   guardar(){
+
+    let NuevaIdentidad = this.idbeneficiario.replace(/-/g,"");
     
     if(this.caf2.trim() == ""){
       this.messageService.add({severity:'error', summary: 'Complete el codigo de afiliado'});
     }else if(this.caf3.trim() == ""){
       this.messageService.add({severity:'error', summary: 'Complete el codigo de afiliado'});
+    }else if(this.nombreAfiliadoC.trim() == ""){
+      this.messageService.add({severity:'error', summary: 'Falta nombre del colaborador', detail:'No se a realizado la busqueda correcta del colaborador'});
     }else if(this.numCheque == 0 || this.numCheque == undefined){
       this.messageService.add({severity:'error', summary: 'Agregue un numero de cheque'});
     }else if(this.monto == 0 || this.monto == undefined){
@@ -125,6 +177,26 @@ export class ChequesTercerosComponent implements OnInit {
                             n_cheque: this.numCheque, observaciones: this.observacion }
       this.contabilidadService.postChequesTerceros(this.controlCheque).subscribe( resp => {
         if(resp.insert){
+          if(this.afiliado == 1){
+            this.contabilidadService.getAfiliadoPSQL(NuevaIdentidad).subscribe( resp => {
+              if(resp.length == 0){
+                this.contabilidadService.postAfiliadoPSQL(this.nuevoAfiliado).subscribe( resp => {
+
+                })
+              }
+            })
+          }
+
+          if(this.editnombre == false){
+            let nombrecompleto = this.nombreBeneficiario.split(" ")
+            let nombre = nombrecompleto[0] + ' ' + nombrecompleto[1]
+            let apellido = (nombrecompleto[2] || "") + ' ' + (nombrecompleto[3] || "")
+            this.nuevoNoAfiliado = { identidad: NuevaIdentidad, nombre: nombre, apellido: apellido}
+
+            this.contabilidadService.postNoAfiliado(this.nuevoNoAfiliado).subscribe( resp => {
+              console.log(resp)
+            })
+          }
           this.messageService.add({severity:'success', summary: 'Guardado exitosamente'}); 
           this.clear();
         }

@@ -35,6 +35,7 @@
                     name="caf3"
                     autocomplete="off"
                     maxlength="9"
+                    (keyup.enter)="buscarColaborador()"
                     pInputText />
                 </div>
                 
@@ -48,6 +49,7 @@
                         name="nombreAfiliadoC"
                         id="nombreAfiliadoC"
                         autocomplete="off"
+                        disabled="true"
                         pInputText />
             </div>
             <div class="form-group col-6 mt-3">

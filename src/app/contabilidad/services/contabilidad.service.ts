@@ -8,6 +8,8 @@ import { Destino } from '../../interfaces/destino.interface';
 import { chequesTerceros } from '../../interfaces/Cheques_terceros.interface';
 import { message } from '../../interfaces/AlertMessage.interface';
 import { Firma } from 'src/app/interfaces/firmas.interface';
+import { Afiliado } from 'src/app/interfaces/Afiliado.interface';
+import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +38,26 @@ export class ContabilidadService {
 
   postChequesTerceros(chequeTerceros : chequesTerceros): Observable<message>{
     return this.http.post<message>(`${this.urlPeticion}/cheques_terceros`, chequeTerceros)
+  }
+
+  getColaboradorCli(idSuc: string, idCli: string):Observable<Afiliado[]>{
+    return this.http.get<Afiliado[]>(`${this.urlPeticion}/Afiliado/Cli/${idSuc}/${idCli}`)
+  }
+
+  getAfiliadoID(id: string):Observable<Afiliado[]>{
+    return this.http.get<Afiliado[]>(`${this.urlPeticion}/Afiliado/${id}`)
+  }
+
+  postAfiliadoPSQL(afiliado: Afiliado):Observable<message>{
+    return this.http.post<message>(`${this.urlPeticion}/Afiliado`, afiliado)
+  }
+
+  getAfiliadoPSQL(id: string):Observable<Afiliado[]>{
+    return this.http.get<Afiliado[]>(`${this.urlPeticion}/Afiliado/PSQL/${id}`)
+  }
+
+  postNoAfiliado(noAfiliado : NoAfiliado):Observable<message>{
+    return this.http.post<message>(`${this.urlPeticion}/no_afiliado`, noAfiliado)
   }
   
 }
