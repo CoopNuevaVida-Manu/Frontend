@@ -8,6 +8,7 @@ import { firmaTercero } from '../../interfaces/Firmas_Terceros.interface';
 import { message } from '../../interfaces/AlertMessage.interface';
 import { Afiliado } from 'src/app/interfaces/Afiliado.interface';
 import { cuentasAfiliado } from 'src/app/interfaces/AfiliadoCuentas.interface';
+import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
 
 
 @Injectable({
@@ -49,5 +50,9 @@ export class AtencionService {
 
   postAfiliadoPSQL(afiliado: Afiliado):Observable<message>{
     return this.http.post<message>(`${this.urlPeticion}/Afiliado`, afiliado)
+  }
+
+  postNoAfiliado(noAfiliado : NoAfiliado):Observable<message>{
+    return this.http.post<message>(`${this.urlPeticion}/no_afiliado`, noAfiliado)
   }
 }

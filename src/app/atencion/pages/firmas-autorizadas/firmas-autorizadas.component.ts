@@ -5,6 +5,7 @@ import {MessageService} from 'primeng/api';
 import { CajaService } from '../../../caja/services/caja.service';
 import { firmaTercero } from 'src/app/interfaces/Firmas_Terceros.interface';
 import { Afiliado } from '../../../interfaces/Afiliado.interface';
+import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
 
 
 @Component({
@@ -45,6 +46,7 @@ export class FirmasAutorizadasComponent implements OnInit {
   filialcolabo!: number
 
   nuevoAfiliado!: Afiliado
+  nuevoNoAfiliado !: NoAfiliado
 
   constructor(private atencionService : AtencionService,
               private messageService: MessageService,
@@ -85,6 +87,7 @@ export class FirmasAutorizadasComponent implements OnInit {
   // }
 
   buscarAfiliado(){
+    this.estadoAfiliado = 2
     this.nombreAutorizado = ""
 
     let NuevaIdentidad = this.idAutorizado.replace(/-/g,"");
@@ -98,11 +101,12 @@ export class FirmasAutorizadasComponent implements OnInit {
               if(respNoAfiliado.length == 0){
                 this.editarNombreA = false;
               }else{
-                this.nombreAfiliadoC = respNoAfiliado[0].nombre + ' ' + respNoAfiliado[0].apellido
+                this.nombreAutorizado = respNoAfiliado[0].nombre + ' ' + respNoAfiliado[0].apellido
                 this.editarNombreA= true;
               }
             })
         }else{
+          this.estadoAfiliado = 1
           this.nuevoAfiliado = resp[0]
           this.nombreAutorizado = resp[0].OUTAFF_NAME
         }
@@ -166,6 +170,8 @@ export class FirmasAutorizadasComponent implements OnInit {
       this.messageService.add({severity:'error', summary: 'Seleccione un tippo de firma'});
     }else{
 
+      let NuevaIdentidad = this.idAutorizado.replace(/-/g,"");
+
       this.codigoAfiliado = `${this.caf1}-${this.caf2}-${this.caf3}`
 
       var date: Date = new Date();
@@ -173,20 +179,42 @@ export class FirmasAutorizadasComponent implements OnInit {
                             date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
       this.firmaAutorizada = {apertura_actualizacion: formatted_date, codigo_afiliado: this.codigoAfiliado,
                               cuenta_afiliado: Number(this.cuentaAfectada.code), id_afiliado_estado: this.estadoAfiliado,
-                              id_cliente: this.idAutorizado, id_colaborador: Number(localStorage.getItem('token')),
+                              id_cliente: NuevaIdentidad, id_colaborador: Number(localStorage.getItem('token')),
                               id_filial_pertenece:  this.filialcolabo, id_firma: Number(this.selectFirma.code),
                               id_parentesco: Number(this.selectParentesco.code) , observaciones: this.observaciones.trim()}
-    }
-    console.log(this.firmaAutorizada)
-    this.atencionService.postFirmaAutorizada(this.firmaAutorizada).subscribe(resp =>{
-      console.log(resp)
-      if(resp.insert){
-        this.messageService.add({severity:'success', summary: 'Guardado exitosamente'});
-        this.clear()
-      }else{
-        this.messageService.add({severity:'error', summary: 'Error al guardar'});
+                              console.log(this.firmaAutorizada)
+
+      this.atencionService.postFirmaAutorizada(this.firmaAutorizada).subscribe(resp =>{
+        console.log(resp)
+        if(resp.insert){
+          if(this.estadoAfiliado == 1){
+            this.atencionService.getAfiliadoPSQL(NuevaIdentidad).subscribe( resp => {
+              if(resp.length == 0){
+                this.atencionService.postAfiliadoPSQL(this.nuevoAfiliado).subscribe( resp => {
+
+                })
+              }
+            })
+          }
+          this.messageService.add({severity:'success', summary: 'Guardado exitosamente'});
+          this.clear()
+        }else{
+          this.messageService.add({severity:'error', summary: 'Error al guardar'});
+        }
+      });
+
+      if(this.editarNombreA == false){
+        let nombrecompleto = this.nombreAutorizado.split(" ")
+        let nombre = nombrecompleto[0] + ' ' + nombrecompleto[1]
+        let apellido = (nombrecompleto[2] || "") + ' ' + (nombrecompleto[3] || "")
+        this.nuevoNoAfiliado = { identidad: NuevaIdentidad, nombre: nombre, apellido: apellido}
+        this.atencionService.postNoAfiliado(this.nuevoNoAfiliado).subscribe( resp => {
+          console.log( resp )
+        })
       }
-    })
+
+
+    }
   }
 
   clear(){
