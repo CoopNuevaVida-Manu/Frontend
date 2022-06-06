@@ -83,9 +83,12 @@ export class EditUserComponent implements OnInit {
         colaborador_password: this.editPassword}
     }
 
-    this.flag.forEach(element => {
-      this.rolescolab.push({id_colaborador: this.colabId, id_departamento: element})
-    });
+    if(this.flag != undefined){
+      this.flag.forEach(element => {
+        this.rolescolab.push({id_colaborador: this.colabId, id_departamento: element})
+      });
+    }
+    
 
     //editar usuario
     this.tecnologiaService.editColab(this.editcolab).subscribe(respEdit => {
@@ -94,17 +97,21 @@ export class EditUserComponent implements OnInit {
         this.tecnologiaService.eliminarRol(this.colabId).subscribe(respDelete => {
           if(respDelete.delete){
             //crear nuevos usuarios 
-            this.rolescolab.forEach(element => {
-              this.tecnologiaService.rolColab(element).subscribe(respCreate => {
-                if(respCreate.insert){
-                  this.estadoEdit = true
-                }else{
-                  this.estadoEdit = false
-                }
-              })
-            });
-
+            if(this.rolescolab.length != 0){
+              this.rolescolab.forEach(element => {
+                this.tecnologiaService.rolColab(element).subscribe(respCreate => {
+                  if(respCreate.insert){
+                    this.estadoEdit = true
+                  }else{
+                    this.estadoEdit = false
+                  }
+                })
+              });
+            }else{
+              this.estadoEdit = true
+            }
             if(this.estadoEdit){
+              this.cancel()
               this.messageService.add({severity:'success', summary: 'Completado', detail: 'Se ha editado el colaborador conexito'});
             }else{
               this.messageService.add({severity:'error', summary: 'Error', detail: 'No se pudo editar el colobarador de forma correcta'});
@@ -115,12 +122,10 @@ export class EditUserComponent implements OnInit {
           }
         })
       }else{
-        this.messageService.add({severity:'error', summary: 'Error', detail: respEdit.msg});
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Existe un colaborador con ese nombre de usuario'});
       }
     })
 
-    
-    console.log(this.flag)
   }
 
   roledit(){

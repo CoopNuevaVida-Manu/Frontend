@@ -1,1 +1,39 @@
-<p>cheques-emitidos-terceros works!</p>
+<p-table [value]="cheques_terceros" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Codigo de Afiliado</th>
+            <th>Filial</th>
+            <th>N° Cheque</th>
+            <th>Fecha de emision</th>
+            <th>Nombre del beneficiario</th>
+            <th>Identidad del beneficiario</th>
+            <th>Estado beneficiario</th>
+            <th>Parentesco</th>
+            <th>Monto</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Colaborador</th>
+            <th>Observacion</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body"  let-CT>
+        <tr>
+            <td>{{CT.codigo_de_afiliado}}</td> 
+            <td>{{CT.filial}}</td>             
+            <td>{{CT.n_cheque}}</td>           
+            <td>{{CT.fecha_emision | date:'M/d/yyyy, h:mm a'}}</td>      
+            <td>{{CT.id_persona}}</td>         
+            <td>{{CT.afiliado_estado}}</td>
+            <td>{{CT.name}}</td>               
+            <td>{{CT.parentesco}}</td>         
+            <td>{{CT.monto | currency:'Lps. '}}</td>              
+            <td>{{CT.origen_fondos}}</td>      
+            <td>{{CT.destino}}</td>            
+            <td>{{CT.colaborador_nombre}}</td> 
+            <td>{{CT.observaciones}}</td>      
+        </tr>
+    </ng-template>
+</p-table>
+
+
+        

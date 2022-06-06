@@ -16,6 +16,8 @@ import { chequesTerceros } from '../../interfaces/Cheques_terceros.interface';
 import { EstadoAfiliado } from 'src/app/interfaces/EstadoAfiliado.interface';
 import { rteCumplimiento } from '../../interfaces/CumplimientoRTE.interface';
 import { ddCumplimiento } from '../../interfaces/CumplimientoDD.interface';
+import { cumplimientoCT } from '../../interfaces/CumplimientoCT.interface';
+import { cumplimientoFT } from 'src/app/interfaces/CumplimientoFT.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -80,6 +82,14 @@ export class CumplimientoService {
 
   getDD():Observable<ddCumplimiento[]>{
     return this.http.get<ddCumplimiento[]>(`${this.urlPeticion}/Cumplimiento/DD`)
+  }
+
+  getCT():Observable<cumplimientoCT[]>{
+    return this.http.get<cumplimientoCT[]>(`${this.urlPeticion}/Cumplimiento/CT`)
+  }
+
+  getFT():Observable<cumplimientoFT[]>{
+    return this.http.get<cumplimientoFT[]>(`${this.urlPeticion}/Cumplimiento/FT`)
   }
 
 }

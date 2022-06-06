@@ -25,7 +25,6 @@ export class NewPasswordComponent  {
                }
 
   nuevaPass(){
-    const dep = Number(localStorage.getItem('dep'));
     if(this.ConfPass === this.NewPass){
 
       this.authServices.actualizarPass(this.ConfPass).subscribe(resp => {
@@ -36,7 +35,9 @@ export class NewPasswordComponent  {
           this.messageService.add({severity:'error', summary: 'Error', detail : resp.msg});  
         }
       })
-      this.messageService.add({severity:'error', summary: 'Error', detail : 'Las contraseñas no son iguales, por favor intentelo de nuevo'});
+      
+    }else{
+      this.messageService.add({severity:'error', summary: 'Error', detail : 'Las contraseñas no son iguales, por favor intentelo de nuevo'})
     }
   }
 

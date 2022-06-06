@@ -1,0 +1,34 @@
+<p-table [value]="firmas_autorizadas_terceros" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nombre de la persona autorizada</th>
+            <th>Numero de identidad</th>
+            <th>Estado de la persona</th>
+            <th>Parentesco</th>
+            <th>Tipo de firma</th>
+            <th>Codigo del afiliado</th>
+            <th>Numero de cuenta afectada</th>
+            <th>Filial al que pertenece el afiliado</th>
+            <th>Fecha de actualización</th>
+            <th>Colaborador</th>
+            <th>Observacion</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body"  let-FT>
+        <tr>   
+            <td>{{FT.name}}</td>                   
+            <td>{{FT.id_cliente}}</td>             
+            <td>{{FT.afiliado_estado}}</td>        
+            <td>{{FT.parentesco}}</td>                
+            <td>{{FT.firma}}</td>                  
+            <td>{{FT.codigo_afiliado}}</td>        
+            <td>{{FT.cuenta_afiliado}}</td>        
+            <td>{{FT.filial}}</td>                 
+            <td>{{FT.apertura_actualizacion | date:'M/d/yyyy, h:mm a'}} </td> 
+            <td>{{FT.colaborador_nombre}}</td>     
+            <td>{{FT.observaciones}}</td>    
+        </tr>
+    </ng-template>
+</p-table>
+
+          

@@ -9,6 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { DDNoAfiliadosComponent } from './components/dd-no-afiliados/dd-no-afiliados.component';
 import { RTESinComprobanteComponent } from './components/rte-sin-comprobante/rte-sin-comprobante.component';
 import { ChequesEmitidosTercerosComponent } from './components/cheques-emitidos-terceros/cheques-emitidos-terceros.component';
+import { FirmasTercerosComponent } from './components/firmas-terceros/firmas-terceros.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ChequesEmitidosTercerosComponent } from './components/cheques-emitidos-
     HomeComponent,
     DDNoAfiliadosComponent,
     RTESinComprobanteComponent,
-    ChequesEmitidosTercerosComponent
+    ChequesEmitidosTercerosComponent,
+    FirmasTercerosComponent
   ],
   imports: [
     CommonModule,

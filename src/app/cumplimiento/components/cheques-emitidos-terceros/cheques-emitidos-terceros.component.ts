@@ -6,6 +6,8 @@ import { origenFondos } from 'src/app/interfaces/origenFondos.interface';
 import { Parentesco } from 'src/app/interfaces/parentesco.interface';
 import { razonOperacion } from 'src/app/interfaces/razonOperacion.interface';
 import { transaccion } from 'src/app/interfaces/transaccion.interface';
+import { CumplimientoService } from '../../services/cumplimiento.service';
+import { cumplimientoCT } from '../../../interfaces/CumplimientoCT.interface';
 
 @Component({
   selector: 'app-cheques-emitidos-terceros',
@@ -14,25 +16,15 @@ import { transaccion } from 'src/app/interfaces/transaccion.interface';
 })
 export class ChequesEmitidosTercerosComponent implements OnInit {
 
-  @Input()
-  noAfiliados : NoAfiliado[] = []
 
-  @Input()
-  parentesco : Parentesco[] = []
+  cheques_terceros!: cumplimientoCT[] 
 
-  @Input()
-  filial : Filial[] = []
+  constructor( private cumplimientoService : CumplimientoService) { 
 
-  @Input()
-  origen_fondos : origenFondos[] = []
-
-  @Input()
-  razon_operacion : razonOperacion[] = []
-
-  @Input()
-  colaborador : Colaborador[] = []
-
-  constructor() { }
+    cumplimientoService.getCT().subscribe( resp => {
+      this.cheques_terceros = resp
+    })
+  }
 
   ngOnInit(): void {
   }

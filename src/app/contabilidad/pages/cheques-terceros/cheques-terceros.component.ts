@@ -173,7 +173,7 @@ export class ChequesTercerosComponent implements OnInit {
                             id_afililiado_estado : this.afiliado, id_colaborador : Number(localStorage.getItem('token')),
                             id_destino: Number(this.selectDestino.code), id_filial: this.filialcolabo,
                             id_origen_fondos: Number(this.selectOrigenFondo.code), id_parentesco: Number(this.selectParentesco.code),
-                            id_persona: this.idbeneficiario, monto : this.monto,
+                            id_persona: NuevaIdentidad, monto : this.monto,
                             n_cheque: this.numCheque, observaciones: this.observacion }
       this.contabilidadService.postChequesTerceros(this.controlCheque).subscribe( resp => {
         if(resp.insert){

@@ -19,76 +19,8 @@ import { EstadoAfiliado } from '../../../interfaces/EstadoAfiliado.interface';
 })
 export class HomeComponent implements OnInit {
 
-  
+  constructor() { 
 
-  noAfiliados : NoAfiliado[] = []
-
-  estadoAfiliado !: EstadoAfiliado[]
-
-  parentesco : Parentesco[] = []
-
-  filial : Filial[] = []
-
-  origen_fondos : origenFondos[] = []
-
-  razon_operacion : razonOperacion[] = []
-
-  transaccion : transaccion[] = []
-
-  colaborador : Colaborador[] = []
-
-  dd_noAfiliado : dd_no_afiliado[] = [] 
-
-  RTEsinComprobate !: sinComprobante[]
-
-  chequesTerceros !: chequesTerceros[]
-
-  constructor(private cumplimientoService: CumplimientoService) { 
-
-    cumplimientoService.getNoAfiliado().subscribe( resp => {
-      this.noAfiliados = resp
-    });
-
-    cumplimientoService.getEstadoAfiliado().subscribe( resp =>{
-      this.estadoAfiliado = resp
-    })
-
-    cumplimientoService.getParentesco().subscribe( resp => {
-      this.parentesco = resp 
-    });
-
-    cumplimientoService.getFilial().subscribe( resp =>{
-      this.filial = resp
-    });
-
-    cumplimientoService.getOrigenFondos().subscribe( resp =>{
-      this.origen_fondos = resp
-    });
-
-    cumplimientoService.getRazonOperacion().subscribe( resp => {
-      this.razon_operacion = resp
-    });
-
-    cumplimientoService.gettransacciones().subscribe( resp => {
-      this.transaccion = resp
-    });
-
-    cumplimientoService.getAllColab().subscribe( resp => {
-      this.colaborador = resp
-    });
-
-    cumplimientoService.getDDNoafiliados().subscribe(resp => {
-      this.dd_noAfiliado = resp
-    });
-
-    
-
-    cumplimientoService.getChequesTerceros().subscribe( resp => {
-      this.chequesTerceros = resp
-    })
-    
-
-    
   }
 
   ngOnInit(): void {

@@ -18,13 +18,10 @@ export class RTESinComprobanteComponent implements OnInit {
 
   RTEsinComprobate!: rteCumplimiento[]
 
-  entradas: number = 1;
-
 
   constructor(private cajaService :CajaService, private cumplimientoService: CumplimientoService) {
 
     cumplimientoService.getTSC().subscribe( resp =>{
-      console.log(resp)
       this.RTEsinComprobate = resp
     });
 
