@@ -1,19 +1,19 @@
-<p-table [value]="cheques_terceros" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+<p-table [value]="cheques_terceros" styleClass="p-datatable-gridlines" sortField="representative.name" sortMode="single" [scrollable]="true">
     <ng-template pTemplate="header">
         <tr>
-            <th>Codigo de Afiliado</th>
-            <th>Filial</th>
-            <th>N° Cheque</th>
-            <th>Fecha de emision</th>
-            <th>Nombre del beneficiario</th>
-            <th>Identidad del beneficiario</th>
-            <th>Estado beneficiario</th>
-            <th>Parentesco</th>
-            <th>Monto</th>
-            <th>Origen</th>
-            <th>Destino</th>
-            <th>Colaborador</th>
-            <th>Observacion</th>
+            <th style="min-width:200px">Codigo de Afiliado</th>
+            <th style="min-width:200px">Filial</th>
+            <th style="min-width:200px">N° Cheque</th>
+            <th style="min-width:200px">Fecha de emision</th>
+            <th style="min-width:200px">Nombre del beneficiario</th>
+            <th style="min-width:200px">Identidad del beneficiario</th>
+            <th style="min-width:200px">Estado beneficiario</th>
+            <th style="min-width:200px">Parentesco</th>
+            <th style="min-width:200px">Monto</th>
+            <th style="min-width:200px">Origen</th>
+            <th style="min-width:200px">Destino</th>
+            <th style="min-width:200px">Colaborador</th>
+            <th style="min-width:200px">Observacion</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body"  let-CT>

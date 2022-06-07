@@ -1,18 +1,18 @@
-<p-table [value]="RTEsinComprobate" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+<p-table [value]="RTEsinComprobate" styleClass="p-datatable-gridlines" sortField="representative.name" sortMode="single" [scrollable]="true">
     <ng-template pTemplate="header">
         <tr>
-            <th>Codigo del afiliado</th>
-            <th>Numero de cuenta afectada</th>
-            <th>Filial donde aperturo</th>
-            <th>Nombre cliente</th>
-            <th>Numero de identidad</th>
-            <th>Origen de fondos</th>
-            <th>Transaccion</th>
-            <th>Fecha de operacion</th>
-            <th>Monto</th>
-            <th>Filial realizo operacion</th>
-            <th>Cajero</th>
-            <th>Observacion</th>
+            <th style="min-width:200px">Codigo del afiliado</th>
+            <th style="min-width:200px">Numero de cuenta afectada</th>
+            <th style="min-width:200px">Filial donde aperturo</th>
+            <th style="min-width:200px">Nombre cliente</th>
+            <th style="min-width:200px">Numero de identidad</th>
+            <th style="min-width:200px">Origen de fondos</th>
+            <th style="min-width:200px">Transaccion</th>
+            <th style="min-width:200px">Fecha de operacion</th>
+            <th style="min-width:200px">Monto</th>
+            <th style="min-width:200px">Filial realizo operacion</th>
+            <th style="min-width:200px">Cajero</th>
+            <th style="min-width:200px">Observacion</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-RTE let-rowIndex="rowIndex">
@@ -36,36 +36,34 @@
 <!-- <table class="table">
     <thead>
       <tr>
-        <th scope="col">Codigo del afiliado</th>
-        <th scope="col">Numero de cuenta afectada</th>
-        <th scope="col">Filial donde aperturo</th>
-        <th scope="col">Nombre no afiliado</th>
-        <th scope="col">Numero de identidad</th>
-        <th scope="col">Origen de fondos</th>
-        <th scope="col">Transaccion</th>
-        <th scope="col">Fecha de operacion</th>
-        <th scope="col">Monto</th>
-        <th scope="col">Filial realizo operacion</th>
-        <th scope="col">Cajero</th>
-        <th scope="col">Observacion</th>
-        <th scope="col">Entradas</th>
+        <th class="ancho">Codigo del afiliado</th>
+        <th>Numero de cuenta afectada</th>
+        <th>Filial donde aperturo</th>
+        <th>Nombre cliente</th>
+        <th>Numero de identidad</th>
+        <th>Origen de fondos</th>
+        <th>Transaccion</th>
+        <th>Fecha de operacion</th>
+        <th>Monto</th>
+        <th>Filial realizo operacion</th>
+        <th>Cajero</th>
+        <th>Observacion</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let RTE of RTEsinComprobate">
         <td>{{RTE.codigo_afiliado}}</td>
         <td>{{RTE.cuenta_afectada}}</td>
-        <td>{{getFilial(RTE.id_filial_ac)}}</td>
-        <td>{{getNombre(RTE.id_cliente)}}</td>
+        <td>{{RTE.filialac}}</td>
+        <td>{{RTE.name}}</td>
         <td>{{RTE.id_cliente}}</td>
-        <td>{{getOrigenFondos(RTE.id_origen_fondos)}}</td>
-        <td>{{getTransaccion(RTE.id_transaccion)}}</td>
+        <td>{{RTE.origen_fondos}}</td>
+        <td>{{RTE.transaccion}}</td>
         <td>{{RTE.fecha_operacion | date:'M/d/yyyy, h:mm a'}}</td>
         <td>{{RTE.monto_transaccion | currency:'Lps. '}}</td>
-        <td>{{getFilial(RTE.id_filial_realizo_transaccion)}}</td>
-        <td>{{getCajero(RTE.id_colaborador)}}</td>
+        <td>{{RTE.filial}}</td>
+        <td>{{RTE.colaborador_usuario}}</td>
         <td>{{RTE.observaciones}}</td>
-        <th>{{numentradas()}}</th>
       </tr>
     </tbody>
   </table> -->

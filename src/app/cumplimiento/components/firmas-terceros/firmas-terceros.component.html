@@ -1,17 +1,17 @@
-<p-table [value]="firmas_autorizadas_terceros" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+<p-table [value]="firmas_autorizadas_terceros" styleClass="p-datatable-gridlines" sortField="representative.name" sortMode="single" [scrollable]="true">
     <ng-template pTemplate="header">
         <tr>
-            <th>Nombre de la persona autorizada</th>
-            <th>Numero de identidad</th>
-            <th>Estado de la persona</th>
-            <th>Parentesco</th>
-            <th>Tipo de firma</th>
-            <th>Codigo del afiliado</th>
-            <th>Numero de cuenta afectada</th>
-            <th>Filial al que pertenece el afiliado</th>
-            <th>Fecha de actualización</th>
-            <th>Colaborador</th>
-            <th>Observacion</th>
+            <th style="min-width:200px">Nombre de la persona autorizada</th>
+            <th style="min-width:200px">Numero de identidad</th>
+            <th style="min-width:200px">Estado de la persona</th>
+            <th style="min-width:200px">Parentesco</th>
+            <th style="min-width:200px">Tipo de firma</th>
+            <th style="min-width:200px">Codigo del afiliado</th>
+            <th style="min-width:200px">Numero de cuenta afectada</th>
+            <th style="min-width:200px">Filial al que pertenece el afiliado</th>
+            <th style="min-width:200px">Fecha de actualización</th>
+            <th style="min-width:200px">Colaborador</th>
+            <th style="min-width:200px">Observacion</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body"  let-FT>

@@ -1,19 +1,19 @@
-<p-table [value]="dd_noAfiliado" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+<p-table [value]="dd_noAfiliado" styleClass="p-datatable-gridlines" sortField="representative.name" sortMode="single" [scrollable]="true">
     <ng-template pTemplate="header">
         <tr>
-            <th>Nombre no afiliado</th>
-            <th>Numero de identidad</th>
-            <th>Parentesco</th>
-            <th>Filial</th>
-            <th>Codigo del afiliado</th>
-            <th>Numero de cuenta afectada</th>
-            <th>Origen de fondos</th>
-            <th>Razon de operacion</th>
-            <th>Transaccion</th>
-            <th>Monto</th>
-            <th>Fecha de operacion</th>
-            <th>Cajero</th>
-            <th>Observacion</th>
+            <th style="min-width:200px">Nombre no afiliado</th>
+            <th style="min-width:200px">Numero de identidad</th>
+            <th style="min-width:200px">Parentesco</th>
+            <th style="min-width:200px">Filial</th>
+            <th style="min-width:200px">Codigo del afiliado</th>
+            <th style="min-width:200px">Numero de cuenta afectada</th>
+            <th style="min-width:200px">Origen de fondos</th>
+            <th style="min-width:200px">Razon de operacion</th>
+            <th style="min-width:200px">Transaccion</th>
+            <th style="min-width:200px">Monto</th>
+            <th style="min-width:200px">Fecha de operacion</th>
+            <th style="min-width:200px">Cajero</th>
+            <th style="min-width:200px">Observacion</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body"  let-DNA>
