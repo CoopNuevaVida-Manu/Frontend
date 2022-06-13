@@ -97,14 +97,9 @@ export class ChequesTercerosComponent implements OnInit {
       if(resp.length == 0){
         this.messageService.add({severity:'error', summary: 'Error en la cuenta', detail: 'Verifique que el codigo del colaborador sea correcto'});
       }else{
-        console.log(resp)
-        if(resp[0].OUTAFF_EMPLOYEE.trim() != "E"){
-          this.messageService.add({severity:'error', summary: 'El afiliado no es un empleado'});
-        }else{
-          this.caf2 = concatSuc
-          this.caf3 = concatCli
-          this.nombreAfiliadoC = resp[0].OUTAFF_NAME
-        }
+        this.caf2 = concatSuc
+        this.caf3 = concatCli
+        this.nombreAfiliadoC = resp[0].OUTAFF_NAME
       }
     })
   }

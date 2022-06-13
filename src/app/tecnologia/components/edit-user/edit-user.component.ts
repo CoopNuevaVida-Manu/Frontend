@@ -88,6 +88,9 @@ export class EditUserComponent implements OnInit {
         this.rolescolab.push({id_colaborador: this.colabId, id_departamento: element})
       });
     }
+
+    console.log(this.editcolab)
+    console.log(this.rolescolab)
     
 
     //editar usuario
@@ -96,26 +99,15 @@ export class EditUserComponent implements OnInit {
         //Eliminar roles
         this.tecnologiaService.eliminarRol(this.colabId).subscribe(respDelete => {
           if(respDelete.delete){
-            //crear nuevos usuarios 
-            if(this.rolescolab.length != 0){
+            //crear nuevos roles de usuarios 
+            if(this.rolescolab.length != 0 || this.rolescolab == undefined){
               this.rolescolab.forEach(element => {
                 this.tecnologiaService.rolColab(element).subscribe(respCreate => {
-                  if(respCreate.insert){
-                    this.estadoEdit = true
-                  }else{
-                    this.estadoEdit = false
-                  }
                 })
               });
-            }else{
-              this.estadoEdit = true
             }
-            if(this.estadoEdit){
-              this.cancel()
+            this.cancel()
               this.messageService.add({severity:'success', summary: 'Completado', detail: 'Se ha editado el colaborador conexito'});
-            }else{
-              this.messageService.add({severity:'error', summary: 'Error', detail: 'No se pudo editar el colobarador de forma correcta'});
-            }
             
           }else{
             this.messageService.add({severity:'error', summary: 'Error', detail: respDelete.msg});

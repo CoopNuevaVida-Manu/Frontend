@@ -101,7 +101,7 @@ export class NewUserComponent implements OnInit {
           this.selectEstadoColab = {code: '', name: ''} 
           this.selectFilial = {code: '', name: ''}
         }else{
-          this.messageService.add({severity:'error', summary: 'Error', detail: resp.msg});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Existe un colaborador con ese nombre de usuario'});
         }
       })
     }
