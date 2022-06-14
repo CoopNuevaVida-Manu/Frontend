@@ -84,7 +84,7 @@ export class MenuComponent implements OnInit {
     }else if (this.router.url.includes('contabilidad')) {
       this.despartamento = 'Contabilidad'
     }else if (this.router.url.includes('atencion-cliente')) {
-      this.despartamento = 'atencion-cliente'
+      this.despartamento = 'Atencion al cliente'
     }else if (this.router.url.includes('TI')) {
       this.despartamento = 'TI'
     }else if (this.router.url.includes('cumplimiento')) {

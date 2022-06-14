@@ -8,6 +8,7 @@ import { sinComprobante } from 'src/app/interfaces/RTE_Sin_Comprobante.interface
 import { transaccion } from 'src/app/interfaces/transaccion.interface';
 import { CumplimientoService } from '../../services/cumplimiento.service';
 import { rteCumplimiento } from '../../../interfaces/CumplimientoRTE.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rte-sin-comprobante',
@@ -19,7 +20,7 @@ export class RTESinComprobanteComponent implements OnInit {
   RTEsinComprobate!: rteCumplimiento[]
 
 
-  constructor(private cajaService :CajaService, private cumplimientoService: CumplimientoService) {
+  constructor(private cajaService :CajaService, private cumplimientoService: CumplimientoService, private router: Router) {
 
     cumplimientoService.getTSC().subscribe( resp =>{
       this.RTEsinComprobate = resp
@@ -30,6 +31,9 @@ export class RTESinComprobanteComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  dowland(){
+    this.router.navigateByUrl('http://localhost:8080/Export/TSC')
+  }
   
 
 }

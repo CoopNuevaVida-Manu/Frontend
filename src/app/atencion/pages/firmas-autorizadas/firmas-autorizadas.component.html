@@ -72,15 +72,16 @@
                         id="nombreAutorizado"
                         autocomplete="off"
                         [disabled]="editarNombreA"
+                        onkeydown="return /[a-z, ]/i.test(event.key)"
                         pInputText />
             </div>
             <div class="col-6 mt-3">
                 <label for="">Parentesco con el afiliado</label>
-                <p-dropdown [options]="cbxParentesco" [(ngModel)]="selectParentesco" name="cmbParentesco" placeholder="Seleccione el parentesco" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                <p-dropdown [options]="cbxParentesco" [(ngModel)]="selectParentesco" name="cmbParentesco" placeholder="Seleccione el parentesco" optionLabel="name" [showClear]="true" ></p-dropdown>
             </div>
             <div class="col-6 mt-3">
                 <label for="">Firma</label>
-                <p-dropdown [options]="cbxFirma" [(ngModel)]="selectFirma" name="cmbFirma" placeholder="Seleccione el tipo de firma" optionLabel="name" [showClear]="true" [required]="true"></p-dropdown>
+                <p-dropdown [options]="cbxFirma" [(ngModel)]="selectFirma" name="cmbFirma" placeholder="Seleccione el tipo de firma" optionLabel="name" [showClear]="true"></p-dropdown>
             </div>
             <div class="form-group col-12 mt-3 ">
                 <label for="nameUsuario">Observaciones</label>
@@ -90,6 +91,7 @@
                         name="observaciones"
                         id="nameUsuario"
                         autocomplete="off"
+                        onkeydown="return /[a-z, ]/i.test(event.key)"
                         pInputText />
             </div>
             <p-toast></p-toast>
@@ -102,3 +104,4 @@
         </form>
     </div>
 </div>
+

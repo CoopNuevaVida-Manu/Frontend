@@ -180,7 +180,7 @@ export class FirmasAutorizadasComponent implements OnInit {
       this.firmaAutorizada = {apertura_actualizacion: formatted_date, codigo_afiliado: this.codigoAfiliado,
                               cuenta_afiliado: Number(this.cuentaAfectada.code), id_afiliado_estado: this.estadoAfiliado,
                               id_cliente: NuevaIdentidad, id_colaborador: Number(localStorage.getItem('token')),
-                              id_filial_pertenece:  this.filialcolabo, id_firma: Number(this.selectFirma.code),
+                              id_filial_pertenece:  Number(this.caf2), id_firma: Number(this.selectFirma.code),
                               id_parentesco: Number(this.selectParentesco.code) , observaciones: this.observaciones.trim()}
                               console.log(this.firmaAutorizada)
 
@@ -229,4 +229,28 @@ export class FirmasAutorizadasComponent implements OnInit {
     this.nombreAutorizado = ""
   }
 
+  soloLetras(e:KeyboardEvent){
+    var key = e.keyCode || e.which,
+      tecla = String.fromCharCode(key).toLowerCase(),
+      letras = " áéíóúabcdefghijklmnñopqrstuvwxyz",
+      especiales = [8, 37, 39, 46],
+      tecla_especial = false;
+  
+    for (var i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = true;
+        break;
+      }
+    }
+  
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+      return false;
+    }else{
+      return false
+    }
+  }
+
 }
+
+
+

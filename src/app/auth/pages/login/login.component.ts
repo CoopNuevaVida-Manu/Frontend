@@ -31,8 +31,8 @@ export class LoginComponent  {
               }
 
   login(){
-    this.user.usuario = this.usuario;
-    this.user.password = this.password;
+    this.user.usuario = this.usuario.trim();
+    this.user.password = this.password.trim();
     
     this.authService.login(this.user).subscribe(resp => {
       if(resp.login){

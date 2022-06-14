@@ -92,4 +92,9 @@ export class CumplimientoService {
     return this.http.get<cumplimientoFT[]>(`${this.urlPeticion}/Cumplimiento/FT`)
   }
 
+  //Dowland ecxel
+  getDowland(){
+    return this.http.get(`${this.urlPeticion}/Export/TSC`)
+  }
+
 }
