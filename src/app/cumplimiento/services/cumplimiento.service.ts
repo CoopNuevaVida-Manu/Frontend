@@ -93,8 +93,21 @@ export class CumplimientoService {
   }
 
   //Dowland ecxel
-  getDowland(){
-    return this.http.get(`${this.urlPeticion}/Export/TSC`)
+  getDowlandRTE(){
+    return this.http.get(`${this.urlPeticion}/Export/TSC`, { observe: 'response', responseType:'blob'})
   }
+
+  getDowlandDD(){
+    return this.http.get(`${this.urlPeticion}/Export/DD`, { observe: 'response', responseType:'blob'})
+  }
+
+  getDowlandFT(){
+    return this.http.get(`${this.urlPeticion}/Export/FT`, { observe: 'response', responseType:'blob'})
+  }
+
+  getDowlandCT(){
+    return this.http.get(`${this.urlPeticion}/Export/CT`, { observe: 'response', responseType:'blob'})
+  }
+
 
 }

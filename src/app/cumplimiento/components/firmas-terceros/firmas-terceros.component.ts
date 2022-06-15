@@ -21,4 +21,16 @@ export class FirmasTercerosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  dowland(){
+    this.cumplimientoService.getDowlandFT().subscribe( resp => {
+      let filename = "RTE.xlsx"
+      let blob:Blob = resp.body as Blob
+      let a = document.createElement('a');
+      a.download = filename
+      a.href = window.URL.createObjectURL(blob);
+      a.click();
+
+    })
+  }
+
 }

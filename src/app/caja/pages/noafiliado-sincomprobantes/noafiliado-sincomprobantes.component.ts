@@ -247,7 +247,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
 
       if(this.afiliadoMonto){
-        if(this.monto >= 100000){
+        if(this.monto >= 200000){
           this.cajaService.postRET(this.rte).subscribe( resp => {
             if(resp.insert){
               this.messageService.add({severity:'success', summary: 'Guardado exitosamente'});
@@ -277,11 +277,11 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
           
         })
 
-        if(this.monto >= 100000){
+        if(this.monto >= 200000){
           this.cajaService.postRET(this.rte).subscribe( resp => {
             if(resp.insert){
             }else{
-              this.messageService.add({severity:'error', summary: 'Error al guardar la transaccion mayor de 100,000'});
+              this.messageService.add({severity:'error', summary: 'Error al guardar la transaccion mayor de 200,000'});
             }
           })
         }

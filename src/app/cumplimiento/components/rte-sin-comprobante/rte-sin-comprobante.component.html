@@ -1,8 +1,7 @@
 <p-table [value]="RTEsinComprobate" styleClass="p-datatable-gridlines" sortField="representative.name" sortMode="single" [scrollable]="true">
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
-          <p-button class="btn w-auto" label="Iniciar Sección" icon="pi pi-refresh" (onClick)="dowland()"></p-button>
-          <a href="http://localhost:8080/Export/TSC">descargar</a>
+          <p-button class="btn w-auto" label="Descargar" icon="pi pi-download" (onClick)="dowland()"></p-button>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
