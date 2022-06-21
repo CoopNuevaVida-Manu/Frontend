@@ -92,7 +92,7 @@ export class CumplimientoService {
     return this.http.get<cumplimientoFT[]>(`${this.urlPeticion}/Cumplimiento/FT`)
   }
 
-  //Dowland ecxel
+  //Dowland excel
   getDowlandRTE(){
     return this.http.get(`${this.urlPeticion}/Export/TSC`, { observe: 'response', responseType:'blob'})
   }
@@ -109,5 +109,21 @@ export class CumplimientoService {
     return this.http.get(`${this.urlPeticion}/Export/CT`, { observe: 'response', responseType:'blob'})
   }
 
+  //Dowlan excel params
+  getDowlandRTEP(){
+    return this.http.get(`${this.urlPeticion}/Export/TSC`, { observe: 'response', responseType:'blob'})
+  }
+
+  getDowlandDDP(){
+    return this.http.get(`${this.urlPeticion}/Export/DD`, { observe: 'response', responseType:'blob'})
+  }
+
+  getDowlandFTP(){
+    return this.http.get(`${this.urlPeticion}/Export/FT`, { observe: 'response', responseType:'blob'})
+  }
+
+  getDowlandCTP(){
+    return this.http.get(`${this.urlPeticion}/Export/CT`, { observe: 'response', responseType:'blob'})
+  }
 
 }

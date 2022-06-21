@@ -1,25 +1,27 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Colaborador } from 'src/app/interfaces/colaboradores.interface';
-import { Filial } from 'src/app/interfaces/filial.interface';
-import { NoAfiliado } from 'src/app/interfaces/No_Afiliado.interface';
-import { origenFondos } from 'src/app/interfaces/origenFondos.interface';
-import { Parentesco } from 'src/app/interfaces/parentesco.interface';
-import { razonOperacion } from 'src/app/interfaces/razonOperacion.interface';
-import { transaccion } from 'src/app/interfaces/transaccion.interface';
 import { CumplimientoService } from '../../services/cumplimiento.service';
 import { cumplimientoCT } from '../../../interfaces/CumplimientoCT.interface';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-cheques-emitidos-terceros',
   templateUrl: './cheques-emitidos-terceros.component.html',
-  styleUrls: ['./cheques-emitidos-terceros.component.css']
+  styleUrls: ['./cheques-emitidos-terceros.component.css'],
+  providers: [MessageService]
 })
 export class ChequesEmitidosTercerosComponent implements OnInit {
 
 
   cheques_terceros!: cumplimientoCT[] 
 
-  constructor( private cumplimientoService : CumplimientoService) { 
+  extender: boolean = false
+  icon : string = "pi pi-angle-down"
+  fecha_inicio!: Date
+  fecha_final!: Date
+
+
+
+  constructor( private cumplimientoService : CumplimientoService, private messageService: MessageService) { 
 
     cumplimientoService.getCT().subscribe( resp => {
       this.cheques_terceros = resp
@@ -31,7 +33,7 @@ export class ChequesEmitidosTercerosComponent implements OnInit {
 
   dowland(){
     this.cumplimientoService.getDowlandCT().subscribe( resp => {
-      let filename = "RTE.xlsx"
+      let filename = "Cheques_Terceros.xlsx"
       let blob:Blob = resp.body as Blob
       let a = document.createElement('a');
       a.download = filename
@@ -39,6 +41,24 @@ export class ChequesEmitidosTercerosComponent implements OnInit {
       a.click();
 
     })
+  }
+
+  parametrizar(){
+    if(this.extender == false){
+      this.extender = true
+      this.icon = "pi pi-angle-up"
+    }else{
+      this.extender = false
+      this.icon = "pi pi-angle-down"
+    }
+  }
+
+  dowland_parameter(){
+    if(this.fecha_inicio > this.fecha_final){
+      this.messageService.add({severity:'error', summary: 'Error de fecha', detail: 'Verifique que la fecha de inicio sea menor que la fecha final'});
+    }else{
+
+    }
   }
 
 }

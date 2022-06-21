@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import {ButtonModule} from 'primeng/button';
+import {CalendarModule} from 'primeng/calendar';
 import {CheckboxModule} from 'primeng/checkbox';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
@@ -17,6 +18,7 @@ import {SplitButtonModule} from 'primeng/splitbutton';
 @NgModule({
   exports: [
     ButtonModule,
+    CalendarModule,
     CheckboxModule,
     DialogModule,
     DropdownModule,

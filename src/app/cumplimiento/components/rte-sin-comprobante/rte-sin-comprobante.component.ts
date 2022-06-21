@@ -2,19 +2,25 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CajaService } from 'src/app/caja/services/caja.service';
 import { CumplimientoService } from '../../services/cumplimiento.service';
 import { rteCumplimiento } from '../../../interfaces/CumplimientoRTE.interface';
-import { Router } from '@angular/router';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-rte-sin-comprobante',
   templateUrl: './rte-sin-comprobante.component.html',
-  styleUrls: ['./rte-sin-comprobante.component.css']
+  styleUrls: ['./rte-sin-comprobante.component.css'],
+  providers: [MessageService]
 })
 export class RTESinComprobanteComponent implements OnInit {
 
   RTEsinComprobate!: rteCumplimiento[]
 
+  extender: boolean = false
+  icon : string = "pi pi-angle-down"
+  fecha_inicio!: Date
+  fecha_final!: Date
 
-  constructor(private cajaService :CajaService, private cumplimientoService: CumplimientoService, private router: Router) {
+
+  constructor(private cajaService :CajaService, private cumplimientoService: CumplimientoService, private messageService: MessageService) {
 
     cumplimientoService.getTSC().subscribe( resp =>{
       this.RTEsinComprobate = resp
@@ -35,6 +41,24 @@ export class RTESinComprobanteComponent implements OnInit {
       a.click();
 
     })
+  }
+
+  parametrizar(){
+    if(this.extender == false){
+      this.extender = true
+      this.icon = "pi pi-angle-up"
+    }else{
+      this.extender = false
+      this.icon = "pi pi-angle-down"
+    }
+  }
+
+  dowland_parameter(){
+    if(this.fecha_inicio > this.fecha_final){
+      this.messageService.add({severity:'error', summary: 'Error de fecha', detail: 'Verifique que la fecha de inicio sea menor que la fecha final'});
+    }else{
+
+    }
   }
 
 }

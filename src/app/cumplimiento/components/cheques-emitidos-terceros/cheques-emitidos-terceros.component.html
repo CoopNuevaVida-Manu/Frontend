@@ -1,7 +1,26 @@
-<p-table [value]="cheques_terceros" styleClass="p-datatable-gridlines" sortField="representative.name" sortMode="single" [scrollable]="true">
+<p-table [value]="cheques_terceros" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10" sortField="representative.name" sortMode="single" [scrollable]="true">
     <ng-template pTemplate="caption">
-        <div class="flex align-items-center justify-content-between">
-            <p-button class="btn w-auto" label="Descargar" icon="pi pi-download" (onClick)="dowland()"></p-button>
+        <div class="row" >
+            <div class="col-2">
+                <p-button label="Descargar a Excel" icon="pi pi-download" (onClick)="dowland()"></p-button>
+            </div>
+            <div class="col-3">
+                <button pButton pRipple type="button" [icon]="icon" (click)="parametrizar()" class="p-button-rounded"></button>
+            </div>
+            <div class="col-12 row field p-fluid" *ngIf="extender">
+                <div class="form-group col-4 mt-4">
+                    <label for="nombreAfiliadoC">Fecha de inicio</label>
+                    <p-calendar [(ngModel)]="fecha_inicio" dateFormat="mm-dd-yy"  inputId="dateformat"></p-calendar>
+                </div>
+                <div class="form-group col-4 mt-4">
+                    <label for="nombreAfiliadoC">Fecha de final</label>
+                    <p-calendar [(ngModel)]="fecha_final" dateFormat="mm-dd-yy"  inputId="dateformat"></p-calendar>
+                </div>
+                <div class="form-group col-3 mt-5">
+                    <p-button label="Descargar segmento a Excel"  icon="pi pi-download" (onClick)="dowland_parameter()"></p-button>
+                    <p-toast></p-toast>
+                </div>
+            </div>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -26,15 +45,15 @@
             <td>{{CT.codigo_de_afiliado}}</td> 
             <td>{{CT.filial}}</td>             
             <td>{{CT.n_cheque}}</td>           
-            <td>{{CT.fecha_emision | date:'M/d/yyyy, h:mm a'}}</td>      
-            <td>{{CT.name}}</td>
+            <td>{{CT.fecha_emision | date:'dd/MM/yyyy, h:mm a'}}</td>      
+            <td>{{CT.name | uppercase}}</td>
             <td>{{CT.id_persona}}</td>         
             <td>{{CT.afiliado_estado}}</td>
             <td>{{CT.parentesco}}</td>         
             <td>{{CT.monto | currency:'Lps. '}}</td>              
             <td>{{CT.origen_fondos}}</td>      
             <td>{{CT.destino}}</td>            
-            <td>{{CT.colaborador_nombre}}</td> 
+            <td>{{CT.colaborador_nombre | uppercase}}</td> 
             <td>{{CT.observaciones}}</td>      
         </tr>
     </ng-template>
