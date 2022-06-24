@@ -110,20 +110,20 @@ export class CumplimientoService {
   }
 
   //Dowlan excel params
-  getDowlandRTEP(){
-    return this.http.get(`${this.urlPeticion}/Export/TSC`, { observe: 'response', responseType:'blob'})
+  getDowlandRTEP(fechai: string, fechaf:string){
+    return this.http.get(`${this.urlPeticion}/ExportParams/TSC/${fechai}/${fechaf}`, { observe: 'response', responseType:'blob'})
   }
 
-  getDowlandDDP(){
-    return this.http.get(`${this.urlPeticion}/Export/DD`, { observe: 'response', responseType:'blob'})
+  getDowlandDDP(fechai: string, fechaf:string){
+    return this.http.get(`${this.urlPeticion}/ExportParams/DD/${fechai}/${fechaf}`, { observe: 'response', responseType:'blob'})
   }
 
-  getDowlandFTP(){
-    return this.http.get(`${this.urlPeticion}/Export/FT`, { observe: 'response', responseType:'blob'})
+  getDowlandFTP(fechai: string, fechaf:string){
+    return this.http.get(`${this.urlPeticion}/ExportParams/FT/${fechai}/${fechaf}`, { observe: 'response', responseType:'blob'})
   }
 
-  getDowlandCTP(){
-    return this.http.get(`${this.urlPeticion}/Export/CT`, { observe: 'response', responseType:'blob'})
+  getDowlandCTP(fechai: string, fechaf:string){
+    return this.http.get(`${this.urlPeticion}/ExportParams/CT/${fechai}/${fechaf}`, { observe: 'response', responseType:'blob'})
   }
 
 }

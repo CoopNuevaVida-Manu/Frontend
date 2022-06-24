@@ -263,7 +263,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
             }
           });
         }else{
-          this.messageService.add({severity:'error', summary: 'El monto tiene que ser mayor o igual que Lps. 100,000.00'});
+          this.messageService.add({severity:'error', summary: 'El monto tiene que ser mayor o igual que Lps. 200,000.00'});
         }
         
       }else{

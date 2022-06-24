@@ -227,6 +227,7 @@ export class FirmasAutorizadasComponent implements OnInit {
     this.observaciones= ""
     this.nombreAutorizado = ""
     this.nombreAutorizado = ""
+    this.nombreAfiliadoC= ""
   }
 
   soloLetras(e:KeyboardEvent){

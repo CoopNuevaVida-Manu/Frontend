@@ -1,3 +1,4 @@
 export const environment = {
-  production: false
+  production: false,
+  urlPeticion: 'http://localhost:8080'
 };

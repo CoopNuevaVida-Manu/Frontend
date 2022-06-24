@@ -55,6 +55,19 @@ export class FirmasTercerosComponent implements OnInit {
     if(this.fecha_inicio > this.fecha_final){
       this.messageService.add({severity:'error', summary: 'Error de fecha', detail: 'Verifique que la fecha de inicio sea menor que la fecha final'});
     }else{
+      
+      let fechai = this.fecha_inicio.getFullYear() + "-" + (this.fecha_inicio.getMonth() + 1) + "-" + this.fecha_inicio.getDate()
+      let fechaf = this.fecha_final.getFullYear() + "-" + (this.fecha_final.getMonth() + 1) + "-" + this.fecha_final.getDate()
+
+      this.cumplimientoService.getDowlandFTP(fechai, fechaf).subscribe( resp => {
+        let filename = "Firmas_Terceros_P.xlsx"
+        let blob:Blob = resp.body as Blob
+        let a = document.createElement('a');
+        a.download = filename
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
+  
+      })
 
     }
   }
