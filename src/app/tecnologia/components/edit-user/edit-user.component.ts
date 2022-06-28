@@ -88,11 +88,7 @@ export class EditUserComponent implements OnInit {
         this.rolescolab.push({id_colaborador: this.colabId, id_departamento: element})
       });
     }
-
-    console.log(this.editcolab)
-    console.log(this.rolescolab)
-    
-
+  
     //editar usuario
     this.tecnologiaService.editColab(this.editcolab).subscribe(respEdit => {
       if(respEdit.put){

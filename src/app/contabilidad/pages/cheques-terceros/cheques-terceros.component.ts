@@ -189,7 +189,6 @@ export class ChequesTercerosComponent implements OnInit {
             this.nuevoNoAfiliado = { identidad: NuevaIdentidad, nombre: nombre, apellido: apellido}
 
             this.contabilidadService.postNoAfiliado(this.nuevoNoAfiliado).subscribe( resp => {
-              console.log(resp)
             })
           }
           this.messageService.add({severity:'success', summary: 'Guardado exitosamente'}); 

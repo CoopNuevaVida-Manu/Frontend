@@ -74,8 +74,4 @@ export class CambioPassComponent implements OnInit {
 
   }
 
-  guardar(){
-    console.log(this.selectedValues)
-  }
-
 }

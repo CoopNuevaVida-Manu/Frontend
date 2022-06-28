@@ -59,7 +59,6 @@ export class NewUserComponent implements OnInit {
 
 
   guardar(){
-    console.log(this.selectedValues)
     if(this.colabNombre==""){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'El nombre del colaborador no fue asignado'});
     }else if(this.colabUsuario == ''){
@@ -87,7 +86,6 @@ export class NewUserComponent implements OnInit {
           this.selectedValues.forEach(element => {
             this.newRolColab = {id_colaborador: this.newIdColab, id_departamento: element}
             this.tecnologiaService.postNewRolColab(this.newRolColab).subscribe(resp => {
-              console.log(resp) 
               })
             });
           })

@@ -182,10 +182,9 @@ export class FirmasAutorizadasComponent implements OnInit {
                               id_cliente: NuevaIdentidad, id_colaborador: Number(localStorage.getItem('token')),
                               id_filial_pertenece:  Number(this.caf2), id_firma: Number(this.selectFirma.code),
                               id_parentesco: Number(this.selectParentesco.code) , observaciones: this.observaciones.trim()}
-                              console.log(this.firmaAutorizada)
+                              
 
       this.atencionService.postFirmaAutorizada(this.firmaAutorizada).subscribe(resp =>{
-        console.log(resp)
         if(resp.insert){
           if(this.estadoAfiliado == 1){
             this.atencionService.getAfiliadoPSQL(NuevaIdentidad).subscribe( resp => {
@@ -209,7 +208,6 @@ export class FirmasAutorizadasComponent implements OnInit {
         let apellido = (nombrecompleto[2] || "") + ' ' + (nombrecompleto[3] || "")
         this.nuevoNoAfiliado = { identidad: NuevaIdentidad, nombre: nombre, apellido: apellido}
         this.atencionService.postNoAfiliado(this.nuevoNoAfiliado).subscribe( resp => {
-          console.log( resp )
         })
       }
 
