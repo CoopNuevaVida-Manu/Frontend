@@ -173,6 +173,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
     this.cajaService.getCuentasAfiliado(concatSuc,concatCli).subscribe( resp => {
       if(resp.length > 0){
+        console.log(resp)
         this.caf2 = concatSuc
         this.caf3 = concatCli
         resp.forEach(element => {
@@ -184,7 +185,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
           }
         });
       }else{
-        this.messageService.add({severity:'error', summary: 'Cuenta inexistente', detail : 'Asegurese que el numero sea correcto'});
+        this.messageService.add({severity:'error', summary: 'Cuenta cancelada o inexistente'});
       }
     })
 
@@ -263,7 +264,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
             }
           });
         }else{
-          this.messageService.add({severity:'error', summary: 'El monto tiene que ser mayor o igual que Lps. 200,000.00'});
+          this.messageService.add({severity:'error', summary: 'Es AFILIADO o la transaccion debe de ser mayor de Lps. 200,000.00'});
         }
         
       }else{
@@ -281,7 +282,7 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
           this.cajaService.postRET(this.rte).subscribe( resp => {
             if(resp.insert){
             }else{
-              this.messageService.add({severity:'error', summary: 'Error al guardar la transaccion mayor de 200,000'});
+              this.messageService.add({severity:'error', summary: 'Es AFILIADO o la transaccion debe de ser mayor de Lps. 200,000.00'});
             }
           })
         }

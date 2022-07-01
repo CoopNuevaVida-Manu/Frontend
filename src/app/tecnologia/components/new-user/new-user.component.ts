@@ -27,6 +27,7 @@ export class NewUserComponent implements OnInit {
 
   departamentos: Departamento[] = []
   selectedValues: number[] = [];
+  usernew: boolean = false
 
   newColab !: Colaborador
   newIdColab : number = 0
@@ -57,8 +58,21 @@ export class NewUserComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  guardarROL(){
+    console.log("entro")
+    this.tecnologiaService.getColabEnd().subscribe( id => {
+      this.newIdColab = id[0].id_colaborador || 0 
+      console.log(this.newIdColab)
+      this.selectedValues.forEach(element => {
+        this.newRolColab = {id_colaborador: Number(this.newIdColab), id_departamento: Number(element)}
+        console.log(this.newRolColab)
+      });
+    })
+  }
+
 
   guardar(){
+    
     if(this.colabNombre==""){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'El nombre del colaborador no fue asignado'});
     }else if(this.colabUsuario == ''){
@@ -79,31 +93,31 @@ export class NewUserComponent implements OnInit {
                      colaborador_password: this.password}
     
       this.tecnologiaService.postNewColab(this.newColab).subscribe( resp => {
+        console.log(resp)
         if(resp.insert){
           
-          this.tecnologiaService.getColabEnd().subscribe(id => {
-          this.newIdColab = id[0].id_colaborador || 0 
-          this.selectedValues.forEach(element => {
-            this.newRolColab = {id_colaborador: this.newIdColab, id_departamento: element}
-            this.tecnologiaService.postNewRolColab(this.newRolColab).subscribe(resp => {
-              })
-            });
-          })
-    
+
+
+          this.guardarROL()
+
+
+
+          // this.clear()
           this.messageService.add({severity:'success', summary: 'Completado', detail: 'Nuevo colaborador creado exitosamente'});
-          
-          this.colabNombre = ''
-          this.colabUsuario = ''
-          this.password = ''
-          this.selectedValues = []
-          this.selectEstadoColab = {code: '', name: ''} 
-          this.selectFilial = {code: '', name: ''}
         }else{
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Existe un colaborador con ese nombre de usuario'});
         }
       })
     }
-    
+  }
+
+  clear(){
+    this.colabNombre = ''
+    this.colabUsuario = ''
+    this.password = ''
+    this.selectedValues = []
+    this.selectEstadoColab = {code: '', name: ''} 
+    this.selectFilial = {code: '', name: ''}
   }
 
   

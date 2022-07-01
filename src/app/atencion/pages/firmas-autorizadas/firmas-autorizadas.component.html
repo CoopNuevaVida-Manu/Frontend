@@ -72,7 +72,7 @@
                         id="nombreAutorizado"
                         autocomplete="off"
                         [disabled]="editarNombreA"
-                        onkeydown="return /[a-z, ]/i.test(event.key)"
+                        onkeydown="return /[a-z, ,ñ]/i.test(event.key)"
                         pInputText />
             </div>
             <div class="col-6 mt-3">
@@ -91,7 +91,7 @@
                         name="observaciones"
                         id="nameUsuario"
                         autocomplete="off"
-                        onkeydown="return /[a-z, ]/i.test(event.key)"
+                        onkeydown="return /[a-z, ,ñ]/i.test(event.key)"
                         pInputText />
             </div>
             <p-toast></p-toast>

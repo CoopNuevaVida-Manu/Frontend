@@ -36,24 +36,22 @@ export class MenuComponent implements OnInit {
                         }
                       });
                     });
+                    console.log(this.listdep[0])
+                    if(this.router.url.includes('Menu')){
+                      if(this.listdep[0] == "Caja"){
+                       this.router.navigate(['caja/']);
+                      }else if(this.listdep[0] == "Contabilidad"){
+                       this.router.navigate(['contabilidad/']);
+                      }else if(this.listdep[0] == 'Atención al Afiliado'){
+                       this.router.navigate(['atencion-cliente/']);
+                     }else if(this.listdep[0] == 'Informática'){
+                       this.router.navigate(['TI/']);
+                     }else if(this.listdep[0] == 'Cumplimiento'){
+                       this.router.navigate(['cumplimiento/']);
+                     }
+                    }
                   })
                 })
-
-               if(this.router.url.includes('Menu')){
-                 if(this.listdep[0] = "Caja"){
-                  this.router.navigate(['caja/']);
-                 }else if(this.listdep[0] = "Contabilidad"){
-                  this.router.navigate(['caja/']);
-                 }else if(this.listdep[0] == 'Atención al Afiliado'){
-                  this.router.navigate(['atencion-cliente/']);
-                }else if(this.listdep[0] == 'Informática'){
-                  this.router.navigate(['TI/']);
-                }else if(this.listdep[0] == 'Cumplimiento'){
-                  this.router.navigate(['cumplimiento/']);
-                }
-               }
-
-
      }
     
      departamentoactual(dep : string){

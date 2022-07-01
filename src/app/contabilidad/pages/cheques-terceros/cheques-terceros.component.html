@@ -83,7 +83,7 @@
                         id="nombreBeneficiario"
                         autocomplete="off"
                         [disabled]="editnombre"
-                        onkeydown="return /[a-z, ]/i.test(event.key)"
+                        onkeydown="return /[a-z, ,ñ]/i.test(event.key)"
                         pInputText />
             </div>
             <div class="col-6 mt-3">
@@ -106,7 +106,7 @@
                         name="observacion"
                         id="observacion"
                         autocomplete="off"
-                        onkeydown="return /[a-z, ]/i.test(event.key)"
+                        onkeydown="return /[a-z, ,ñ]/i.test(event.key)"
                         pInputText />
             </div>
             <p-toast></p-toast>

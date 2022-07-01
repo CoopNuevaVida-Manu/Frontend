@@ -95,7 +95,7 @@ export class ChequesTercerosComponent implements OnInit {
 
     this.contabilidadService.getColaboradorCli(concatSuc, concatCli).subscribe( resp => {
       if(resp.length == 0){
-        this.messageService.add({severity:'error', summary: 'Error en la cuenta', detail: 'Verifique que el codigo del colaborador sea correcto'});
+        this.messageService.add({severity:'error', summary: 'Error en la cuenta', detail: 'Cuenta cancelada o inexistente'});
       }else{
         this.caf2 = concatSuc
         this.caf3 = concatCli
