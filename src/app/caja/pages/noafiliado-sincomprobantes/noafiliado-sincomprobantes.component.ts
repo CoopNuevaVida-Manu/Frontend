@@ -173,7 +173,6 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
 
     this.cajaService.getCuentasAfiliado(concatSuc,concatCli).subscribe( resp => {
       if(resp.length > 0){
-        console.log(resp)
         this.caf2 = concatSuc
         this.caf3 = concatCli
         resp.forEach(element => {
@@ -248,10 +247,6 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
                   id_filial_ac: parseInt(this.caf2), id_filial_realizo_transaccion: this.filialcolabo,
                   id_origen_fondos: Number(this.selectOrigenFondo.code), id_transaccion: Number(this.selectTransaccion.code),
                   monto_transaccion: this.monto, observaciones: this.observaciones}
-        console.log("DD")
-        console.log(this.diligencia)
-        console.log("RTE")
-        console.log(this.rte)
 
       if(this.afiliadoMonto){
         if(this.monto >= 200000){
