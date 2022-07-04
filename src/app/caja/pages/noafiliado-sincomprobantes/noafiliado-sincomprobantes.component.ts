@@ -226,6 +226,9 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
     }else{
 
       let NuevaIdentidad = this.identidad.replace(/-/g,"");
+      let myarray = this.cuentaAfectada.code.split("-");
+      let numeroCuentaAfectada = myarray[1];
+
 
       this.codigoAfiliado = `${this.caf1}-${this.caf2}-${this.caf3}`
 
@@ -233,19 +236,22 @@ export class NoafiliadoSincomprobantesComponent implements OnInit {
       let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
                             date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
-      this.diligencia = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(this.cuentaAfectada.code), 
+      this.diligencia = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(numeroCuentaAfectada), 
                           fecha_operacion : formatted_date, id_cajero_operacion: Number(localStorage.getItem('token')),
                           id_filial: this.filialcolabo, id_no_afiliado : NuevaIdentidad,
                           id_origen_fondos: Number(this.selectOrigenFondo.code), id_parentesco: Number(this.selectParentesco.code),
                           id_razon_operacion: Number(this.selectRazonFondo.code), id_transaccion: Number(this.selectTransaccion.code),
                           monto_transaccion: this.monto, observaciones: this.observaciones}
 
-      this.rte = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(this.cuentaAfectada.code),
+      this.rte = {codigo_afiliado: this.codigoAfiliado, cuenta_afectada: Number(numeroCuentaAfectada),
                   fecha_operacion: formatted_date, id_cliente: NuevaIdentidad, id_colaborador: Number(localStorage.getItem('token')), 
                   id_filial_ac: parseInt(this.caf2), id_filial_realizo_transaccion: this.filialcolabo,
                   id_origen_fondos: Number(this.selectOrigenFondo.code), id_transaccion: Number(this.selectTransaccion.code),
                   monto_transaccion: this.monto, observaciones: this.observaciones}
-
+        console.log("DD")
+        console.log(this.diligencia)
+        console.log("RTE")
+        console.log(this.rte)
 
       if(this.afiliadoMonto){
         if(this.monto >= 200000){

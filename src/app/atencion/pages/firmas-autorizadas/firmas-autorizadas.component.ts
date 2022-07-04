@@ -172,13 +172,16 @@ export class FirmasAutorizadasComponent implements OnInit {
 
       let NuevaIdentidad = this.idAutorizado.replace(/-/g,"");
 
+      let myarray = this.cuentaAfectada.code.split("-");
+      let numeroCuentaAfectada = myarray[1];
+
       this.codigoAfiliado = `${this.caf1}-${this.caf2}-${this.caf3}`
 
       var date: Date = new Date();
       let formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
                             date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
       this.firmaAutorizada = {apertura_actualizacion: formatted_date, codigo_afiliado: this.codigoAfiliado,
-                              cuenta_afiliado: Number(this.cuentaAfectada.code), id_afiliado_estado: this.estadoAfiliado,
+                              cuenta_afiliado: Number(numeroCuentaAfectada), id_afiliado_estado: this.estadoAfiliado,
                               id_cliente: NuevaIdentidad, id_colaborador: Number(localStorage.getItem('token')),
                               id_filial_pertenece:  Number(this.caf2), id_firma: Number(this.selectFirma.code),
                               id_parentesco: Number(this.selectParentesco.code) , observaciones: this.observaciones.trim()}

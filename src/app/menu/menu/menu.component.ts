@@ -36,7 +36,6 @@ export class MenuComponent implements OnInit {
                         }
                       });
                     });
-                    console.log(this.listdep[0])
                     if(this.router.url.includes('Menu')){
                       if(this.listdep[0] == "Caja"){
                        this.router.navigate(['caja/']);

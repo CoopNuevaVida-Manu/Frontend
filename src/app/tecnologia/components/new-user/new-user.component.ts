@@ -27,7 +27,8 @@ export class NewUserComponent implements OnInit {
 
   departamentos: Departamento[] = []
   selectedValues: number[] = [];
-  usernew: boolean = false
+  rolescolab: number[] = []
+  
 
   newColab !: Colaborador
   newIdColab : number = 0
@@ -59,20 +60,19 @@ export class NewUserComponent implements OnInit {
   }
 
   guardarROL(){
-    console.log("entro")
     this.tecnologiaService.getColabEnd().subscribe( id => {
       this.newIdColab = id[0].id_colaborador || 0 
-      console.log(this.newIdColab)
-      this.selectedValues.forEach(element => {
+      this.rolescolab.forEach(element => {
         this.newRolColab = {id_colaborador: Number(this.newIdColab), id_departamento: Number(element)}
-        console.log(this.newRolColab)
+        this.tecnologiaService.rolColab(this.newRolColab).subscribe(resp => {
+        })
       });
     })
   }
 
 
   guardar(){
-    
+    this.rolescolab = this.selectedValues
     if(this.colabNombre==""){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'El nombre del colaborador no fue asignado'});
     }else if(this.colabUsuario == ''){
@@ -92,23 +92,18 @@ export class NewUserComponent implements OnInit {
                      id_oficiona: Number(this.selectFilial.code),
                      colaborador_password: this.password}
     
-      this.tecnologiaService.postNewColab(this.newColab).subscribe( resp => {
-        console.log(resp)
+      this.tecnologiaService.postNewColab(this.newColab).subscribe( async resp => {
         if(resp.insert){
-          
-
-
-          this.guardarROL()
-
-
-
-          // this.clear()
+          await this.guardarROL()
+          await this.clear()
           this.messageService.add({severity:'success', summary: 'Completado', detail: 'Nuevo colaborador creado exitosamente'});
         }else{
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Existe un colaborador con ese nombre de usuario'});
         }
       })
     }
+
+    
   }
 
   clear(){
