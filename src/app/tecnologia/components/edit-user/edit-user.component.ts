@@ -67,7 +67,6 @@ export class EditUserComponent implements OnInit {
   }
 
   save(){
-
     if(this.editPassword.trim() == ""){
       this.editcolab = {id_colaborador: this.colabId,
         colaborador_nombre: this.colabNombre ,
@@ -82,7 +81,7 @@ export class EditUserComponent implements OnInit {
         id_oficiona: Number(this.selectFilial.code), 
         colaborador_password: this.editPassword}
     }
-
+    
     if(this.flag != undefined){
       this.flag.forEach(element => {
         this.rolescolab.push({id_colaborador: this.colabId, id_departamento: element})
@@ -93,22 +92,27 @@ export class EditUserComponent implements OnInit {
     this.tecnologiaService.editColab(this.editcolab).subscribe(respEdit => {
       if(respEdit.put){
         //Eliminar roles
-        this.tecnologiaService.eliminarRol(this.colabId).subscribe(respDelete => {
-          if(respDelete.delete){
-            //crear nuevos roles de usuarios 
-            if(this.rolescolab.length != 0 || this.rolescolab == undefined){
-              this.rolescolab.forEach(element => {
-                this.tecnologiaService.rolColab(element).subscribe(respCreate => {
-                })
-              });
+        if(this.flag != undefined){
+          this.tecnologiaService.eliminarRol(this.colabId).subscribe(respDelete => {
+            if(respDelete.delete){
+              //crear nuevos roles de usuarios 
+              if(this.rolescolab.length != 0 || this.rolescolab == undefined){
+                this.rolescolab.forEach(element => {
+                  this.tecnologiaService.rolColab(element).subscribe(respCreate => {
+                  })
+                });
+              }
+              this.cancel()
+                this.messageService.add({severity:'success', summary: 'Completado', detail: 'Se ha editado el colaborador conexito'});
+              
+            }else{
+              this.messageService.add({severity:'error', summary: 'Error', detail: respDelete.msg});
             }
-            this.cancel()
-              this.messageService.add({severity:'success', summary: 'Completado', detail: 'Se ha editado el colaborador conexito'});
-            
-          }else{
-            this.messageService.add({severity:'error', summary: 'Error', detail: respDelete.msg});
-          }
-        })
+          })
+        }else{
+          this.cancel()
+                this.messageService.add({severity:'success', summary: 'Completado', detail: 'Se ha editado el colaborador conexito'});
+        }
       }else{
         this.messageService.add({severity:'error', summary: 'Error', detail: 'Existe un colaborador con ese nombre de usuario'});
       }
