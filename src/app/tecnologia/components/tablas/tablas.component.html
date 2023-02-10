@@ -1,4 +1,4 @@
-<p-table [value]="colabotabla" >
+<p-table [value]="colabotabla" [globalFilterFields]="['colaborador_nombre','colaborador_usuario']">
     <ng-template pTemplate="header">
         <tr>
             <th>Nombre Colaborador</th>
@@ -7,6 +7,19 @@
             <th>Estado</th>
             <th>Editar
             </th>
+        </tr>
+        <tr>
+            <th>
+                <p-columnFilter type="text" field="colaborador_nombre"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="colaborador_usuario"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="oficiona"></p-columnFilter>
+            </th>
+            <th></th>
+            <th></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-colab>
